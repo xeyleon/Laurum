@@ -10,9 +10,26 @@
         <entry key="app/src/main/res/drawable/ic_reminders_tab.xml" value="0.2838541666666667" />
         <entry key="app/src/main/res/drawable/splash_image.xml" value="0.2416214841716227" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.2838541666666667" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_schedule.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/layout/add_or_edit.xml" value="0.31875" />
+        <entry key="app/src/main/res/layout/cardview.xml" value="0.3047332961894682" />
+        <entry key="app/src/main/res/layout/fragment_courses.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_degree.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_faculty.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.24479166666666666" />
+        <entry key="app/src/main/res/layout/fragment_item.xml" value="0.4860813704496788" />
+        <entry key="app/src/main/res/layout/fragment_item_list.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_reminders.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_resources.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_schedule.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/layout/fragment_schedules.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/layout/resource_item.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/layout/settings_activity.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19635416666666666" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.25885416666666666" />
       </map>
     </option>
   </component>
