@@ -1,0 +1,71 @@
+package com.example.laurum.Resources;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.laurum.R;
+import com.example.laurum.Resources.ResourceContent.ResourceItem;
+import com.example.laurum.databinding.FragmentResourceBinding;
+
+import java.util.List;
+
+/**
+ * {@link RecyclerView.Adapter} that can display a {@link ResourceItem}.
+ * TODO: Replace the implementation with code for your data type.
+ */
+public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRecyclerViewAdapter.ViewHolder> {
+
+    private final List<ResourceItem> mValues;
+
+    public ResourceRecyclerViewAdapter(List<ResourceItem> items) {
+        mValues = items;
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        return new ViewHolder(FragmentResourceBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+
+    }
+
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        holder.mItem = mValues.get(position);
+        holder.resTitle.setText(mValues.get(position).id);
+        holder.resDesc.setText(mValues.get(position).content);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), v.getResources().getString(R.string.coming_soon), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return mValues.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public final TextView resTitle;
+        public final TextView resDesc;
+        public ResourceItem mItem;
+
+        public ViewHolder(FragmentResourceBinding binding) {
+            super(binding.getRoot());
+            resTitle = binding.resourceTitle;
+            resDesc = binding.resourceDesc;
+        }
+
+        @Override
+        public String toString() {
+            return super.toString() + " '" + resDesc.getText() + "'";
+        }
+    }
+}

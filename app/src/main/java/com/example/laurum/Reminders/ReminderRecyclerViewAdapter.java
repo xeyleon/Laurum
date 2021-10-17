@@ -1,4 +1,4 @@
-package com.example.laurum;
+package com.example.laurum.Reminders;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,35 +8,36 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.laurum.placeholder.PlaceholderContent.PlaceholderItem;
-import com.example.laurum.databinding.FragmentItemBinding;
+import com.example.laurum.R;
+import com.example.laurum.Reminders.ReminderContent.ReminderItem;
+import com.example.laurum.databinding.FragmentReminderBinding;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
+ * {@link RecyclerView.Adapter} that can display a {@link ReminderItem}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRecyclerViewAdapter.ViewHolder> {
+public class ReminderRecyclerViewAdapter extends RecyclerView.Adapter<ReminderRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private final List<ReminderItem> mValues;
 
-    public ResourceRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public ReminderRecyclerViewAdapter(List<ReminderItem> items) {
         mValues = items;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(FragmentItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new ViewHolder(FragmentReminderBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
 
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.resTitle.setText(mValues.get(position).id);
-        holder.resDesc.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).id);
+        holder.mContentView.setText(mValues.get(position).content);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,19 +53,19 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView resTitle;
-        public final TextView resDesc;
-        public PlaceholderItem mItem;
+        public final TextView mIdView;
+        public final TextView mContentView;
+        public ReminderItem mItem;
 
-        public ViewHolder(FragmentItemBinding binding) {
+        public ViewHolder(FragmentReminderBinding binding) {
             super(binding.getRoot());
-            resTitle = binding.resourceTitle;
-            resDesc = binding.resourceDesc;
+            mIdView = binding.reminderTitle;
+            mContentView = binding.reminderDesc;
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + resDesc.getText() + "'";
+            return super.toString() + " '" + mContentView.getText() + "'";
         }
     }
 }

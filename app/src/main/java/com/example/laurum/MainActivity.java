@@ -7,8 +7,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
+import com.example.laurum.Courses.CoursesFragment;
+import com.example.laurum.Faculty.FacultyFragment;
+import com.example.laurum.Reminders.ReminderFragment;
+import com.example.laurum.Resources.ResourceFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new ScheduleFragment();
                 break;
             case 1:
-                fragment = new RemindersFragment();
+                fragment = new ReminderFragment();
                 break;
             case 2:
                 fragment = new DegreeFragment();
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ScheduleFragment();
                         break;
                     case 1:
-                        fragment = new RemindersFragment();
+                        fragment = new ReminderFragment();
                         break;
                     case 2:
                         fragment = new DegreeFragment();

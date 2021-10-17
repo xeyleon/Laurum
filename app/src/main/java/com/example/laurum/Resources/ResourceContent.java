@@ -1,4 +1,4 @@
-package com.example.laurum.placeholder;
+package com.example.laurum.Resources;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,34 +11,34 @@ import java.util.Map;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class PlaceholderContent {
+public class ResourceContent {
 
     /**
      * An array of sample (placeholder) items.
      */
-    public static final List<PlaceholderItem> ITEMS = new ArrayList<PlaceholderItem>();
+    public static final List<ResourceItem> ITEMS = new ArrayList<ResourceItem>();
 
     /**
      * A map of sample (placeholder) items, by ID.
      */
-    public static final Map<String, PlaceholderItem> ITEM_MAP = new HashMap<String, PlaceholderItem>();
+    public static final Map<String, ResourceItem> ITEM_MAP = new HashMap<String, ResourceItem>();
 
     private static final int COUNT = 10;
 
     static {
         // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
-            addItem(createPlaceholderItem(i));
+            addItem(createResourceItem(i));
         }
     }
 
-    private static void addItem(PlaceholderItem item) {
+    private static void addItem(ResourceItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
-    private static PlaceholderItem createPlaceholderItem(int position) {
-        return new PlaceholderItem("Resource " + position, "Resource Description", makeDetails(position));
+    private static ResourceItem createResourceItem(int position) {
+        return new ResourceItem("Resource " + position, "Resource Description", makeDetails(position));
     }
 
     private static String makeDetails(int position) {
@@ -53,12 +53,12 @@ public class PlaceholderContent {
     /**
      * A placeholder item representing a piece of content.
      */
-    public static class PlaceholderItem {
+    public static class ResourceItem {
         public final String id;
         public final String content;
         public final String details;
 
-        public PlaceholderItem(String id, String content, String details) {
+        public ResourceItem(String id, String content, String details) {
             this.id = id;
             this.content = content;
             this.details = details;
