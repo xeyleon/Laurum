@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +62,17 @@ public class RemindersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reminders, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_reminders, container, false);
+        FloatingActionButton addReminder = (FloatingActionButton) view.findViewById(R.id.add_reminder_fab);
+
+        addReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), getResources().getString(R.string.coming_soon), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
     }
 }

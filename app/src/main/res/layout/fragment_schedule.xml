@@ -10,7 +10,7 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:theme="@style/CalendarViewTheme"
+
         android:layout_gravity="center_vertical"
         android:scrollbars="horizontal|vertical"
         android:verticalScrollbarPosition="right"

@@ -4,11 +4,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,14 +64,19 @@ public class ScheduleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        View v = inflater.inflate(R.layout.fragment_schedule,container,false);
-//        CalendarView cv = (CalendarView) v.findViewById(R.id.calendarView);
+        View view = inflater.inflate(R.layout.fragment_schedule,container,false);
+
+        CalendarView cv = (CalendarView) view.findViewById(R.id.calendarView);
 //        ViewGroup vg = (ViewGroup) cv.getChildAt(0);
-//        View child = vg.getChildAt(0);
-//
-//        if(child instanceof TextView) {
-//            ((TextView)child).setTextColor(getResources().getColor(R.color.wlu_gold));
+//        for (int i = 0; i < vg.getChildCount(); i++) {
+//            final View child = vg.getChildAt(i);
+//            Log.i("i",child.toString());
+//            if(child instanceof TextView) {
+//                ((TextView)child).setTextColor(getResources().getColor(R.color.wlu_purple));
+//            }
 //        }
-        return inflater.inflate(R.layout.fragment_schedule, container, false);
+        cv.setWeekDayTextAppearance(R.style.TextAppearance_AppCompat_Body1);
+        cv.setDateTextAppearance(R.style.TextAppearance_AppCompat_Body2);
+        return view;
     }
 }

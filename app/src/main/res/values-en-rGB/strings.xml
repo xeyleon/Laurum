@@ -10,4 +10,5 @@
     <string name="settings_tab_label">Settings</string>
     <string name="coming_soon">Coming Soon.</string>
     <string name="under_construction">Under Construction</string>
+    <string name="todo">TODO</string>
 </resources>

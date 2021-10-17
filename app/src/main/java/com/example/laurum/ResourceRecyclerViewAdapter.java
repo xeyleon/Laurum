@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.laurum.placeholder.PlaceholderContent.PlaceholderItem;
 import com.example.laurum.databinding.FragmentItemBinding;
@@ -36,6 +37,13 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
         holder.mItem = mValues.get(position);
         holder.resTitle.setText(mValues.get(position).id);
         holder.resDesc.setText(mValues.get(position).content);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), v.getResources().getString(R.string.coming_soon), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
