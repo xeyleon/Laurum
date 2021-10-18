@@ -1,5 +1,6 @@
 package com.laurum.Database;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -10,7 +11,12 @@ import android.util.Log;
 
 import com.laurum.Courses.Course;
 import com.laurum.R;
+import com.laurum.Resources.Resource;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,14 +135,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Course> getCourseList() {
         List<Course> courses = new ArrayList<>();
 
-        // SELECT * FROM POSTS
-        // LEFT OUTER JOIN USERS
-        // ON POSTS.KEY_POST_USER_ID_FK = USERS.KEY_USER_ID
         String POSTS_SELECT_QUERY =
                 String.format("SELECT * FROM %s ", TABLE_COURSES);
 
-        // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
-        // disk space scenarios)
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
         try {
@@ -151,7 +152,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 } while(cursor.moveToNext());
             }
         } catch (Exception e) {
-            Log.e("E", "Error while trying to get posts from database");
+            Log.e("E", "Error while trying to get courses from database");
         } finally {
             if (cursor != null && !cursor.isClosed()) {
                 cursor.close();
@@ -160,4 +161,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return courses;
     }
 
+    public List<Resource> getResourceList() {
+        List<Resource> resources = new ArrayList<>();
+
+        String POSTS_SELECT_QUERY =
+                String.format("SELECT * FROM %s ", TABLE_RESOURCES);
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Integer id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_RES_ID));
+                    String title = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RES_TITLE));
+                    String desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RES_DESC));
+                    String url = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RES_URL));
+                    Resource resource = new Resource(id, title, desc, url);
+                    resources.add(resource);
+                } while(cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.e("E", "Error while trying to get courses from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return resources;
+    }
+
+//    private void copyDatabase() throws IOException {
+//        try (InputStream inputStream = Application.getAssets().open("databasefilename")) {
+//            //Create the file before
+//            OutputStream outputStream = new FileOutputStream(mDbPath);
+//            byte[] buffer = new byte[4096];
+//            int length;
+//            while ((length = inputStream.read(buffer)) > 0) {
+//                outputStream.write(buffer, 0, length);
+//            }
+//            outputStream.flush();
+//            outputStream.close();
+//            inputStream.close();
+//        }
+//    }
 }
