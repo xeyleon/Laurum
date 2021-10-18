@@ -1,4 +1,4 @@
-package com.example.laurum;
+package com.laurum;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -8,10 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
-import com.example.laurum.Courses.CoursesFragment;
-import com.example.laurum.Faculty.FacultyFragment;
-import com.example.laurum.Reminders.ReminderFragment;
-import com.example.laurum.Resources.ResourceFragment;
+import com.laurum.Courses.CoursesFragment;
+import com.laurum.Faculty.FacultyFragment;
+import com.laurum.Reminders.ReminderFragment;
+import com.laurum.Resources.ResourceFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;

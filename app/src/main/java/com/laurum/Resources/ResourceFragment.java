@@ -1,4 +1,4 @@
-package com.example.laurum.Resources;
+package com.laurum.Resources;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,8 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.laurum.R;
-import com.example.laurum.Resources.ResourceContent;
+import com.laurum.R;
 
 /**
  * A fragment representing a list of Items.

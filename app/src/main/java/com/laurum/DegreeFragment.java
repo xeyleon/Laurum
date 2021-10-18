@@ -1,4 +1,4 @@
-package com.example.laurum;
+package com.laurum;
 
 import android.os.Bundle;
 

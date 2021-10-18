@@ -1,4 +1,4 @@
-package com.example.laurum.Reminders;
+package com.laurum.Reminders;
 
 import java.util.ArrayList;
 import java.util.HashMap;

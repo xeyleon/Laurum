@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.laurum"
+        applicationId "com.laurum"
         minSdk 26
         targetSdk 31
         versionCode 1

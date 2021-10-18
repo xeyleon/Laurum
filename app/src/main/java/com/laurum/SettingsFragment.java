@@ -1,24 +1,19 @@
-package com.example.laurum;
+package com.laurum;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ScheduleFragment#newInstance} factory method to
+ * Use the {@link SettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ScheduleFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +24,7 @@ public class ScheduleFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ScheduleFragment() {
+    public SettingsFragment() {
         // Required empty public constructor
     }
 
@@ -42,8 +37,8 @@ public class ScheduleFragment extends Fragment {
      * @return A new instance of fragment FacultyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ScheduleFragment newInstance(String param1, String param2) {
-        ScheduleFragment fragment = new ScheduleFragment();
+    public static SettingsFragment newInstance(String param1, String param2) {
+        SettingsFragment fragment = new SettingsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,20 +58,8 @@ public class ScheduleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_schedule,container,false);
-
-        CalendarView cv = (CalendarView) view.findViewById(R.id.calendarView);
-//        ViewGroup vg = (ViewGroup) cv.getChildAt(0);
-//        for (int i = 0; i < vg.getChildCount(); i++) {
-//            final View child = vg.getChildAt(i);
-//            Log.i("i",child.toString());
-//            if(child instanceof TextView) {
-//                ((TextView)child).setTextColor(getResources().getColor(R.color.wlu_purple));
-//            }
-//        }
-        cv.setWeekDayTextAppearance(R.style.TextAppearance_AppCompat_Body1);
-        cv.setDateTextAppearance(R.style.TextAppearance_AppCompat_Body2);
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 }
+

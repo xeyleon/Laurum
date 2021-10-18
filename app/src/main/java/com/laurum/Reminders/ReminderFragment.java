@@ -1,4 +1,4 @@
-package com.example.laurum.Reminders;
+package com.laurum.Reminders;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,8 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.laurum.R;
-import com.example.laurum.Reminders.ReminderContent;
+import com.laurum.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**

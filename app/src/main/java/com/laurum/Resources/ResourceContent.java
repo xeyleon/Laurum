@@ -1,4 +1,4 @@
-package com.example.laurum.Resources;
+package com.laurum.Resources;
 
 import java.util.ArrayList;
 import java.util.HashMap;
