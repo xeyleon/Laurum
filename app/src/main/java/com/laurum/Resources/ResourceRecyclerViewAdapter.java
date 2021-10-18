@@ -2,6 +2,8 @@ package com.laurum.Resources;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +44,9 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), v.getResources().getString(R.string.coming_soon), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), holder.resTitle.getText().toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW, holder.resUri);
+                v.getContext().startActivity(intent);
             }
         });
     }
@@ -55,6 +59,7 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView resTitle;
         public final TextView resDesc;
+        public final Uri resUri = Uri.parse("https://google.com");
         public ResourceItem mItem;
 
         public ViewHolder(FragmentResourceBinding binding) {
