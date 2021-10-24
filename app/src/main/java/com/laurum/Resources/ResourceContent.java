@@ -1,5 +1,17 @@
 package com.laurum.Resources;
 
+import android.database.Cursor;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.laurum.Database.LaurumDB;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +24,8 @@ import java.util.Map;
  * TODO: Replace all uses of this class before publishing your app.
  */
 public class ResourceContent {
-
+    private LaurumDB db;
+    private Cursor cursor;
     /**
      * An array of sample (placeholder) items.
      */
@@ -26,7 +39,6 @@ public class ResourceContent {
     private static final int COUNT = 10;
 
     static {
-        // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
             addItem(createResourceItem(i));
         }
@@ -38,14 +50,14 @@ public class ResourceContent {
     }
 
     private static ResourceItem createResourceItem(int position) {
-        return new ResourceItem("Resource " + position, "Resource Description", makeDetails(position));
+        return new ResourceItem(Integer.toString(position), "Resource " + position, getDetails(position), "", "");
     }
 
-    private static String makeDetails(int position) {
+    private static String getDetails(int position) {
         StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
+        builder.append("Details about Resource ").append(position);
         for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
+            builder.append("\n...");
         }
         return builder.toString();
     }
@@ -55,18 +67,23 @@ public class ResourceContent {
      */
     public static class ResourceItem {
         public final String id;
-        public final String content;
-        public final String details;
+        public final String title;
+        public final String description;
+        public final String icon;
+        public final String url;
 
-        public ResourceItem(String id, String content, String details) {
+        public ResourceItem(String id, String title, String description, String url, String icon) {
             this.id = id;
-            this.content = content;
-            this.details = details;
+            this.title = title;
+            this.description = description;
+            this.url = url;
+            this.icon = icon;
         }
 
+        @NonNull
         @Override
         public String toString() {
-            return content;
+            return title;
         }
     }
 }

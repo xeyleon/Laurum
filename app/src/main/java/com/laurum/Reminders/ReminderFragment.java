@@ -1,6 +1,8 @@
 package com.laurum.Reminders;
 
+import android.app.Application;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.laurum.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.laurum.Utilities;
 
 /**
  * A fragment representing a list of Items.
@@ -70,9 +74,12 @@ public class ReminderFragment extends Fragment {
         addReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), getResources().getString(R.string.coming_soon), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.coming_soon, Toast.LENGTH_SHORT).show();
+                //Utilities.sendToast(getActivity().getApplicationContext(), R.string.app_name, Utilities.ToastType.ERROR);
+
             }
         });
+
 
         return view;
     }

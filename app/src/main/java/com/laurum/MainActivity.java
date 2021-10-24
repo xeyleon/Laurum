@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -15,6 +17,7 @@ import android.widget.FrameLayout;
 import com.laurum.Courses.CoursesFragment;
 import com.laurum.Faculty.FacultyFragment;
 import com.laurum.Reminders.ReminderFragment;
+import com.laurum.Resources.Resource;
 import com.laurum.Resources.ResourceFragment;
 import com.google.android.material.tabs.TabLayout;
 
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
+    @SuppressLint("ObsoleteSdkInt")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Force Light Mode

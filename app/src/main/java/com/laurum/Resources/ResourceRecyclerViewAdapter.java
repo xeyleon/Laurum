@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,14 +33,14 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         return new ViewHolder(FragmentResourceBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.resTitle.setText(mValues.get(position).id);
-        holder.resDesc.setText(mValues.get(position).content);
+        holder.resTitle.setText(mValues.get(position).title);
+        holder.resDesc.setText(mValues.get(position).description);
+        //holder.resIcon.setImageResource(R.drawable.ic_courses_tab);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +60,7 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView resTitle;
         public final TextView resDesc;
+        public final ImageView resIcon;
         public final Uri resUri = Uri.parse("https://google.com");
         public ResourceItem mItem;
 
@@ -66,6 +68,7 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
             super(binding.getRoot());
             resTitle = binding.resourceTitle;
             resDesc = binding.resourceDesc;
+            resIcon = binding.resourceIcon;
         }
 
         @Override

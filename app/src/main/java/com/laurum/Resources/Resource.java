@@ -1,5 +1,6 @@
 package com.laurum.Resources;
 
+
 public class Resource {
     private final Integer id;
     private final String title;
@@ -12,7 +13,6 @@ public class Resource {
         this.desc = "desc";
         this.url = "url";
     }
-
     public Resource(Integer id, String title, String desc, String url) {
         this.id = -1;
         this.title = "title";
