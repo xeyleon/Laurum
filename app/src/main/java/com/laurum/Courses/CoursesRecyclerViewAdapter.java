@@ -1,8 +1,10 @@
 package com.laurum.Courses;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,9 +38,7 @@ public class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecy
         holder.course_desc = mValues.get(position).getDesc();
 
         holder.itemView.setOnClickListener(v -> {
-//            Toast.makeText(v.getContext(), holder.resTitle.getText().toString(), Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(Intent.ACTION_VIEW, holder.resUri);
-//            v.getContext().startActivity(intent);
+            Toast.makeText(v.getContext(), holder.course_desc, Toast.LENGTH_SHORT).show();
         });
     }
 

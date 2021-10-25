@@ -13,6 +13,27 @@
       "description": "Map of Wilfrid Laurier University Brantford campus",
       "url" : "https://map.concept3d.com/?id=573#!",
       "icon" : "ic_map"
+    },
+    {
+      "id": "3",
+      "title": "LORIS",
+      "description": "Laurier Online Registration and Information System",
+      "url" : "https://loris.wlu.ca/",
+      "icon" : "ic_loris"
+    },
+    {
+      "id": "4",
+      "title": "myDegree",
+      "description": "A visual tool to help students with course planning.",
+      "url" : "https://loris.wlu.ca/",
+      "icon" : "ic_mydegree"
+    },
+    {
+      "id": "5",
+      "title": "Visual Schedule Builder",
+      "description": "A visual tool to help students with course schedule planning.",
+      "url" : "https://scheduleme.wlu.ca",
+      "icon" : "ic_schedule"
     }
   ]
 }

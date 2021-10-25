@@ -3,6 +3,7 @@ package com.laurum.Resources;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.laurum.R;
 import com.laurum.databinding.FragmentResourceBinding;
 
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRecyclerViewAdapter.ViewHolder> {
 
     private final List<Resource> mValues;
+    private Context context;
 
     public ResourceRecyclerViewAdapter(List<Resource> items) {
         mValues = items;
@@ -27,7 +30,7 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
+        this.context = parent.getContext();
         return new ViewHolder(FragmentResourceBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
@@ -37,7 +40,7 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
         holder.resTitle.setText(mValues.get(position).getTitle());
         holder.resDesc.setText(mValues.get(position).getDesc());
         holder.resUri = Uri.parse(mValues.get(position).getUrl());
-        holder.resIcon.setImageResource(mValues.get(position).getIcon());
+        holder.resIcon.setImageResource(context.getResources().getIdentifier(mValues.get(position).getIcon(), "drawable", context.getPackageName()));
 
         holder.itemView.setOnClickListener(v -> {
             Toast.makeText(v.getContext(), holder.resTitle.getText().toString(), Toast.LENGTH_SHORT).show();

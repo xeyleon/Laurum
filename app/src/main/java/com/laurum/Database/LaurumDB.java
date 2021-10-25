@@ -38,7 +38,7 @@ public class LaurumDB extends DatabaseHelper{
                     String title = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RES_TITLE));
                     String desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RES_DESC));
                     String url = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RES_URL));
-                    Integer icon = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_RES_ICON));
+                    String icon = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RES_ICON));
                     Resource resource = new Resource(id, title, desc, url, icon);
                     resources.add(resource);
                 } while (cursor.moveToNext());

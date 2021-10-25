@@ -1,6 +1,7 @@
 package com.laurum.Database;
 
 import android.app.Application;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -13,17 +14,24 @@ import com.laurum.Courses.Course;
 import com.laurum.R;
 import com.laurum.Resources.Resource;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static DatabaseHelper sInstance;
+    private DatabaseHelper sInstance;
+    private final Context context;
 
     // Database Info
     public static final String DATABASE_NAME = "laurum.db";
@@ -70,9 +78,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
-    public static synchronized DatabaseHelper getInstance(Context context) {
+    public synchronized DatabaseHelper getInstance(Context context) {
         // Use the application context, which will ensure that you
         // don't accidentally leak an Activity's context.
         // See this article for more information: http://bit.ly/6LRzfx
@@ -128,14 +137,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ")";
         db.execSQL(CREATE_COURSES_TABLE);
 
-        String INSERTION = String.format("INSERT INTO %s(%s, %s, %s, %s) VALUES", TABLE_COURSES, KEY_COURSE_ID, KEY_COURSE_TITLE, KEY_COURSE_DESC, KEY_COURSE_CREDIT);
-        String[] INIT_COURSES_QUERIES = {
-                String.format(INSERTION+"('%s', '%s', '%s', '%.2f')", "CP212","Uhh","YES!!", 2.5),
-                String.format(INSERTION+"('%s', '%s', '%s', '%.2f')", "CP999","Woo!!","??", 9.9),
-        };
-
-        for (String query : INIT_COURSES_QUERIES) {
-            db.execSQL(query);
+        try
+        {
+            JSONObject jsonObject = new JSONObject(Objects.requireNonNull(loadJSONFromAsset("courses.json")));
+            JSONArray jsonArray = jsonObject.getJSONArray("courses");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject json = jsonArray.getJSONObject(i);
+                ContentValues values = new ContentValues();
+                values.put(KEY_COURSE_ID, json.getString("id"));
+                values.put(KEY_COURSE_TITLE, json.getString("title"));
+                values.put(KEY_COURSE_DESC, json.getString("description"));
+                values.put(KEY_COURSE_CREDIT, json.getString("credits"));
+                db.insert(TABLE_COURSES, null, values);
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -149,14 +168,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ")";
         db.execSQL(CREATE_FACULTY_TABLE);
 
-        String INSERTION = String.format("INSERT INTO %s(%s, %s, %s) VALUES", TABLE_FACULTY, KEY_FACULTY_FNAME, KEY_FACULTY_LNAME, KEY_FACULTY_EMAIL);
-        String[] INIT_FACULTY_QUERIES = {
-                String.format(INSERTION+"('%s', '%s', '%s')", "Joe","Blow","ho@gmail.com"),
-                String.format(INSERTION+"('%s', '%s', '%s')", "Jim","Bob","lol@gmail.com"),
-        };
-
-        for (String query : INIT_FACULTY_QUERIES) {
-            db.execSQL(query);
+        try
+        {
+            JSONObject jsonObject = new JSONObject(Objects.requireNonNull(loadJSONFromAsset("faculty.json")));
+            JSONArray jsonArray = jsonObject.getJSONArray("faculty");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject json = jsonArray.getJSONObject(i);
+                ContentValues values = new ContentValues();
+                values.put(KEY_FACULTY_FNAME, json.getString("first_name"));
+                values.put(KEY_FACULTY_LNAME, json.getString("last_name"));
+                values.put(KEY_FACULTY_EMAIL, json.getString("email"));
+                db.insert(TABLE_FACULTY, null, values);
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -171,19 +199,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ")";
         db.execSQL(CREATE_RESOURCES_TABLE);
 
-        String INSERTION = String.format("INSERT INTO %s(%s, %s, %s, %s) VALUES", TABLE_RESOURCES, KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL, KEY_RES_ICON);
-        String[] INIT_RESOURCE_QUERIES = {
-                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "Campus Map (Waterloo)", "Map of Wilfrid Laurier University Waterloo campus", "https://map.concept3d.com/?id=638#!", R.drawable.ic_map),
-                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "Campus Map (Brantford)", "Map of Wilfrid Laurier University Brantford campus", "https://map.concept3d.com/?id=573#!", R.drawable.ic_map),
-                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "LORIS", "Laurier Online Registration and Information System", "https://loris.wlu.ca/", R.drawable.ic_golden_hawk),
-                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "myDegree", "A visual tool to help students with course planning.", "https://mydegree.wlu.ca/", R.drawable.ic_golden_hawk),
-                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "Visual Schedule Builder", "A visual tool to help students with course schedule planning", "https://scheduleme.wlu.ca", R.drawable.ic_schedule),
-        };
-
-        for (String query : INIT_RESOURCE_QUERIES) {
-            db.execSQL(query);
+        try
+        {
+            JSONObject jsonObject = new JSONObject(Objects.requireNonNull(loadJSONFromAsset("resources.json")));
+            JSONArray jsonArray = jsonObject.getJSONArray("resources");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject json = jsonArray.getJSONObject(i);
+                ContentValues values = new ContentValues();
+                values.put(KEY_RES_TITLE, json.getString("title"));
+                values.put(KEY_RES_DESC, json.getString("description"));
+                values.put(KEY_RES_URL, json.getString("url"));
+                values.put(KEY_RES_ICON, json.getString("icon"));
+                db.insert(TABLE_RESOURCES, null, values);
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
         }
 
+    }
+
+    private String loadJSONFromAsset(String jsonFile){
+        String json;
+        try {
+            InputStream is = context.getAssets().open(jsonFile);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 
 //    private void copyDatabase() throws IOException {

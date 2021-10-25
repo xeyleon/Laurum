@@ -1,0 +1,22 @@
+{
+  "courses": [
+    {
+      "id": "CP322",
+      "title": "Introduction to Notepad",
+      "description": "Learn how to use Notepad.",
+      "credits" : 5
+    },
+    {
+      "id": "CP342",
+      "title": "Introduction to Microsoft",
+      "description": "Learn about Microsoft.",
+      "credits" : 2
+    },
+    {
+      "id": "CP444",
+      "title": "Introduction to Internet",
+      "description": "Learn to use the internet.",
+      "credits" : 10
+    }
+  ]
+}

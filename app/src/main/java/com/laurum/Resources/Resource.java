@@ -6,16 +6,16 @@ public class Resource {
     private final String title;
     private final String desc;
     private final String url;
-    private final Integer icon;
+    private final String icon;
 
     public Resource() {
         this.id = -1;
         this.title = "title";
         this.desc = "desc";
         this.url = "url";
-        this.icon = 0;
+        this.icon = "";
     }
-    public Resource(Integer id, String title, String desc, String url, Integer icon) {
+    public Resource(Integer id, String title, String desc, String url, String icon) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -39,7 +39,7 @@ public class Resource {
         return this.url;
     }
 
-    public Integer getIcon() {
+    public String getIcon() {
         return this.icon;
     }
 
