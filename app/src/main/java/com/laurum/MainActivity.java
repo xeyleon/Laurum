@@ -19,7 +19,6 @@ import com.laurum.Courses.CoursesFragment;
 import com.laurum.Database.DatabaseHelper;
 import com.laurum.Database.LaurumDB;
 import com.laurum.Faculty.FacultyFragment;
-import com.laurum.Reminders.ReminderFragment;
 import com.laurum.Resources.Resource;
 import com.laurum.Resources.ResourceFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -66,28 +65,22 @@ public class MainActivity extends AppCompatActivity {
         frameLayout = findViewById(R.id.MainFrameLayout);
         switch(tabLayout.getSelectedTabPosition()){
             case 0:
-                fragment = new ScheduleFragment();
-                break;
-            case 1:
-                fragment = new ReminderFragment();
-                break;
-            case 2:
                 fragment = new DegreeFragment();
                 break;
-            case 3:
+            case 1:
                 fragment = new CoursesFragment();
                 break;
-            case 4:
+            case 2:
                 fragment = new FacultyFragment();
                 break;
-            case 5:
+            case 3:
                 fragment = new ResourceFragment();
                 break;
-            case 6:
+            case 4:
                 fragment = new SettingsFragment();
                 break;
             default:
-                fragment = new ScheduleFragment();
+                fragment = new DegreeFragment();
                 break;
         }
         fragmentManager = getSupportFragmentManager();
@@ -101,28 +94,22 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-                        fragment = new ScheduleFragment();
-                        break;
-                    case 1:
-                        fragment = new ReminderFragment();
-                        break;
-                    case 2:
                         fragment = new DegreeFragment();
                         break;
-                    case 3:
+                    case 1:
                         fragment = new CoursesFragment();
                         break;
-                    case 4:
+                    case 2:
                         fragment = new FacultyFragment();
                         break;
-                    case 5:
+                    case 3:
                         fragment = new ResourceFragment();
                         break;
-                    case 6:
+                    case 4:
                         fragment = new SettingsFragment();
                         break;
                     default:
-                        fragment = new ScheduleFragment();
+                        fragment = new DegreeFragment();
                         break;
                 }
                 FragmentManager fm = getSupportFragmentManager();

@@ -7,44 +7,23 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <HorizontalScrollView
-        android:id="@+id/tabScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingBottom="0dp"
-        android:scrollbarStyle="insideOverlay"
-        android:scrollbarThumbHorizontal="@color/wlu_gold"
-        android:scrollbars="horizontal"
-        android:visibility="visible">
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/MainTabLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
 
             app:tabBackground="@color/wlu_purple"
-            app:tabGravity="center"
+            app:tabGravity="fill"
             app:tabIconTint="@drawable/tab_color_selector"
-            app:tabIndicatorHeight="0dp"
-            app:tabMode="auto"
+            app:tabMode="fixed"
+            app:tabPaddingStart="0dp"
+            app:tabPaddingEnd="0dp"
             app:tabSelectedTextColor="@color/wlu_gold"
             app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"
             app:tabTextColor="@color/purple_200">
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/schedulesTab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/ic_schedule_tab"
-                android:text="@string/schedules_tab_label" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/remindersTab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/ic_reminders_tab"
-                android:text="@string/reminders_tab_label" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/degreeTab"
@@ -82,7 +61,6 @@
                 android:text="@string/settings_tab_label" />
 
         </com.google.android.material.tabs.TabLayout>
-    </HorizontalScrollView>
 
     <FrameLayout
         android:id="@+id/MainFrameLayout"
@@ -92,6 +70,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabScrollView" />
+        app:layout_constraintTop_toBottomOf="@id/MainTabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
