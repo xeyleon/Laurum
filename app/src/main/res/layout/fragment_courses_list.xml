@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reminder_list"
+        android:id="@+id/courses_list"
         android:name="com.example.laurum.ReminderFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -15,9 +15,8 @@
         android:requiresFadingEdge="horizontal|vertical"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-
         tools:context=".Courses.CoursesFragment"
         tools:layout_editor_absoluteX="16dp"
-        tools:listitem="@layout/fragment_reminder" />
+        tools:listitem="@layout/fragment_courses" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
