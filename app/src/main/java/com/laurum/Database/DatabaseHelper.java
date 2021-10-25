@@ -26,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper sInstance;
 
     // Database Info
-    private static final String DATABASE_NAME = "LaurumDB";
+    private static final String DATABASE_NAME = "laurum.db";
     private static final int DATABASE_VERSION = 1;
 
     // Table Names
@@ -69,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Constructor should be private to prevent direct instantiation.
      * Make a call to the static method "getInstance()" instead.
      */
-    private DatabaseHelper(Context context) {
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -95,24 +95,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // If a database already exists on disk with the same DATABASE_NAME, this method will NOT be called.
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_COURSES_TABLE = "CREATE TABLE " + TABLE_COURSES +
-                "(" +
-                KEY_COURSE_ID + " TEXT PRIMARY KEY," + // Define a primary key
-                KEY_COURSE_TITLE + " TEXT REFERENCES " + TABLE_COURSES + "," + // Define a foreign key
-                KEY_COURSE_DESC + " TEXT," +
-                KEY_COURSE_CREDIT + " REAL" +
-                ")";
 
-        String CREATE_FACULTY_TABLE = "CREATE TABLE " + TABLE_FACULTY +
-                "(" +
-                KEY_FACULTY_ID + " INTEGER PRIMARY KEY," +
-                KEY_FACULTY_LNAME + " TEXT," +
-                KEY_FACULTY_FNAME + " TEXT," +
-                KEY_FACULTY_EMAIL + " TEXT" +
-                ")";
+        initCoursesTable(db);
+        initFacultyTable(db);
+        initResourcesTable(db);
 
-        db.execSQL(CREATE_COURSES_TABLE);
-        db.execSQL(CREATE_FACULTY_TABLE);
     }
 
     // Called when the database needs to be upgraded.
@@ -124,11 +111,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // Simplest implementation is to drop all old tables and recreate them
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_COURSES);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_FACULTY);
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_DEGREE);
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_REMINDERS);
+            //db.execSQL("DROP TABLE IF EXISTS " + TABLE_DEGREE);
+            //db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
+            //db.execSQL("DROP TABLE IF EXISTS " + TABLE_REMINDERS);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESOURCES);
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETTINGS);
+            //db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETTINGS);
             onCreate(db);
         }
     }
@@ -162,33 +149,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return courses;
     }
 
-    public List<Resource> getResourceList() {
-        List<Resource> resources = new ArrayList<>();
+    private void initCoursesTable(SQLiteDatabase db) {
+        String CREATE_COURSES_TABLE = "CREATE TABLE " + TABLE_COURSES +
+                "(" +
+                KEY_COURSE_ID + " TEXT PRIMARY KEY," + // Define a primary key
+                KEY_COURSE_TITLE + " TEXT REFERENCES " + TABLE_COURSES + "," + // Define a foreign key
+                KEY_COURSE_DESC + " TEXT," +
+                KEY_COURSE_CREDIT + " REAL" +
+                ")";
+        db.execSQL(CREATE_COURSES_TABLE);
+    }
 
-        String POSTS_SELECT_QUERY =
-                String.format("SELECT * FROM %s ", TABLE_RESOURCES);
+    private void initFacultyTable(SQLiteDatabase db) {
+        String CREATE_FACULTY_TABLE = "CREATE TABLE " + TABLE_FACULTY +
+                "(" +
+                KEY_FACULTY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                KEY_FACULTY_LNAME + " TEXT," +
+                KEY_FACULTY_FNAME + " TEXT," +
+                KEY_FACULTY_EMAIL + " TEXT" +
+                ")";
+        db.execSQL(CREATE_FACULTY_TABLE);
+    }
 
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-                    Integer id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_RES_ID));
-                    String title = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RES_TITLE));
-                    String desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RES_DESC));
-                    String url = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RES_URL));
-                    Resource resource = new Resource(id, title, desc, url);
-                    resources.add(resource);
-                } while(cursor.moveToNext());
-            }
-        } catch (Exception e) {
-            Log.e("E", "Error while trying to get courses from database");
-        } finally {
-            if (cursor != null && !cursor.isClosed()) {
-                cursor.close();
-            }
+    private void initResourcesTable(SQLiteDatabase db) {
+        String CREATE_RESOURCES_TABLE = "CREATE TABLE " + TABLE_RESOURCES +
+                "(" +
+                KEY_RES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                KEY_RES_TITLE + " TEXT," +
+                KEY_RES_DESC + " TEXT," +
+                KEY_RES_URL + " TEXT" +
+                ")";
+        db.execSQL(CREATE_RESOURCES_TABLE);
+
+        String INSERTION = String.format("INSERT INTO %s(%s, %s, %s) VALUES", TABLE_RESOURCES, KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL);
+        String[] INIT_RESOURCE_QUERIES = {
+                String.format(INSERTION+"('%s', '%s', '%s')", KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL),
+                String.format(INSERTION+"('%s', '%s', '%s')", KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL),
+                String.format(INSERTION+"('%s', '%s', '%s')", KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL),
+                String.format(INSERTION+"('%s', '%s', '%s')", KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL),
+        };
+
+        for (String query : INIT_RESOURCE_QUERIES) {
+            db.execSQL(query);
         }
-        return resources;
+
     }
 
 //    private void copyDatabase() throws IOException {

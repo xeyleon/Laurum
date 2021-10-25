@@ -24,8 +24,6 @@ import java.util.Map;
  * TODO: Replace all uses of this class before publishing your app.
  */
 public class ResourceContent {
-    private LaurumDB db;
-    private Cursor cursor;
     /**
      * An array of sample (placeholder) items.
      */

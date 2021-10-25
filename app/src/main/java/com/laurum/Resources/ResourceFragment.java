@@ -1,6 +1,7 @@
 package com.laurum.Resources;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,11 +9,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.laurum.Database.DatabaseHelper;
+import com.laurum.Database.LaurumDB;
 import com.laurum.R;
+
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -51,8 +57,7 @@ public class ResourceFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_resource_list, container, false);
 
         // Set the adapter
@@ -64,6 +69,13 @@ public class ResourceFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+
+            DatabaseHelper dbHelper = new DatabaseHelper(view.getContext());
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            List<Resource> resources = LaurumDB.getResourceList(db);
+            for (Resource res : resources)
+                Log.i("I",res.getTitle());
+
             recyclerView.setAdapter(new ResourceRecyclerViewAdapter(ResourceContent.ITEMS));
         }
 

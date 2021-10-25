@@ -14,10 +14,10 @@ public class Resource {
         this.url = "url";
     }
     public Resource(Integer id, String title, String desc, String url) {
-        this.id = -1;
-        this.title = "title";
-        this.desc = "desc";
-        this.url = "url";
+        this.id = id;
+        this.title = title;
+        this.desc = desc;
+        this.url = url;
     }
 
     public Integer getId() {
