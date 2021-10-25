@@ -26,29 +26,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper sInstance;
 
     // Database Info
-    private static final String DATABASE_NAME = "laurum.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = LaurumDB.DATABASE_NAME;
+    private static final int DATABASE_VERSION = LaurumDB.DATABASE_VERSION;
 
     // Table Names
-    private static final String TABLE_COURSES = "courses";
-    private static final String TABLE_FACULTY = "faculty";
-    private static final String TABLE_DEGREE = "degree";
-    private static final String TABLE_SCHEDULE = "schedule";
-    private static final String TABLE_REMINDERS = "reminders";
-    private static final String TABLE_RESOURCES = "resources";
-    private static final String TABLE_SETTINGS = "settings";
+    private static final String TABLE_COURSES = LaurumDB.TABLE_COURSES;
+    private static final String TABLE_FACULTY = LaurumDB.TABLE_FACULTY;
+    private static final String TABLE_DEGREE = LaurumDB.TABLE_DEGREE;
+    private static final String TABLE_RESOURCES = LaurumDB.TABLE_RESOURCES;
+    private static final String TABLE_SETTINGS = LaurumDB.TABLE_SETTINGS;
 
     // Courses Table Columns
-    private static final String KEY_COURSE_ID = "course_id";
-    private static final String KEY_COURSE_TITLE = "course_title";
-    private static final String KEY_COURSE_DESC = "course_desc";
-    public static final String KEY_COURSE_CREDIT = "course_credit";
+    private static final String KEY_COURSE_ID = LaurumDB.KEY_COURSE_ID;
+    private static final String KEY_COURSE_TITLE = LaurumDB.KEY_COURSE_TITLE;
+    private static final String KEY_COURSE_DESC = LaurumDB.KEY_COURSE_DESC;
+    public static final String KEY_COURSE_CREDIT = LaurumDB.KEY_COURSE_CREDIT;
 
     // Faculty Table Columns
-    private static final String KEY_FACULTY_ID = "id";
-    private static final String KEY_FACULTY_FNAME = "first_name";
-    private static final String KEY_FACULTY_LNAME = "last_name";
-    private static final String KEY_FACULTY_EMAIL = "email";
+    private static final String KEY_FACULTY_ID = LaurumDB.KEY_FACULTY_ID;
+    private static final String KEY_FACULTY_FNAME = LaurumDB.KEY_FACULTY_FNAME;
+    private static final String KEY_FACULTY_LNAME = LaurumDB.KEY_FACULTY_LNAME;
+    private static final String KEY_FACULTY_EMAIL = LaurumDB.KEY_FACULTY_EMAIL;
 
     // Degree Table Columns
 
@@ -57,10 +55,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Reminders Table Columns
 
     // Resources Table Columns
-    private static final String KEY_RES_ID = "id";
-    private static final String KEY_RES_TITLE = "res_id";
-    private static final String KEY_RES_DESC = "res_desc";
-    private static final String KEY_RES_URL = "res_url";
+    private static final String KEY_RES_ID = LaurumDB.KEY_RES_ID;
+    private static final String KEY_RES_TITLE = LaurumDB.KEY_RES_TITLE;
+    private static final String KEY_RES_DESC = LaurumDB.KEY_RES_DESC;
+    private static final String KEY_RES_URL = LaurumDB.KEY_RES_URL;
+    private static final String KEY_RES_ICON = LaurumDB.KEY_RES_ICON;
 
     // Settings Table Columns
 
@@ -99,7 +98,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         initCoursesTable(db);
         initFacultyTable(db);
         initResourcesTable(db);
-
     }
 
     // Called when the database needs to be upgraded.
@@ -177,16 +175,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 KEY_RES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 KEY_RES_TITLE + " TEXT," +
                 KEY_RES_DESC + " TEXT," +
-                KEY_RES_URL + " TEXT" +
+                KEY_RES_URL + " TEXT," +
+                KEY_RES_ICON + " INTEGER" +
                 ")";
         db.execSQL(CREATE_RESOURCES_TABLE);
 
-        String INSERTION = String.format("INSERT INTO %s(%s, %s, %s) VALUES", TABLE_RESOURCES, KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL);
+        String INSERTION = String.format("INSERT INTO %s(%s, %s, %s, %s) VALUES", TABLE_RESOURCES, KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL, KEY_RES_ICON);
         String[] INIT_RESOURCE_QUERIES = {
-                String.format(INSERTION+"('%s', '%s', '%s')", KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL),
-                String.format(INSERTION+"('%s', '%s', '%s')", KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL),
-                String.format(INSERTION+"('%s', '%s', '%s')", KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL),
-                String.format(INSERTION+"('%s', '%s', '%s')", KEY_RES_TITLE, KEY_RES_DESC, KEY_RES_URL),
+                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "Campus Map (Waterloo)", "Map of Wilfrid Laurier University Waterloo campus", "https://map.concept3d.com/?id=638#!", R.drawable.ic_map),
+                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "Campus Map (Brantford)", "Map of Wilfrid Laurier University Brantford campus", "https://map.concept3d.com/?id=573#!", R.drawable.ic_map),
+                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "LORIS", "Laurier Online Registration and Information System", "https://loris.wlu.ca/", R.drawable.ic_golden_hawk),
+                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "myDegree", "A visual tool to help students with course planning.", "https://mydegree.wlu.ca/", R.drawable.ic_golden_hawk),
+                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "Visual Schedule Builder", "A visual tool to help students with course schedule planning", "https://scheduleme.wlu.ca", R.drawable.ic_schedule),
+                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "Student Services", "...", "", R.drawable.ic_golden_hawk),
+                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "Wellness Centre", "....", "", R.drawable.ic_golden_hawk),
         };
 
         for (String query : INIT_RESOURCE_QUERIES) {

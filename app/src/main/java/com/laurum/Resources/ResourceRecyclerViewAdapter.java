@@ -1,5 +1,6 @@
 package com.laurum.Resources;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -11,26 +12,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.laurum.R;
-import com.laurum.Resources.ResourceContent.ResourceItem;
 import com.laurum.databinding.FragmentResourceBinding;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link ResourceItem}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRecyclerViewAdapter.ViewHolder> {
 
-    private final List<ResourceItem> mValues;
+    private final List<Resource> mValues;
 
-    public ResourceRecyclerViewAdapter(List<ResourceItem> items) {
+    public ResourceRecyclerViewAdapter(List<Resource> items) {
         mValues = items;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         return new ViewHolder(FragmentResourceBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
@@ -38,17 +34,15 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.resTitle.setText(mValues.get(position).title);
-        holder.resDesc.setText(mValues.get(position).description);
-        //holder.resIcon.setImageResource(R.drawable.ic_courses_tab);
+        holder.resTitle.setText(mValues.get(position).getTitle());
+        holder.resDesc.setText(mValues.get(position).getDesc());
+        holder.resUri = Uri.parse(mValues.get(position).getUrl());
+        holder.resIcon.setImageResource(mValues.get(position).getIcon());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), holder.resTitle.getText().toString(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Intent.ACTION_VIEW, holder.resUri);
-                v.getContext().startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            Toast.makeText(v.getContext(), holder.resTitle.getText().toString(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Intent.ACTION_VIEW, holder.resUri);
+            v.getContext().startActivity(intent);
         });
     }
 
@@ -61,8 +55,8 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
         public final TextView resTitle;
         public final TextView resDesc;
         public final ImageView resIcon;
-        public final Uri resUri = Uri.parse("https://google.com");
-        public ResourceItem mItem;
+        public Uri resUri;
+        public Resource mItem;
 
         public ViewHolder(FragmentResourceBinding binding) {
             super(binding.getRoot());
@@ -71,6 +65,7 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
             resIcon = binding.resourceIcon;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + resDesc.getText() + "'";

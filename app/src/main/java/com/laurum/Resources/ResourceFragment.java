@@ -73,10 +73,8 @@ public class ResourceFragment extends Fragment {
             DatabaseHelper dbHelper = new DatabaseHelper(view.getContext());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             List<Resource> resources = LaurumDB.getResourceList(db);
-            for (Resource res : resources)
-                Log.i("I",res.getTitle());
 
-            recyclerView.setAdapter(new ResourceRecyclerViewAdapter(ResourceContent.ITEMS));
+            recyclerView.setAdapter(new ResourceRecyclerViewAdapter(resources));
         }
 
         return view;
