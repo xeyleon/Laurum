@@ -20,9 +20,6 @@ import com.laurum.R;
 
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- */
 public class ResourceFragment extends Fragment {
 
     // TODO: Customize parameter argument names
@@ -30,10 +27,6 @@ public class ResourceFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public ResourceFragment() {
     }
 

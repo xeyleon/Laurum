@@ -20,8 +20,10 @@
         <entry key="app/src/main/res/layout/add_or_edit.xml" value="0.31875" />
         <entry key="app/src/main/res/layout/cardview.xml" value="0.3047332961894682" />
         <entry key="app/src/main/res/layout/fragment_courses.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_courses_list.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/layout/fragment_degree.xml" value="0.1775869684153747" />
         <entry key="app/src/main/res/layout/fragment_faculty.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_faculty_list.xml" value="0.1734375" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.24479166666666666" />
         <entry key="app/src/main/res/layout/fragment_item.xml" value="0.4860813704496788" />
         <entry key="app/src/main/res/layout/fragment_item_list.xml" value="0.16927083333333334" />

@@ -151,11 +151,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String CREATE_COURSES_TABLE = "CREATE TABLE " + TABLE_COURSES +
                 "(" +
                 KEY_COURSE_ID + " TEXT PRIMARY KEY," + // Define a primary key
-                KEY_COURSE_TITLE + " TEXT REFERENCES " + TABLE_COURSES + "," + // Define a foreign key
+                KEY_COURSE_TITLE + " TEXT," + // Define a foreign key
                 KEY_COURSE_DESC + " TEXT," +
                 KEY_COURSE_CREDIT + " REAL" +
                 ")";
         db.execSQL(CREATE_COURSES_TABLE);
+
+        String INSERTION = String.format("INSERT INTO %s(%s, %s, %s, %s) VALUES", TABLE_COURSES, KEY_COURSE_ID, KEY_COURSE_TITLE, KEY_COURSE_DESC, KEY_COURSE_CREDIT);
+        String[] INIT_COURSES_QUERIES = {
+                String.format(INSERTION+"('%s', '%s', '%s', '%.2f')", "CP212","Uhh","YES!!", 2.5),
+                String.format(INSERTION+"('%s', '%s', '%s', '%.2f')", "CP999","Woo!!","??", 9.9),
+        };
+
+        for (String query : INIT_COURSES_QUERIES) {
+            db.execSQL(query);
+        }
     }
 
     private void initFacultyTable(SQLiteDatabase db) {
@@ -167,6 +177,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 KEY_FACULTY_EMAIL + " TEXT" +
                 ")";
         db.execSQL(CREATE_FACULTY_TABLE);
+
+        String INSERTION = String.format("INSERT INTO %s(%s, %s, %s) VALUES", TABLE_FACULTY, KEY_FACULTY_FNAME, KEY_FACULTY_LNAME, KEY_FACULTY_EMAIL);
+        String[] INIT_FACULTY_QUERIES = {
+                String.format(INSERTION+"('%s', '%s', '%s')", "Joe","Blow","ho@gmail.com"),
+                String.format(INSERTION+"('%s', '%s', '%s')", "Jim","Bob","lol@gmail.com"),
+        };
+
+        for (String query : INIT_FACULTY_QUERIES) {
+            db.execSQL(query);
+        }
     }
 
     private void initResourcesTable(SQLiteDatabase db) {
