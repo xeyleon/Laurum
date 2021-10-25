@@ -7,7 +7,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/courses_list"
-        android:name=".Courses.CoursesFragment"
+        android:name="com.laurum.CoursesFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
