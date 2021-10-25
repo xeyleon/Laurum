@@ -63,9 +63,7 @@ public class FacultyFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            DatabaseHelper dbHelper = new DatabaseHelper(view.getContext());
-            SQLiteDatabase db = dbHelper.getReadableDatabase();
-            List<Faculty> faculty = LaurumDB.getFacultyList(db);
+            List<Faculty> faculty = LaurumDB.getFacultyList();
 
             recyclerView.setAdapter(new FacultyRecyclerViewAdapter(faculty));
         }

@@ -9,57 +9,22 @@ import android.util.Log;
 
 import com.laurum.Courses.Course;
 import com.laurum.Faculty.Faculty;
+import com.laurum.R;
 import com.laurum.Resources.Resource;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LaurumDB {
-    private SQLiteDatabase db;
+public class LaurumDB extends DatabaseHelper{
+    private static SQLiteDatabase db = null;
 
-    // Database Info
-    public static final String DATABASE_NAME = "laurum.db";
-    public static final int DATABASE_VERSION = 1;
+    public LaurumDB(Context context) {
+        super(context);
+        db = new DatabaseHelper(context).getWritableDatabase();
+    }
 
-    // Table Names
-    public static final String TABLE_COURSES = "courses";
-    public static final String TABLE_FACULTY = "faculty";
-    public static final String TABLE_DEGREE = "degree";
-    public static final String TABLE_SCHEDULE = "schedule";
-    public static final String TABLE_REMINDERS = "reminders";
-    public static final String TABLE_RESOURCES = "resources";
-    public static final String TABLE_SETTINGS = "settings";
-
-    // Courses Table Columns
-    public static final String KEY_COURSE_ID = "course_id";
-    public static final String KEY_COURSE_TITLE = "course_title";
-    public static final String KEY_COURSE_DESC = "course_desc";
-    public static final String KEY_COURSE_CREDIT = "course_credit";
-
-    // Faculty Table Columns
-    public static final String KEY_FACULTY_ID = "id";
-    public static final String KEY_FACULTY_FNAME = "first_name";
-    public static final String KEY_FACULTY_LNAME = "last_name";
-    public static final String KEY_FACULTY_EMAIL = "email";
-
-    // Degree Table Columns
-
-    // Schedule Table Columns
-
-    // Reminders Table Columns
-
-    // Resources Table Columns
-    public static final String KEY_RES_ID = "id";
-    public static final String KEY_RES_TITLE = "res_title";
-    public static final String KEY_RES_DESC = "res_desc";
-    public static final String KEY_RES_URL = "res_url";
-    public static final String KEY_RES_ICON = "res_icon";
-
-    // Settings Table Columns
-
-
-    public static List<Resource> getResourceList(SQLiteDatabase db) {
+    public static List<Resource> getResourceList() {
         List<Resource> resources = new ArrayList<>();
 
         String POSTS_SELECT_QUERY =
@@ -88,7 +53,7 @@ public class LaurumDB {
         return resources;
     }
 
-    public static List<Course> getCourseList(SQLiteDatabase db) {
+    public static List<Course> getCourseList() {
         List<Course> courses = new ArrayList<>();
 
         String POSTS_SELECT_QUERY =
@@ -116,7 +81,7 @@ public class LaurumDB {
         return courses;
     }
 
-    public static List<Faculty> getFacultyList(SQLiteDatabase db) {
+    public static List<Faculty> getFacultyList() {
         List<Faculty> faculty = new ArrayList<>();
 
         String POSTS_SELECT_QUERY =
@@ -143,4 +108,5 @@ public class LaurumDB {
         }
         return faculty;
     }
+
 }

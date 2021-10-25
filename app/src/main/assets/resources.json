@@ -3,16 +3,16 @@
     {
       "id": "1",
       "title": "Campus Map (Waterloo)",
-      "description": "...",
-      "url" : "https://www.google.com",
-      "icon" : ""
+      "description": "Map of Wilfrid Laurier University Waterloo campus",
+      "url" : "https://map.concept3d.com/?id=638#!",
+      "icon" : "ic_map"
     },
     {
       "id": "2",
       "title": "Campus Map (Brantford)",
-      "description": "...",
-      "url" : "https://www.yahoo.com",
-      "icon" : ""
+      "description": "Map of Wilfrid Laurier University Brantford campus",
+      "url" : "https://map.concept3d.com/?id=573#!",
+      "icon" : "ic_map"
     }
   ]
 }

@@ -63,9 +63,7 @@ public class CoursesFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            DatabaseHelper dbHelper = new DatabaseHelper(view.getContext());
-            SQLiteDatabase db = dbHelper.getReadableDatabase();
-            List<Course> faculty = LaurumDB.getCourseList(db);
+            List<Course> faculty = LaurumDB.getCourseList();
 
             recyclerView.setAdapter(new CoursesRecyclerViewAdapter(faculty));
         }

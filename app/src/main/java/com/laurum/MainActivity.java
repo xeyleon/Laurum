@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     private DatabaseHelper dbHelper;
-    private SQLiteDatabase db;
+    private LaurumDB db;
 
     @SuppressLint("ObsoleteSdkInt")
     @Override
@@ -58,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         //Init Database
-        dbHelper = new DatabaseHelper(this);
-        db = dbHelper.getReadableDatabase();
+        db = new LaurumDB(this);
 
         tabLayout = findViewById(R.id.MainTabLayout);
         frameLayout = findViewById(R.id.MainFrameLayout);

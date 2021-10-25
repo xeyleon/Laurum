@@ -26,27 +26,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper sInstance;
 
     // Database Info
-    private static final String DATABASE_NAME = LaurumDB.DATABASE_NAME;
-    private static final int DATABASE_VERSION = LaurumDB.DATABASE_VERSION;
+    public static final String DATABASE_NAME = "laurum.db";
+    public static final int DATABASE_VERSION = 1;
 
     // Table Names
-    private static final String TABLE_COURSES = LaurumDB.TABLE_COURSES;
-    private static final String TABLE_FACULTY = LaurumDB.TABLE_FACULTY;
-    private static final String TABLE_DEGREE = LaurumDB.TABLE_DEGREE;
-    private static final String TABLE_RESOURCES = LaurumDB.TABLE_RESOURCES;
-    private static final String TABLE_SETTINGS = LaurumDB.TABLE_SETTINGS;
+    public static final String TABLE_COURSES = "courses";
+    public static final String TABLE_FACULTY = "faculty";
+    public static final String TABLE_DEGREE = "degree";
+    public static final String TABLE_RESOURCES = "resources";
+    public static final String TABLE_SETTINGS = "settings";
 
     // Courses Table Columns
-    private static final String KEY_COURSE_ID = LaurumDB.KEY_COURSE_ID;
-    private static final String KEY_COURSE_TITLE = LaurumDB.KEY_COURSE_TITLE;
-    private static final String KEY_COURSE_DESC = LaurumDB.KEY_COURSE_DESC;
-    public static final String KEY_COURSE_CREDIT = LaurumDB.KEY_COURSE_CREDIT;
+    public static final String KEY_COURSE_ID = "course_id";
+    public static final String KEY_COURSE_TITLE = "course_title";
+    public static final String KEY_COURSE_DESC = "course_desc";
+    public static final String KEY_COURSE_CREDIT = "course_credit";
 
     // Faculty Table Columns
-    private static final String KEY_FACULTY_ID = LaurumDB.KEY_FACULTY_ID;
-    private static final String KEY_FACULTY_FNAME = LaurumDB.KEY_FACULTY_FNAME;
-    private static final String KEY_FACULTY_LNAME = LaurumDB.KEY_FACULTY_LNAME;
-    private static final String KEY_FACULTY_EMAIL = LaurumDB.KEY_FACULTY_EMAIL;
+    public static final String KEY_FACULTY_ID = "id";
+    public static final String KEY_FACULTY_FNAME = "first_name";
+    public static final String KEY_FACULTY_LNAME = "last_name";
+    public static final String KEY_FACULTY_EMAIL = "email";
 
     // Degree Table Columns
 
@@ -55,11 +55,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Reminders Table Columns
 
     // Resources Table Columns
-    private static final String KEY_RES_ID = LaurumDB.KEY_RES_ID;
-    private static final String KEY_RES_TITLE = LaurumDB.KEY_RES_TITLE;
-    private static final String KEY_RES_DESC = LaurumDB.KEY_RES_DESC;
-    private static final String KEY_RES_URL = LaurumDB.KEY_RES_URL;
-    private static final String KEY_RES_ICON = LaurumDB.KEY_RES_ICON;
+    public static final String KEY_RES_ID = "id";
+    public static final String KEY_RES_TITLE = "res_title";
+    public static final String KEY_RES_DESC = "res_desc";
+    public static final String KEY_RES_URL = "res_url";
+    public static final String KEY_RES_ICON = "res_icon";
 
     // Settings Table Columns
 
@@ -116,35 +116,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETTINGS);
             onCreate(db);
         }
-    }
-
-    public List<Course> getCourseList() {
-        List<Course> courses = new ArrayList<>();
-
-        String POSTS_SELECT_QUERY =
-                String.format("SELECT * FROM %s ", TABLE_COURSES);
-
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-                    String id = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COURSE_ID));
-                    String title = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COURSE_TITLE));
-                    String desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COURSE_DESC));
-                    Double credits = cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_COURSE_CREDIT));
-                    Course course = new Course(id, title, desc, credits);
-                    courses.add(course);
-                } while(cursor.moveToNext());
-            }
-        } catch (Exception e) {
-            Log.e("E", "Error while trying to get courses from database");
-        } finally {
-            if (cursor != null && !cursor.isClosed()) {
-                cursor.close();
-            }
-        }
-        return courses;
     }
 
     private void initCoursesTable(SQLiteDatabase db) {
@@ -207,8 +178,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String.format(INSERTION+"('%s', '%s', '%s', '%s')", "LORIS", "Laurier Online Registration and Information System", "https://loris.wlu.ca/", R.drawable.ic_golden_hawk),
                 String.format(INSERTION+"('%s', '%s', '%s', '%s')", "myDegree", "A visual tool to help students with course planning.", "https://mydegree.wlu.ca/", R.drawable.ic_golden_hawk),
                 String.format(INSERTION+"('%s', '%s', '%s', '%s')", "Visual Schedule Builder", "A visual tool to help students with course schedule planning", "https://scheduleme.wlu.ca", R.drawable.ic_schedule),
-                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "Student Services", "...", "", R.drawable.ic_golden_hawk),
-                String.format(INSERTION+"('%s', '%s', '%s', '%s')", "Wellness Centre", "....", "", R.drawable.ic_golden_hawk),
         };
 
         for (String query : INIT_RESOURCE_QUERIES) {
