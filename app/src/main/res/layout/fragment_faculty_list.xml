@@ -14,8 +14,8 @@
         android:scrollIndicators="left"
         android:requiresFadingEdge="horizontal|vertical"
         app:layoutManager="LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-
         tools:context=".Faculty.FacultyFragment"
         tools:layout_editor_absoluteX="16dp"
         tools:listitem="@layout/fragment_faculty" />
