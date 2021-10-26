@@ -37,7 +37,7 @@ public class FacultyRecyclerViewAdapter extends RecyclerView.Adapter<FacultyRecy
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.name.setText(mValues.get(position).getName());
-        holder.email.setText(mValues.get(position).getEmail());
+        holder.email = mValues.get(position).getEmail();
         holder.title = mValues.get(position).getTitle();
         holder.department = mValues.get(position).getDepartment();
 
@@ -56,21 +56,24 @@ public class FacultyRecyclerViewAdapter extends RecyclerView.Adapter<FacultyRecy
             textView.setText(mValues.get(position).getName());
             textView = (TextView)view.findViewById(R.id.facultyTitle);
             textView.setText(mValues.get(position).getTitle());
-            builder.setView(view);
-            builder.setPositiveButton("Email", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    Intent email = new Intent(Intent.ACTION_SEND);
-                    email.putExtra(Intent.EXTRA_EMAIL, new String[]{ holder.email.getText().toString()});
-                    email.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                    email.putExtra(Intent.EXTRA_TEXT, "");
-                    email.setType("message/rfc822");
-                    v.getContext().startActivity(email);
-                }
-            });
-            builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
+            textView = (TextView)view.findViewById(R.id.facultyDialog_title);
+            textView.setText(mValues.get(position).getName());
+            textView = (TextView)view.findViewById(R.id.facultyDep);
+            textView.setText(mValues.get(position).getDepartment());
+            textView = (TextView)view.findViewById(R.id.facultyEmail);
+            textView.setText(mValues.get(position).getEmail());
 
-                }
+            builder.setView(view);
+            builder.setPositiveButton("Email", (dialog, id) -> {
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{holder.email});
+                email.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                email.putExtra(Intent.EXTRA_TEXT, "");
+                email.setType("message/rfc822");
+                v.getContext().startActivity(email);
+            });
+            builder.setNegativeButton("Close", (dialog, id) -> {
+
             });
             AlertDialog dialog = builder.create();
             dialog.show();
@@ -84,7 +87,7 @@ public class FacultyRecyclerViewAdapter extends RecyclerView.Adapter<FacultyRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView name;
-        public final TextView email;
+        public String email = "";
         public String title = "";
         public String department = "";
         public Faculty mItem;
@@ -92,7 +95,6 @@ public class FacultyRecyclerViewAdapter extends RecyclerView.Adapter<FacultyRecy
         public ViewHolder(FragmentFacultyBinding binding) {
             super(binding.getRoot());
             name = binding.facultyName;
-            email = binding.facultyEmail;
         }
 
         @NonNull
