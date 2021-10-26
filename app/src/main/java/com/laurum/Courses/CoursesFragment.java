@@ -65,7 +65,8 @@ public class CoursesFragment extends Fragment {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 
         List<Course> courses = LaurumDB.getCourseList();
-        recyclerView.setAdapter(new CoursesRecyclerViewAdapter(courses));
+        CoursesRecyclerViewAdapter course_adapter = new CoursesRecyclerViewAdapter(courses);
+        recyclerView.setAdapter(course_adapter);
 
         EditText search_input = view.findViewById(R.id.course_search_input);
         search_input.addTextChangedListener(new TextWatcher() {
@@ -79,7 +80,11 @@ public class CoursesFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                Toast.makeText(getContext(), editable.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), editable.toString(), Toast.LENGTH_SHORT).show();
+                List<Course> courses = LaurumDB.searchCourseList(editable.toString());
+                CoursesRecyclerViewAdapter course_adapter = new CoursesRecyclerViewAdapter(courses);
+                recyclerView.setAdapter(course_adapter);
+                //course_adapter.notifyDataSetChanged();
             }
 
         });

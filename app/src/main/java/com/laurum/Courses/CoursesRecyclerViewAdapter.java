@@ -1,7 +1,10 @@
 package com.laurum.Courses;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ import java.util.List;
 public class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecyclerViewAdapter.ViewHolder> {
 
     private final List<Course> mValues;
+    private int lastPosition = -1;
 
     public CoursesRecyclerViewAdapter(List<Course> items) {
         mValues = items;
@@ -33,6 +37,8 @@ public class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecy
         holder.course_id.setText(mValues.get(position).getId());
         holder.course_title.setText(mValues.get(position).getTitle());
         holder.course_desc = mValues.get(position).getDesc();
+
+        setAnimation(holder.itemView, position);
 
         holder.itemView.setOnClickListener(v -> {
             Toast.makeText(v.getContext(), holder.course_desc, Toast.LENGTH_SHORT).show();
@@ -60,6 +66,17 @@ public class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecy
         @Override
         public String toString() {
             return super.toString() + " '" + course_title.getText()  + "'";
+        }
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
         }
     }
 }

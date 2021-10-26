@@ -7,7 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +23,7 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
 
     private final List<Resource> mValues;
     private Context context;
+    private int lastPosition = -1;
 
     public ResourceRecyclerViewAdapter(List<Resource> items) {
         mValues = items;
@@ -39,6 +43,8 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
         holder.resDesc.setText(mValues.get(position).getDesc());
         holder.resUri = Uri.parse(mValues.get(position).getUrl());
         holder.resIcon.setImageResource(context.getResources().getIdentifier(mValues.get(position).getIcon(), "drawable", context.getPackageName()));
+
+        setAnimation(holder.itemView, position);
 
         holder.itemView.setOnClickListener(v -> {
             Toast.makeText(v.getContext(), holder.resTitle.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -70,6 +76,17 @@ public class ResourceRecyclerViewAdapter extends RecyclerView.Adapter<ResourceRe
         @Override
         public String toString() {
             return super.toString() + " '" + resDesc.getText() + "'";
+        }
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
         }
     }
 }
