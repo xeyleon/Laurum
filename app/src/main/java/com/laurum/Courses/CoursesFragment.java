@@ -9,10 +9,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.laurum.Database.DatabaseHelper;
 import com.laurum.Database.LaurumDB;
@@ -51,22 +55,34 @@ public class CoursesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_resource_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_courses_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+        Context context = view.getContext();
+        RecyclerView recyclerView = view.findViewById(R.id.courses_list);
+        if (mColumnCount <= 1)
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        else
+            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+
+        List<Course> courses = LaurumDB.getCourseList();
+        recyclerView.setAdapter(new CoursesRecyclerViewAdapter(courses));
+
+        EditText search_input = view.findViewById(R.id.course_search_input);
+        search_input.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
-            List<Course> courses = LaurumDB.getCourseList();
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
-            recyclerView.setAdapter(new CoursesRecyclerViewAdapter(courses));
-        }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                Toast.makeText(getContext(), editable.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
         return view;
     }

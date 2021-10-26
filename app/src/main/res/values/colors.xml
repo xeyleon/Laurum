@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="wlu_purple">#391676</color>
+    <color name="wlu_purple2">#4D1E9F</color>
     <color name="wlu_gold">#F5C92E</color>
+    <color name="wlu_gold2">#DDB529</color>
     <color name="gray">#AFAEA8</color>
 </resources>

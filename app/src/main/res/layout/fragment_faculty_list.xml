@@ -15,9 +15,35 @@
         android:requiresFadingEdge="horizontal|vertical"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/faculty_search_input"
         tools:context=".Faculty.FacultyFragment"
         tools:layout_editor_absoluteX="16dp"
         tools:listitem="@layout/fragment_faculty" />
+
+    <EditText
+        android:id="@+id/faculty_search_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:autofillHints="Search Course"
+        android:hint="@string/search_faculty_hint"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/search_bar"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="5dp"
+        android:textColor="@color/wlu_gold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColorHint="@color/purple_200"
+        android:bottom="10dp"
+        android:left="10dp"
+        android:right="10dp"
+        android:top="10dp"
+        android:layout_margin="5dp"
+        tools:ignore="LabelFor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
