@@ -7,23 +7,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.laurum.Courses.CoursesFragment;
-import com.laurum.Database.DatabaseHelper;
 import com.laurum.Database.LaurumDB;
 import com.laurum.Faculty.FacultyFragment;
-import com.laurum.Resources.Resource;
 import com.laurum.Resources.ResourceFragment;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment = null;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    private DatabaseHelper dbHelper;
     private LaurumDB db;
 
     @SuppressLint("ObsoleteSdkInt")

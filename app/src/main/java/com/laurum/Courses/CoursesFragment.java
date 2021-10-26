@@ -63,9 +63,9 @@ public class CoursesFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            List<Course> faculty = LaurumDB.getCourseList();
+            List<Course> courses = LaurumDB.getCourseList();
 
-            recyclerView.setAdapter(new CoursesRecyclerViewAdapter(faculty));
+            recyclerView.setAdapter(new CoursesRecyclerViewAdapter(courses));
         }
 
         return view;

@@ -1,6 +1,5 @@
 package com.laurum.Courses;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -9,9 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.laurum.Faculty.Faculty;
 import com.laurum.databinding.FragmentCoursesBinding;
-import com.laurum.databinding.FragmentFacultyBinding;
 
 import java.util.List;
 

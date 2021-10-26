@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.laurum.databinding.FragmentFacultyBinding;
-import com.laurum.databinding.FragmentResourceBinding;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class FacultyRecyclerViewAdapter extends RecyclerView.Adapter<FacultyRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.name.setText(mValues.get(position).getLastName() + ", "+mValues.get(position).getFirstName());
+        holder.name.setText(String.format("%s, %s", mValues.get(position).getLastName(),mValues.get(position).getFirstName()));
         holder.email.setText(mValues.get(position).getEmail());
 
         holder.itemView.setOnClickListener(v -> {
