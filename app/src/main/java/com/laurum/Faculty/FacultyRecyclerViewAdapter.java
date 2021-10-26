@@ -1,19 +1,20 @@
 package com.laurum.Faculty;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.laurum.R;
 import com.laurum.databinding.FragmentFacultyBinding;
 
 import java.util.List;
@@ -29,15 +30,16 @@ public class FacultyRecyclerViewAdapter extends RecyclerView.Adapter<FacultyRecy
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         return new ViewHolder(FragmentFacultyBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.name.setText(String.format("%s, %s", mValues.get(position).getLastName(),mValues.get(position).getFirstName()));
+        holder.name.setText(mValues.get(position).getName());
         holder.email.setText(mValues.get(position).getEmail());
+        holder.title = mValues.get(position).getTitle();
+        holder.department = mValues.get(position).getDepartment();
 
         setAnimation(holder.itemView, position);
 
@@ -46,12 +48,32 @@ public class FacultyRecyclerViewAdapter extends RecyclerView.Adapter<FacultyRecy
 //            Intent intent = new Intent(Intent.ACTION_VIEW, holder.resUri);
 //            v.getContext().startActivity(intent);
 
-            Intent email = new Intent(Intent.ACTION_SEND);
-            email.putExtra(Intent.EXTRA_EMAIL, new String[]{ holder.email.getText().toString()});
-            email.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-            email.putExtra(Intent.EXTRA_TEXT, "");
-            email.setType("message/rfc822");
-            v.getContext().startActivity(email);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.faculty_dialog, null);
+            TextView textView = (TextView)view.findViewById(R.id.facultyName);
+            textView.setText(mValues.get(position).getName());
+            textView = (TextView)view.findViewById(R.id.facultyTitle);
+            textView.setText(mValues.get(position).getTitle());
+            builder.setView(view);
+            builder.setPositiveButton("Email", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent email = new Intent(Intent.ACTION_SEND);
+                    email.putExtra(Intent.EXTRA_EMAIL, new String[]{ holder.email.getText().toString()});
+                    email.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                    email.putExtra(Intent.EXTRA_TEXT, "");
+                    email.setType("message/rfc822");
+                    v.getContext().startActivity(email);
+                }
+            });
+            builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
         });
     }
 
@@ -63,6 +85,8 @@ public class FacultyRecyclerViewAdapter extends RecyclerView.Adapter<FacultyRecy
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView name;
         public final TextView email;
+        public String title = "";
+        public String department = "";
         public Faculty mItem;
 
         public ViewHolder(FragmentFacultyBinding binding) {

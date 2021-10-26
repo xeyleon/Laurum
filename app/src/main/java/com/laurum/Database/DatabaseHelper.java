@@ -52,8 +52,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Faculty Table Columns
     public static final String KEY_FACULTY_ID = "id";
-    public static final String KEY_FACULTY_FNAME = "first_name";
-    public static final String KEY_FACULTY_LNAME = "last_name";
+    public static final String KEY_FACULTY_NAME = "name";
+    public static final String KEY_FACULTY_TITLE = "title";
+    public static final String KEY_FACULTY_DEP = "department";
     public static final String KEY_FACULTY_EMAIL = "email";
 
     // Degree Table Columns
@@ -162,8 +163,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String CREATE_FACULTY_TABLE = "CREATE TABLE " + TABLE_FACULTY +
                 "(" +
                 KEY_FACULTY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                KEY_FACULTY_LNAME + " TEXT," +
-                KEY_FACULTY_FNAME + " TEXT," +
+                KEY_FACULTY_NAME + " TEXT," +
+                KEY_FACULTY_TITLE + " TEXT," +
+                KEY_FACULTY_DEP + " TEXT," +
                 KEY_FACULTY_EMAIL + " TEXT" +
                 ")";
         db.execSQL(CREATE_FACULTY_TABLE);
@@ -176,8 +178,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             {
                 JSONObject json = jsonArray.getJSONObject(i);
                 ContentValues values = new ContentValues();
-                values.put(KEY_FACULTY_FNAME, json.getString("first_name"));
-                values.put(KEY_FACULTY_LNAME, json.getString("last_name"));
+                values.put(KEY_FACULTY_NAME, json.getString("name"));
+                values.put(KEY_FACULTY_TITLE, json.getString("title"));
+                values.put(KEY_FACULTY_DEP, json.getString("department"));
                 values.put(KEY_FACULTY_EMAIL, json.getString("email"));
                 db.insert(TABLE_FACULTY, null, values);
             }

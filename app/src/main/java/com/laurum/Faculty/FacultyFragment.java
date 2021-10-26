@@ -8,10 +8,15 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import com.laurum.Courses.Course;
+import com.laurum.Courses.CoursesRecyclerViewAdapter;
 import com.laurum.Database.LaurumDB;
 import com.laurum.R;
 
@@ -58,7 +63,29 @@ public class FacultyFragment extends Fragment {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 
         List<Faculty> faculty = LaurumDB.getFacultyList();
-        recyclerView.setAdapter(new FacultyRecyclerViewAdapter(faculty));
+        FacultyRecyclerViewAdapter faculty_adapter = new FacultyRecyclerViewAdapter(faculty);
+        recyclerView.setAdapter(faculty_adapter);
+
+        EditText search_input = view.findViewById(R.id.faculty_search_input);
+        search_input.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //Toast.makeText(getContext(), editable.toString(), Toast.LENGTH_SHORT).show();
+                List<Faculty> faculty = LaurumDB.searchFacultyList(editable.toString());
+                FacultyRecyclerViewAdapter faculty_adapter = new FacultyRecyclerViewAdapter(faculty);
+                recyclerView.setAdapter(faculty_adapter);
+                //course_adapter.notifyDataSetChanged();
+            }
+
+        });
 
         return view;
     }
