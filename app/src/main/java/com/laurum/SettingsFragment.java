@@ -1,67 +1,68 @@
 package com.laurum;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+
+import com.laurum.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link SettingsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * shows the settings option for choosing the movie categories in ListPreference.
  */
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+    private static final String TAG = SettingsFragment.class.getSimpleName();
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    SharedPreferences sharedPreferences;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    @Override
+    public void onCreatePreferences(Bundle bundle, String s) {
+        //add xml
+        addPreferencesFromResource(R.xml.settings);
 
-    public SettingsFragment() {
-        // Required empty public constructor
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        onSharedPreferenceChanged(sharedPreferences, getString(R.string.settings_test_key));
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FacultyFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SettingsFragment newInstance(String param1, String param2) {
-        SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //unregister the preferenceChange listener
+        getPreferenceScreen().getSharedPreferences()
+                .registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+        Preference preference = findPreference(key);
+        if (preference instanceof ListPreference) {
+            ListPreference listPreference = (ListPreference) preference;
+            int prefIndex = listPreference.findIndexOfValue(sharedPreferences.getString(key, ""));
+            if (prefIndex >= 0) {
+                preference.setSummary(listPreference.getEntries()[prefIndex]);
+            }
+        }
+        else if (preference instanceof CheckBoxPreference) {
+                CheckBoxPreference check = (CheckBoxPreference) preference;
+                check.setChecked(sharedPreferences.getBoolean(key, true));
+        } else {
+            preference.setSummary(sharedPreferences.getString(key, ""));
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        return view;
+    public void onPause() {
+        super.onPause();
+        //unregister the preference change listener
+        getPreferenceScreen().getSharedPreferences()
+                .unregisterOnSharedPreferenceChangeListener(this);
     }
-    
 }
-

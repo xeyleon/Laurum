@@ -19,4 +19,6 @@
     <string name="dialog_department_label">Department:</string>
     <string name="dialog_title_label">Title:</string>
     <string name="dialog_name_label">Name:</string>
+
+    <string name="settings_test_key">categoriesKey</string>
 </resources>

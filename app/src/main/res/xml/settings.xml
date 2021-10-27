@@ -1,0 +1,39 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="First Section">
+
+        <CheckBoxPreference
+            android:key="checkbox_preference"
+            android:title="TEST"
+            android:defaultValue="TEST"/>
+
+        <EditTextPreference
+            android:key="edittext_preference"
+            android:title="EDITME"
+            android:summary="HEHE"
+            android:dialogTitle="HEHE"
+            android:dependency="checkbox_preference" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Second Section">
+
+        <ListPreference
+            android:key="@string/settings_test_key"
+            android:title="WII"
+            android:dialogTitle="AFAS"
+            android:entries="@array/reply_entries"
+            android:defaultValue="popular"
+            android:entryValues="@array/reply_entries" />
+
+        <Preference
+            android:title="WIIII">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://github.com/" />
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
