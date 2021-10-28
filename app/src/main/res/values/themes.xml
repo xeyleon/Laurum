@@ -12,6 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorSecondary">@color/gray</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:itemTextAppearance">@style/TextAppearance.AppCompat.Medium</item>
     </style>
 
     <style name="splashTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
@@ -35,6 +39,11 @@
         <item name="android:selectedWeekBackgroundColor">@color/white</item>
         <item name="android:weekDayTextAppearance">@style/TextAppearance.AppCompat.Widget.PopupMenu.Large</item>
         <item name="android:dateTextAppearance">@style/TextAppearance.AppCompat.Medium</item>
+    </style>
+    <style name="PreferenceTheme" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorAccent">@color/wlu_purple</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>
 

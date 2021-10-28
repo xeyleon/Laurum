@@ -87,21 +87,27 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
+                        setTheme(R.style.Theme_Laurum);
                         fragment = new DegreeFragment();
                         break;
                     case 1:
+                        setTheme(R.style.Theme_Laurum);
                         fragment = new CoursesFragment();
                         break;
                     case 2:
+                        setTheme(R.style.Theme_Laurum);
                         fragment = new FacultyFragment();
                         break;
                     case 3:
+                        setTheme(R.style.Theme_Laurum);
                         fragment = new ResourceFragment();
                         break;
                     case 4:
+                        setTheme(R.style.PreferenceTheme);
                         fragment = new SettingsFragment();
                         break;
                     default:
+                        setTheme(R.style.Theme_Laurum);
                         fragment = new DegreeFragment();
                         break;
                 }

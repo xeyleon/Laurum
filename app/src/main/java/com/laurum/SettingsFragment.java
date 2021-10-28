@@ -3,7 +3,9 @@ package com.laurum;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -11,6 +13,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import com.laurum.R;
+
+import java.util.Objects;
 
 /**
  * shows the settings option for choosing the movie categories in ListPreference.
@@ -26,8 +30,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         addPreferencesFromResource(R.xml.settings);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
         onSharedPreferenceChanged(sharedPreferences, getString(R.string.settings_test_key));
+
     }
 
 
@@ -37,6 +41,26 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         //unregister the preferenceChange listener
         getPreferenceScreen().getSharedPreferences()
                 .registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Preference about = findPreference("settings_about");
+        Objects.requireNonNull(about).setOnPreferenceClickListener(v->{
+            Toast.makeText(getContext(), "Developed by Group 11", Toast.LENGTH_SHORT).show();
+            return true;
+        });
+
+        CheckBoxPreference checkbox = findPreference("theme_preference");
+        Objects.requireNonNull(checkbox).setOnPreferenceChangeListener((v, c)->{
+            if (c.toString().compareTo("true") == 0)
+                Toast.makeText(getContext(), "Dark Theme enabled", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getContext(), "Dark Theme disabled", Toast.LENGTH_SHORT).show();
+            return true;
+        });
     }
 
     @Override
