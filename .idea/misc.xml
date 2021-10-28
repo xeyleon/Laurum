@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/layout/activity_schedule.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/layout/add_or_edit.xml" value="0.31875" />
         <entry key="app/src/main/res/layout/cardview.xml" value="0.3047332961894682" />
+        <entry key="app/src/main/res/layout/course_dialog.xml" value="0.318974358974359" />
         <entry key="app/src/main/res/layout/custom_dialog.xml" value="0.318974358974359" />
         <entry key="app/src/main/res/layout/fragment_courses.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_courses_list.xml" value="0.1864134682591854" />

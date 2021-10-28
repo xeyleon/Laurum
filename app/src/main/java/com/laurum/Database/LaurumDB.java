@@ -56,8 +56,8 @@ public class LaurumDB extends DatabaseHelper{
     public static List<Course> getCourseList() {
         List<Course> courses = new ArrayList<>();
 
-        String POSTS_SELECT_QUERY =
-                String.format("SELECT * FROM %s ", TABLE_COURSES);
+        String POSTS_SELECT_QUERY = String.format("SELECT * FROM %s ", TABLE_COURSES);
+        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("ORDER BY %s ASC", KEY_COURSE_ID));
 
         Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
         try {
@@ -84,8 +84,7 @@ public class LaurumDB extends DatabaseHelper{
     public static List<Faculty> getFacultyList() {
         List<Faculty> faculty = new ArrayList<>();
 
-        String POSTS_SELECT_QUERY =
-                String.format("SELECT * FROM %s ", TABLE_FACULTY);
+        String POSTS_SELECT_QUERY = String.format("SELECT * FROM %s ", TABLE_FACULTY);
 
         Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
         try {
@@ -117,6 +116,7 @@ public class LaurumDB extends DatabaseHelper{
         POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_COURSE_ID, search));
         POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_COURSE_TITLE, search));
         POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_COURSE_DESC, search));
+        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("ORDER BY %s ASC", KEY_COURSE_ID));
         Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
 
         try {

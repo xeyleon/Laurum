@@ -1,5 +1,7 @@
 package com.laurum.Courses;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.laurum.R;
 import com.laurum.databinding.FragmentCoursesBinding;
 
 import java.util.List;
@@ -41,7 +45,26 @@ public class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecy
         setAnimation(holder.itemView, position);
 
         holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), holder.course_desc, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(v.getContext(), holder.course_desc, Toast.LENGTH_SHORT).show();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.course_dialog, null);
+            TextView textView = (TextView)view.findViewById(R.id.courseDialog_id);
+            textView.setText(mValues.get(position).getId());
+            textView = (TextView)view.findViewById(R.id.courseTitle);
+            textView.setText(mValues.get(position).getTitle());
+            textView = (TextView)view.findViewById(R.id.courseCredits);
+            textView.setText(mValues.get(position).getCredits().toString());
+            textView = (TextView)view.findViewById(R.id.courseDesc);
+            textView.setText(mValues.get(position).getDesc());
+
+            builder.setView(view);
+            builder.setNegativeButton("Close", (dialog, id) -> {
+
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
         });
     }
 

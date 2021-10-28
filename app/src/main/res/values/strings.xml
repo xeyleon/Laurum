@@ -20,4 +20,6 @@
     <string name="dialog_name_label">Name:</string>
 
     <string name="settings_test_key">categoriesKey</string>
+    <string name="course_description_label">Description:</string>
+    <string name="dialog_credits_label">Credits:</string>
 </resources>

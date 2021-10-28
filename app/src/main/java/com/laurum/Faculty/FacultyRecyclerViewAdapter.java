@@ -48,7 +48,6 @@ public class FacultyRecyclerViewAdapter extends RecyclerView.Adapter<FacultyRecy
 //            Intent intent = new Intent(Intent.ACTION_VIEW, holder.resUri);
 //            v.getContext().startActivity(intent);
 
-
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
             LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.faculty_dialog, null);
