@@ -23,4 +23,7 @@
     <string name="settings_test_key">categoriesKey</string>
     <string name="course_description_label">Description:</string>
     <string name="dialog_credits_label">Credits:</string>
+    <string name="course_search_key">course_search_key</string>
+    <string name="faculty_search_key">faculty_search_key</string>
+    <string name="student_name_key">student_name_key</string>
 </resources>

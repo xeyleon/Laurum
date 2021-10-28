@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.preference.CheckBoxPreference;
+import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -30,7 +31,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         addPreferencesFromResource(R.xml.settings);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        onSharedPreferenceChanged(sharedPreferences, getString(R.string.settings_test_key));
+        onSharedPreferenceChanged(sharedPreferences, getString(R.string.course_search_key));
+        onSharedPreferenceChanged(sharedPreferences, getString(R.string.faculty_search_key));
 
     }
 
@@ -47,9 +49,25 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Preference about = findPreference("settings_about");
-        Objects.requireNonNull(about).setOnPreferenceClickListener(v->{
+//        ListPreference coursePref = (ListPreference) findPreference("course_search_key");
+//        if(coursePref.getValue() == null){
+//            coursePref.setValueIndex(1);
+//        }
+//
+//        ListPreference facultyPref = (ListPreference) findPreference("faculty_search_key");
+//        if(facultyPref.getValue() == null){
+//            facultyPref.setValueIndex(1);
+//        }
+
+        Preference developer = findPreference("developer_info");
+        Objects.requireNonNull(developer).setOnPreferenceClickListener(v->{
             Toast.makeText(getContext(), "Developed by Group 11", Toast.LENGTH_SHORT).show();
+            return true;
+        });
+
+        Preference version = findPreference("version_info");
+        Objects.requireNonNull(version).setOnPreferenceClickListener(v->{
+            Toast.makeText(getContext(), "Version 0.0.1", Toast.LENGTH_SHORT).show();
             return true;
         });
 
