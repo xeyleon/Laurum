@@ -15,17 +15,20 @@
     <string name="res_description">Resource Description</string>
     <string name="search_course_hint">Search Course</string>
     <string name="search_faculty_hint">Search Faculty</string>
+
     <string name="dialog_email_label">E-Mail:</string>
     <string name="dialog_department_label">Department:</string>
     <string name="dialog_title_label">Title:</string>
     <string name="dialog_name_label">Name:</string>
-
-    <string name="settings_test_key">categoriesKey</string>
-    <string name="course_description_label">Description:</string>
+    <string name="dialog_description_label">Description:</string>
     <string name="dialog_credits_label">Credits:</string>
+
     <string name="course_search_key">course_search_key</string>
     <string name="faculty_search_key">faculty_search_key</string>
     <string name="student_name_key">student_name_key</string>
+
     <string name="dark_enable_msg">Dark Theme Enabled</string>
     <string name="dark_disable_msg">Dark Theme Disabled</string>
+    <string name="deverloper_info_msg">Developed by Group 11</string>
+    <string name="version_info_msg">Version 0.0.1</string>
 </resources>

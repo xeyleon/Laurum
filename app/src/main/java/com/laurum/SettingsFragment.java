@@ -61,13 +61,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
         Preference developer = findPreference("developer_info");
         Objects.requireNonNull(developer).setOnPreferenceClickListener(v->{
-            Toast.makeText(getContext(), "Developed by Group 11", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.deverloper_info_msg, Toast.LENGTH_SHORT).show();
             return true;
         });
 
         Preference version = findPreference("version_info");
         Objects.requireNonNull(version).setOnPreferenceClickListener(v->{
-            Toast.makeText(getContext(), "Version 0.0.1", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.version_info_msg, Toast.LENGTH_SHORT).show();
             return true;
         });
 

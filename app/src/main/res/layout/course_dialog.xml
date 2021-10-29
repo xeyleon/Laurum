@@ -77,7 +77,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:text = "@string/course_description_label"
+            android:text = "@string/dialog_description_label"
             android:textStyle="bold" />
         <TextView
             android:id="@+id/courseDesc"
