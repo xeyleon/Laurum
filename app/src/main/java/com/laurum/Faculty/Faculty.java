@@ -18,7 +18,7 @@ public class Faculty {
         this.id = id;
         this.name = name;
         this.title = title;
-        this.department = title;
+        this.department = department;
         this.email = email;
     }
 
