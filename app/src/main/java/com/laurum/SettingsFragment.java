@@ -74,9 +74,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         CheckBoxPreference checkbox = findPreference("theme_preference");
         Objects.requireNonNull(checkbox).setOnPreferenceChangeListener((v, c)->{
             if (c.toString().compareTo("true") == 0)
-                Toast.makeText(getContext(), "Dark Theme enabled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.dark_enable_msg, Toast.LENGTH_SHORT).show();
             else
-                Toast.makeText(getContext(), "Dark Theme disabled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.dark_disable_msg, Toast.LENGTH_SHORT).show();
             return true;
         });
     }

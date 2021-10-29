@@ -25,4 +25,6 @@
     <string name="course_search_key">course_search_key</string>
     <string name="faculty_search_key">faculty_search_key</string>
     <string name="student_name_key">student_name_key</string>
+    <string name="dark_enable_msg">Dark Theme Enabled</string>
+    <string name="dark_disable_msg">Dark Theme Disabled</string>
 </resources>

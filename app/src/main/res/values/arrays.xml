@@ -3,21 +3,22 @@
     <string-array name="course_search_entries">
         <item name="1">All</item>
         <item name="2">Course ID</item>
-        <item name="3">Course Description</item>
+        <item name="3">Course Title</item>
+        <item name="4">Course Description</item>
     </string-array>
 
     <string-array name="course_search_values">
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
     </string-array>
 
     <string-array name="faculty_search_entries">
         <item name="1">All</item>
-        <item name="2">First Name</item>
-        <item name="3">Last Name</item>
+        <item name="2">Name</item>
+        <item name="3">Title</item>
         <item name="4">Department</item>
-        <item name="5">Email</item>
     </string-array>
 
     <string-array name="faculty_search_values">

@@ -5119,114 +5119,6 @@
       "description": "An environmental studies perspective on the origins, variety, and relevance of environmental thought to understanding and resolving current environmental issues. Topics addressed will range from environmental philosophies to environmental literature and environmental politics, among others."
     },
     {
-      "id": "GESC151",
-      "title": "Our Digital Earth",
-      "credits": 0.5,
-      "description": "The purpose of this course is to explore the Digital Earth: how our environment is represented in digital spaces and how these are used to plan cities, manage epidemics, and create a more sustainable world."
-    },
-    {
-      "id": "GESC251",
-      "title": "Cartography",
-      "credits": 0.5,
-      "description": "..."
-    },
-    {
-      "id": "GESC254",
-      "title": "Geographic Information and Analysis",
-      "credits": 0.5,
-      "description": "GESC254"
-    },
-    {
-      "id": "GESC258",
-      "title": "Geographical Research Methods",
-      "credits": 0.5,
-      "description": "GESC258"
-    },
-    {
-      "id": "GESC290",
-      "title": "Environmental Concepts and Approaches",
-      "credits": 0.5,
-      "description": "GESC290"
-    },
-    {
-      "id": "GESC291",
-      "title": "Development and the Environment",
-      "credits": 0.5,
-      "description": "GESC291"
-    },
-    {
-      "id": "GESC297",
-      "title": "Geography of Water Resources - Canada",
-      "credits": 0.5,
-      "description": "GESC297"
-    },
-    {
-      "id": "GESC360",
-      "title": "Research Methods and Thesis Preparation",
-      "credits": 0.5,
-      "description": "GESC360"
-    },
-    {
-      "id": "GESC362",
-      "title": "Global Food Systems",
-      "credits": 0.5,
-      "description": "GESC362"
-    },
-    {
-      "id": "GESC391",
-      "title": "Wildlife and Rural Land Resources Management",
-      "credits": 0.5,
-      "description": "GESC391"
-    },
-    {
-      "id": "GESC397",
-      "title": "World Water Environment and Development Issues",
-      "credits": 0.5,
-      "description": "GESC397"
-    },
-    {
-      "id": "GESC398",
-      "title": "Parks and Protected Areas",
-      "credits": 0.5,
-      "description": "GESC398"
-    },
-    {
-      "id": "GESC399",
-      "title": "Third Year Field Studies",
-      "credits": 0.5,
-      "description": "GESC399"
-    },
-    {
-      "id": "GESC450",
-      "title": "Thesis",
-      "credits": 1,
-      "description": "GESC450*"
-    },
-    {
-      "id": "GESC451",
-      "title": "Field Studies",
-      "credits": 0.5,
-      "description": "GESC451"
-    },
-    {
-      "id": "GESC465",
-      "title": "Capstone Urban Sustainability Project",
-      "credits": 1,
-      "description": "GESC465"
-    },
-    {
-      "id": "GESC493",
-      "title": "Problems in Land Resources Management",
-      "credits": 0.5,
-      "description": "GESC493"
-    },
-    {
-      "id": "GESC494",
-      "title": "Northern Resources and Environments",
-      "credits": 0.5,
-      "description": "GESC494"
-    },
-    {
       "id": "AF101",
       "title": "First Year Seminar",
       "credits": 0.5,
@@ -14968,13 +14860,7 @@
       "id": "UU150",
       "title": "Foundations for Community Engagement and Service",
       "credits": 0.5,
-      "description": "..."
-    },
-    {
-      "id": "Introduction to core concepts, theories and competencies that serve as underpinnings for effective community engagement and service. Topics include ethical conduct, academic integrity, community service learning, civic engagement, career skills and professionalism. This is a practical course that provides a foundation for undertaking further experiential education opportunities.",
-      "title": "",
-      "credits": "",
-      "description": ""
+      "description": "Introduction to core concepts, theories and competencies that serve as underpinnings for effective community engagement and service. Topics include ethical conduct, academic integrity, community service learning, civic engagement, career skills and professionalism. This is a practical course that provides a foundation for undertaking further experiential education opportunities."
     },
     {
       "id": "UU201",

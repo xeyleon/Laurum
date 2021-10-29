@@ -9,15 +9,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Personalization">
-        <EditTextPreference
-            android:key="@string/student_name_key"
-            android:title="Student Name"
-            android:dialogTitle="Student Name" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="Search Settings">
 
         <ListPreference
@@ -41,7 +32,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:textColor="@color/wlu_purple"
         android:title="App Details">
         <Preference
             android:key="developer_info"

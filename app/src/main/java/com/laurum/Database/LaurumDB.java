@@ -1,11 +1,14 @@
 package com.laurum.Database;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
+
+import androidx.preference.PreferenceManager;
 
 import com.laurum.Courses.Course;
 import com.laurum.Faculty.Faculty;
@@ -18,10 +21,12 @@ import java.util.List;
 
 public class LaurumDB extends DatabaseHelper{
     private static SQLiteDatabase db = null;
+    private static SharedPreferences sharedPreferences = null;
 
     public LaurumDB(Context context) {
         super(context);
         db = new DatabaseHelper(context).getWritableDatabase();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public static List<Resource> getResourceList() {
@@ -111,11 +116,32 @@ public class LaurumDB extends DatabaseHelper{
 
     public static List<Course> searchCourseList(String search) {
         List<Course> courses = new ArrayList<>();
+        String search_settings = sharedPreferences.getString("course_search_key","1");
 
         String POSTS_SELECT_QUERY = String.format("SELECT * FROM %s ", TABLE_COURSES);
-        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_COURSE_ID, search));
-        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_COURSE_TITLE, search));
-        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_COURSE_DESC, search));
+
+        switch (Integer.parseInt(search_settings)) {
+            case 1:
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_COURSE_ID, search));
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_COURSE_TITLE, search));
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_COURSE_DESC, search));
+                break;
+            case 2:
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_COURSE_ID, search));
+                break;
+            case 3:
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_COURSE_TITLE, search));
+                break;
+            case 4:
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_COURSE_DESC, search));
+                break;
+            default:
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_COURSE_ID, search));
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_COURSE_TITLE, search));
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_COURSE_DESC, search));
+                break;
+        }
+
         POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("ORDER BY %s ASC", KEY_COURSE_ID));
         Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
 
@@ -142,11 +168,33 @@ public class LaurumDB extends DatabaseHelper{
 
     public static List<Faculty> searchFacultyList(String search) {
         List<Faculty> faculty = new ArrayList<>();
+        String search_settings = sharedPreferences.getString("faculty_search_key","1");
 
         String POSTS_SELECT_QUERY = String.format("SELECT * FROM %s ", TABLE_FACULTY);
-        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_FACULTY_NAME, search));
-        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_FACULTY_TITLE, search));
-        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_FACULTY_DEP, search));
+
+        switch (Integer.parseInt(search_settings)) {
+            case 1:
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_FACULTY_NAME, search));
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_FACULTY_TITLE, search));
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_FACULTY_DEP, search));
+                break;
+            case 2:
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_FACULTY_NAME, search));
+                break;
+            case 3:
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_FACULTY_TITLE, search));
+                break;
+            case 4:
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_FACULTY_DEP, search));
+                break;
+            default:
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_FACULTY_NAME, search));
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_FACULTY_TITLE, search));
+                POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("OR %s LIKE '%%%s%%' ", KEY_FACULTY_DEP, search));
+                break;
+        }
+
+        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("ORDER BY %s ASC", KEY_FACULTY_NAME));
         Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
 
         try {
