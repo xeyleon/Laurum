@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 
 import com.laurum.Courses.CoursesFragment;
 import com.laurum.Database.LaurumDB;
+import com.laurum.Degree.DegreeFragment;
 import com.laurum.Faculty.FacultyFragment;
 import com.laurum.Resources.ResourceFragment;
 import com.google.android.material.tabs.TabLayout;

@@ -58,10 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_FACULTY_EMAIL = "email";
 
     // Degree Table Columns
-
-    // Schedule Table Columns
-
-    // Reminders Table Columns
+    public static final String KEY_DEGREE_STATUS = "status";
 
     // Resources Table Columns
     public static final String KEY_RES_ID = "id";
@@ -106,8 +103,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         initCoursesTable(db);
+        initDegreeTable(db);
         initFacultyTable(db);
         initResourcesTable(db);
+
     }
 
     // Called when the database needs to be upgraded.
@@ -126,6 +125,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETTINGS);
             onCreate(db);
         }
+    }
+
+    private void initDegreeTable(SQLiteDatabase db) {
+        String CREATE_COURSES_TABLE = "CREATE TABLE " + TABLE_DEGREE +
+                "(" +
+                KEY_COURSE_ID + " TEXT PRIMARY KEY," +
+                KEY_DEGREE_STATUS + " INTEGER DEFAULT 0, " +
+                "FOREIGN KEY ("+KEY_COURSE_ID+") REFERENCES " + TABLE_COURSES + "(" + KEY_COURSE_ID +
+                "));";
+
+        db.execSQL(CREATE_COURSES_TABLE);
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_COURSE_ID, String.format("%s", "CP220"));
+        db.insert(TABLE_DEGREE, null, values);
+
     }
 
     private void initCoursesTable(SQLiteDatabase db) {
