@@ -7,7 +7,6 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/courses_list"
-        android:name="com.laurum.CoursesFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -16,7 +15,6 @@
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/course_search_input"
-        tools:context=".Courses.CoursesFragment"
         tools:listitem="@layout/fragment_courses" />
 
     <EditText
