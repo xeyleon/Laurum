@@ -31,4 +31,5 @@
     <string name="deverloper_info_msg">Developed by Group 11</string>
     <string name="version_info_msg">Version 0.0.1</string>
     <string name="degree_progress_label">Degree Progress</string>
+    <string name="course_completed_label">Completed</string>
 </resources>

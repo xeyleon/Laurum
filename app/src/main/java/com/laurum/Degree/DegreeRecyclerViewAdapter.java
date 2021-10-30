@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.laurum.Courses.Course;
 import com.laurum.R;
+import com.laurum.databinding.DegreeCourseItemBinding;
 import com.laurum.databinding.FragmentCoursesBinding;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new ViewHolder(FragmentCoursesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new ViewHolder(DegreeCourseItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -49,13 +50,13 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
             LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.course_dialog, null);
-            TextView textView = (TextView)view.findViewById(R.id.courseDialog_id);
+            TextView textView = view.findViewById(R.id.courseDialog_id);
             textView.setText(mValues.get(position).getId());
-            textView = (TextView)view.findViewById(R.id.courseTitle);
+            textView = view.findViewById(R.id.courseTitle);
             textView.setText(mValues.get(position).getTitle());
-            textView = (TextView)view.findViewById(R.id.courseCredits);
+            textView = view.findViewById(R.id.courseCredits);
             textView.setText(mValues.get(position).getCredits().toString());
-            textView = (TextView)view.findViewById(R.id.courseDesc);
+            textView = view.findViewById(R.id.courseDesc);
             textView.setText(mValues.get(position).getDesc());
 
             builder.setView(view);
@@ -78,10 +79,10 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
         public String course_desc = "";
         public Course mItem;
 
-        public ViewHolder(FragmentCoursesBinding binding) {
+        public ViewHolder(DegreeCourseItemBinding binding) {
             super(binding.getRoot());
-            course_id = binding.courseId;
-            course_title = binding.courseTitle;
+            course_id = binding.degreeCourseId;
+            course_title = binding.degreeCourseTitle;
         }
 
         @NonNull

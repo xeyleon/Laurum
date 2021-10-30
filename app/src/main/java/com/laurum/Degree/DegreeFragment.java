@@ -69,7 +69,7 @@ public class DegreeFragment extends Fragment {
         else
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 
-        List<Course> courses = LaurumDB.getCourseList();
+        List<Course> courses = LaurumDB.getDegreeCourses();
         DegreeRecyclerViewAdapter course_adapter = new DegreeRecyclerViewAdapter(courses);
         recyclerView.setAdapter(course_adapter);
 

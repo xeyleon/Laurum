@@ -219,4 +219,34 @@ public class LaurumDB extends DatabaseHelper{
         return faculty;
     }
 
+    public static List<Course> getDegreeCourses() {
+        List<Course> courses = new ArrayList<>();
+        String search_settings = sharedPreferences.getString("course_search_key","1");
+
+        String POSTS_SELECT_QUERY = String.format("SELECT * FROM %s AS D, %s as C ", TABLE_DEGREE, TABLE_COURSES);
+        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE D.%s=C.%s ", KEY_COURSE_ID, KEY_COURSE_ID));
+        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("ORDER BY %s ASC", KEY_COURSE_ID));
+        Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    String id = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COURSE_ID));
+                    String title = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COURSE_TITLE));
+                    String desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COURSE_DESC));
+                    Double credits = cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_COURSE_CREDIT));
+                    Course course = new Course(id, title, desc, credits);
+                    courses.add(course);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.e("E", "Error while trying to get courses from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return courses;
+    }
+
 }
