@@ -12,4 +12,5 @@
     <color name="wlu_gold">#F5C92E</color>
     <color name="wlu_gold2">#DDB529</color>
     <color name="gray">#AFAEA8</color>
+    <color name="transparent">#00000000</color>
 </resources>

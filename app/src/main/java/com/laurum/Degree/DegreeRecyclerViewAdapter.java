@@ -6,7 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -66,6 +71,23 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
             AlertDialog dialog = builder.create();
             dialog.show();
         });
+
+        ImageButton remove_button = holder.itemView.findViewById(R.id.course_remove);
+        remove_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "Course Remove Requested: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        CheckBox completed = holder.itemView.findViewById(R.id.checkbox_complete);
+        completed.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked)
+                Toast.makeText(compoundButton.getContext(), "Course Completed: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(compoundButton.getContext(), "Course Incompleted: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
+        });
+
     }
 
     @Override
