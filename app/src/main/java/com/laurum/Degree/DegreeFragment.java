@@ -1,5 +1,6 @@
 package com.laurum.Degree;
 
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -128,7 +129,18 @@ public class DegreeFragment extends Fragment {
         return primary_RecyclerView;
     }
 
+    private static boolean courseExists(String course_id){
+        for (Course course : courses)
+            if ((course.getId()).compareTo(course_id) == 0)
+                return true;
+        return false;
+    }
+
     public static void addCourse(String course_id){
+
+        if (courseExists(course_id))
+            return;
+
         LaurumDB.addToDegree(course_id);
         Course course = LaurumDB.getCourse(course_id);
         courses.add(course);
@@ -149,6 +161,10 @@ public class DegreeFragment extends Fragment {
             if (course.getStatus() == 1)
                 total_credits += 100*course.getCredits();
         }
+        //degreeProgress.setProgress(total_credits);
+        ObjectAnimator.ofInt(degreeProgress, "progress", total_credits)
+                .setDuration(300)
+                .start();
         degreeProgress.setProgress(total_credits);
         degreeProgressPercent.setText(String.format("%s%%", 100 * (double) degreeProgress.getProgress() / (double) degreeProgress.getMax()));
     }

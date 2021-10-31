@@ -73,7 +73,7 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
 
         ImageButton remove_button = holder.itemView.findViewById(R.id.course_remove);
         remove_button.setOnClickListener(view -> {
-            Toast.makeText(view.getContext(), "Course Remove Requested: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(view.getContext(), "Course Remove Requested: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
             LaurumDB.removeFromDegree(mValues.get(holder.getAdapterPosition()).getId());
             RecyclerView p_recycler = DegreeFragment.getPrimaryRecyclerView();
             DegreeFragment.removeCourse(holder.getAdapterPosition());
@@ -81,14 +81,10 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
 
         CheckBox completed = holder.itemView.findViewById(R.id.checkbox_complete);
         completed.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            if (isChecked) {
-                Toast.makeText(compoundButton.getContext(), "Course Completed: " + holder.mItem.getId(), Toast.LENGTH_SHORT).show();
+            if (isChecked)
                 holder.mItem.setStatus(1);
-            }
-            else {
-                Toast.makeText(compoundButton.getContext(), "Course Incompleted: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
+            else
                 holder.mItem.setStatus(0);
-            }
             DegreeFragment.updateProgress();
             LaurumDB.degreeCourseStatusUpdate(holder.mItem.getId(), holder.mItem.getStatus());
         });
