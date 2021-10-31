@@ -1,5 +1,6 @@
 package com.laurum.Database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -286,16 +287,15 @@ public class LaurumDB extends DatabaseHelper{
         db.delete(TABLE_DEGREE, String.format("%s = ?", KEY_COURSE_ID), new String[] {course_id}) ;
     }
 
+    @SuppressLint("DefaultLocale")
     public static void degreeCourseStatusUpdate(String course_id, int status){
-        ContentValues values = new ContentValues();
-        values.put(KEY_DEGREE_STATUS, status);
-        String[] whereArgs = {KEY_COURSE_ID, course_id};
+        //ContentValues values = new ContentValues();
+        //values.put(KEY_DEGREE_STATUS, status);
+        //String[] whereArgs = {KEY_COURSE_ID, course_id};
+        //int value = db.update(TABLE_DEGREE, values, "? = ?", whereArgs);
 
-        int value = db.update(TABLE_DEGREE, values, "? = ?", whereArgs);
-        Log.i("I",""+value);
-        //String UPDATE_QUERY = String.format("UPDATE %s SET %s = %d ", TABLE_DEGREE, KEY_DEGREE_STATUS, status);
-        //UPDATE_QUERY = UPDATE_QUERY.concat(String.format("WHERE %s = \'%s\'", KEY_COURSE_ID, course_id));
-        //Cursor cursor = db.rawQuery(UPDATE_QUERY, null);
-        //cursor.close();
+        String UPDATE_QUERY = String.format("UPDATE %s SET %s = %d ", TABLE_DEGREE, KEY_DEGREE_STATUS, status);
+        UPDATE_QUERY = UPDATE_QUERY.concat(String.format("WHERE %s = '%s'", KEY_COURSE_ID, course_id));
+        db.execSQL(UPDATE_QUERY);
     }
 }

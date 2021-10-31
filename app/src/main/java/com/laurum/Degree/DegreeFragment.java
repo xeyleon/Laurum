@@ -38,6 +38,7 @@ public class DegreeFragment extends Fragment {
     private static List<Course> courses;
     private static DegreeRecyclerViewAdapter course_adapter;
     private static ProgressBar degreeProgress;
+    private static TextView degreeProgressPercent;
 
     public DegreeFragment() {
     }
@@ -78,8 +79,7 @@ public class DegreeFragment extends Fragment {
         primary_RecyclerView.setAdapter(course_adapter);
 
         degreeProgress = view.findViewById(R.id.progressBar);
-        TextView label = view.findViewById(R.id.degreeProgressPercent);
-        label.setText(String.format("%s%%", 100 * (double) degreeProgress.getProgress() / (double) degreeProgress.getMax()));
+        degreeProgressPercent = view.findViewById(R.id.degreeProgressPercent);
         //degreeProgress.setScaleY(5f);
         updateProgress();
 
@@ -150,6 +150,7 @@ public class DegreeFragment extends Fragment {
                 total_credits += 100*course.getCredits();
         }
         degreeProgress.setProgress(total_credits);
+        degreeProgressPercent.setText(String.format("%s%%", 100 * (double) degreeProgress.getProgress() / (double) degreeProgress.getMax()));
     }
 
 }
