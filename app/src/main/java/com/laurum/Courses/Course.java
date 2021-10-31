@@ -5,13 +5,16 @@ public class Course {
     private final String title;
     private final String desc;
     private final double credits;
+    private int status;
 
     public Course() {
         this.id = "id";
         this.title = "title";
         this.desc = "desc";
         this.credits = 0.0;
+        this.status = 0;
     }
+
     public Course(String id, String title, String desc, Double credits) {
         this.id = id;
         this.title = title;
@@ -34,5 +37,11 @@ public class Course {
     public Double getCredits() {
         return this.credits;
     }
+
+    public Integer getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(int status) {this.status = status;}
 
 }

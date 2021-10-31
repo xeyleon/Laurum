@@ -1,5 +1,6 @@
 package com.laurum.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -166,6 +167,30 @@ public class LaurumDB extends DatabaseHelper{
         return courses;
     }
 
+    public static Course getCourse(String course_id) {
+        Course course = new Course();
+        String POSTS_SELECT_QUERY = String.format("SELECT * FROM %s ", TABLE_COURSES);
+        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE %s LIKE '%%%s%%' ",KEY_COURSE_ID, course_id));
+        Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
+
+        try {
+            if (cursor.moveToFirst()) {
+                    String id = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COURSE_ID));
+                    String title = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COURSE_TITLE));
+                String desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COURSE_DESC));
+                    Double credits = cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_COURSE_CREDIT));
+                    course = new Course(id, title, desc, credits);
+            }
+        } catch (Exception e) {
+            Log.e("E", "Error while trying to get courses from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return course;
+    }
+
     public static List<Faculty> searchFacultyList(String search) {
         List<Faculty> faculty = new ArrayList<>();
         String search_settings = sharedPreferences.getString("faculty_search_key","1");
@@ -223,10 +248,10 @@ public class LaurumDB extends DatabaseHelper{
         List<Course> courses = new ArrayList<>();
         String search_settings = sharedPreferences.getString("course_search_key","1");
 
-        String POSTS_SELECT_QUERY = String.format("SELECT * FROM %s AS D, %s as C ", TABLE_DEGREE, TABLE_COURSES);
-        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("WHERE D.%s=C.%s ", KEY_COURSE_ID, KEY_COURSE_ID));
-        POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("ORDER BY %s ASC", KEY_COURSE_ID));
-        Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
+        String SELECT_QUERY = String.format("SELECT * FROM %s AS D, %s as C ", TABLE_DEGREE, TABLE_COURSES);
+        SELECT_QUERY = SELECT_QUERY.concat(String.format("WHERE D.%s=C.%s ", KEY_COURSE_ID, KEY_COURSE_ID));
+        //POSTS_SELECT_QUERY = POSTS_SELECT_QUERY.concat(String.format("ORDER BY %s ASC", KEY_COURSE_ID));
+        Cursor cursor = db.rawQuery(SELECT_QUERY, null);
 
         try {
             if (cursor.moveToFirst()) {
@@ -235,7 +260,9 @@ public class LaurumDB extends DatabaseHelper{
                     String title = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COURSE_TITLE));
                     String desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COURSE_DESC));
                     Double credits = cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_COURSE_CREDIT));
+                    int status = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_DEGREE_STATUS));
                     Course course = new Course(id, title, desc, credits);
+                    course.setStatus(status);
                     courses.add(course);
                 } while (cursor.moveToNext());
             }
@@ -249,4 +276,26 @@ public class LaurumDB extends DatabaseHelper{
         return courses;
     }
 
+    public static void addToDegree(String course_id) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_COURSE_ID, course_id);
+        db.insert(TABLE_DEGREE, null, values);
+    }
+
+    public static void removeFromDegree(String course_id) {
+        db.delete(TABLE_DEGREE, String.format("%s = ?", KEY_COURSE_ID), new String[] {course_id}) ;
+    }
+
+    public static void degreeCourseStatusUpdate(String course_id, int status){
+        ContentValues values = new ContentValues();
+        values.put(KEY_DEGREE_STATUS, status);
+        String[] whereArgs = {KEY_COURSE_ID, course_id};
+
+        int value = db.update(TABLE_DEGREE, values, "? = ?", whereArgs);
+        Log.i("I",""+value);
+        //String UPDATE_QUERY = String.format("UPDATE %s SET %s = %d ", TABLE_DEGREE, KEY_DEGREE_STATUS, status);
+        //UPDATE_QUERY = UPDATE_QUERY.concat(String.format("WHERE %s = \'%s\'", KEY_COURSE_ID, course_id));
+        //Cursor cursor = db.rawQuery(UPDATE_QUERY, null);
+        //cursor.close();
+    }
 }

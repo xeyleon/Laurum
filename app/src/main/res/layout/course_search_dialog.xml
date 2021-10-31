@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/courseSearchDialog_id"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:scaleType="center"
+        android:text = "Add a Course"
+        android:gravity="fill_horizontal|fill|center"
+        android:textColor="@color/wlu_gold"
+        android:textSize="16sp"
+        android:background="@color/wlu_purple"
+        android:drawablePadding="10dp"
+        android:paddingTop="5dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:layout_marginBottom="10dp"
+        app:drawableLeftCompat="@drawable/ic_degree_tab" />
+
+    <EditText
+        android:id="@+id/course_add_search_input"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:autofillHints="Search Course"
+        android:hint="@string/search_course_hint"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/search_bar"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="5dp"
+        android:textColor="@color/wlu_gold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColorHint="@color/purple_200"
+        android:bottom="30dp"
+        android:left="30dp"
+        android:right="30dp"
+        android:top="30dp"
+        android:layout_margin="5dp" />
+
+</LinearLayout>

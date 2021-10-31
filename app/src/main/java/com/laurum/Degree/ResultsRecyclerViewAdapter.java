@@ -1,35 +1,43 @@
-package com.laurum.Courses;
+package com.laurum.Degree;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.laurum.Courses.Course;
+import com.laurum.Database.LaurumDB;
 import com.laurum.R;
+import com.laurum.databinding.CourseInfoDialogBinding;
+import com.laurum.databinding.DegreeCourseItemBinding;
 import com.laurum.databinding.FragmentCoursesBinding;
 
 import java.util.List;
 
-public class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecyclerViewAdapter.ViewHolder> {
+public class ResultsRecyclerViewAdapter extends RecyclerView.Adapter<ResultsRecyclerViewAdapter.ViewHolder> {
 
     private final List<Course> mValues;
     private int lastPosition = -1;
 
-    public CoursesRecyclerViewAdapter(List<Course> items) {
+    public ResultsRecyclerViewAdapter(List<Course> items) {
         mValues = items;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         return new ViewHolder(FragmentCoursesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
@@ -44,26 +52,12 @@ public class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecy
 
         holder.itemView.setOnClickListener(v -> {
             //Toast.makeText(v.getContext(), holder.course_desc, Toast.LENGTH_SHORT).show();
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-            LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.course_info_dialog, null);
-            TextView textView = view.findViewById(R.id.courseDialog_id);
-            textView.setText(mValues.get(position).getId());
-            textView = view.findViewById(R.id.courseTitle);
-            textView.setText(mValues.get(position).getTitle());
-            textView = view.findViewById(R.id.courseCredits);
-            textView.setText(mValues.get(position).getCredits().toString());
-            textView = view.findViewById(R.id.courseDesc);
-            textView.setText(mValues.get(position).getDesc());
-
-            builder.setView(view);
-            builder.setNegativeButton("Close", (dialog, id) -> {
-
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            //LaurumDB.addToDegree(holder.course_id.getText().toString());
+            DegreeFragment.dismissDialog();
+            DegreeFragment.addCourse(holder.course_id.getText().toString());
         });
+
+
     }
 
     @Override

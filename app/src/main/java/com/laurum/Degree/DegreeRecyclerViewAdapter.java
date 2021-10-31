@@ -1,15 +1,14 @@
 package com.laurum.Degree;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,9 +17,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.laurum.Courses.Course;
+import com.laurum.Database.LaurumDB;
 import com.laurum.R;
 import com.laurum.databinding.DegreeCourseItemBinding;
-import com.laurum.databinding.FragmentCoursesBinding;
 
 import java.util.List;
 
@@ -36,7 +35,6 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         return new ViewHolder(DegreeCourseItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
@@ -46,6 +44,7 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
         holder.course_id.setText(mValues.get(position).getId());
         holder.course_title.setText(mValues.get(position).getTitle());
         holder.course_desc = mValues.get(position).getDesc();
+        holder.course_completed.setChecked(mValues.get(position).getStatus() == 1);
 
         setAnimation(holder.itemView, position);
 
@@ -54,7 +53,7 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
 
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
             LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.course_dialog, null);
+            View view = inflater.inflate(R.layout.course_info_dialog, null);
             TextView textView = view.findViewById(R.id.courseDialog_id);
             textView.setText(mValues.get(position).getId());
             textView = view.findViewById(R.id.courseTitle);
@@ -73,19 +72,25 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
         });
 
         ImageButton remove_button = holder.itemView.findViewById(R.id.course_remove);
-        remove_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Course Remove Requested: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
-            }
+        remove_button.setOnClickListener(view -> {
+            Toast.makeText(view.getContext(), "Course Remove Requested: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
+            LaurumDB.removeFromDegree(mValues.get(holder.getAdapterPosition()).getId());
+            RecyclerView p_recycler = DegreeFragment.getPrimaryRecyclerView();
+            DegreeFragment.removeCourse(holder.getAdapterPosition());
         });
 
         CheckBox completed = holder.itemView.findViewById(R.id.checkbox_complete);
         completed.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            if (isChecked)
-                Toast.makeText(compoundButton.getContext(), "Course Completed: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
-            else
+            if (isChecked) {
+                Toast.makeText(compoundButton.getContext(), "Course Completed: " + holder.mItem.getId(), Toast.LENGTH_SHORT).show();
+                holder.mItem.setStatus(1);
+            }
+            else {
                 Toast.makeText(compoundButton.getContext(), "Course Incompleted: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
+                holder.mItem.setStatus(0);
+            }
+            DegreeFragment.updateProgress();
+            LaurumDB.degreeCourseStatusUpdate(holder.mItem.getId(), holder.mItem.getStatus());
         });
 
     }
@@ -98,6 +103,7 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView course_id;
         public final TextView course_title;
+        public final CheckBox course_completed;
         public String course_desc = "";
         public Course mItem;
 
@@ -105,6 +111,7 @@ public class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecycl
             super(binding.getRoot());
             course_id = binding.degreeCourseId;
             course_title = binding.degreeCourseTitle;
+            course_completed = binding.checkboxComplete;
         }
 
         @NonNull
