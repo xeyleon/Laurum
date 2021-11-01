@@ -2,7 +2,7 @@ package com.laurum.Courses;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +21,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.laurum.Database.DatabaseHelper;
 import com.laurum.Database.LaurumDB;
 import com.laurum.R;
 import com.laurum.databinding.FragmentCoursesBinding;
@@ -33,10 +30,9 @@ import java.util.List;
 
 public class CoursesFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
+    RecyclerView recyclerView;
 
     public CoursesFragment() {
     }
@@ -65,7 +61,7 @@ public class CoursesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_courses_list, container, false);
 
         Context context = view.getContext();
-        RecyclerView recyclerView = view.findViewById(R.id.courses_list);
+        recyclerView = view.findViewById(R.id.courses_list);
         if (mColumnCount <= 1)
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
         else
@@ -184,4 +180,5 @@ public class CoursesFragment extends Fragment {
             }
         }
     }
+
 }
