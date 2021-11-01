@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
+import android.widget.TextSwitcher;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -109,25 +113,28 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
             TabLayout tabLayout  = view.findViewById(R.id.user_manual_tabs);
             FrameLayout frameLayout = view.findViewById(R.id.user_manual_frame);
-            View frameView = inflater.inflate(R.layout.fragment_construction,frameLayout,false);
+            View frameView = inflater.inflate(R.layout.info_dialog,frameLayout,false);
             frameLayout.addView(frameView);
-
+            TextView info_dlg = frameView.findViewById(R.id.info_dlg_msg);
+            TranslateAnimation animObj= new TranslateAnimation(300,info_dlg.getWidth(), 0, 0);
+            animObj.setDuration(500);
+            info_dlg.startAnimation(animObj);
+            info_dlg.setText(R.string.how_to_use_msg);
             tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                public void onTabSelected(TabLayout.Tab tab) {
-                   View frameView;
+                   info_dlg.startAnimation(animObj);
                    switch (tab.getPosition()) {
                        case 0:
-                           frameView = inflater.inflate(R.layout.fragment_construction,frameLayout,false);
+
+                           info_dlg.setText(R.string.how_to_use_msg);
                            break;
                        case 1:
-                           frameView = inflater.inflate(R.layout.fragment_construction,frameLayout,false);
+                           info_dlg.setText(R.string.degree_tracking_msg);
                            break;
                        default:
-                           frameView = inflater.inflate(R.layout.fragment_construction,frameLayout,false);
+                           info_dlg.setText(R.string.how_to_use_msg);
                            break;
                    }
-                   frameLayout.removeAllViews();
-                   frameLayout.addView(frameView);
                }
                 @Override
                 public void onTabUnselected(TabLayout.Tab tab) {

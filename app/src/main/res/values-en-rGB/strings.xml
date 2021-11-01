@@ -44,4 +44,7 @@
     <string name="dev_member_4">Zhenyang Ding</string>
     <string name="dev_member_5">Zongyang Li</string>
     <string name="user_manual_dlg_title">User Manual</string>
+
+    <string name="how_to_use_msg">Laurum is a …</string>
+    <string name="degree_tracking_msg">Degree Tracking allows you to keep track of your degree progress.</string>
 </resources>

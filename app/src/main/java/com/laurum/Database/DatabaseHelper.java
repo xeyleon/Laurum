@@ -137,9 +137,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(CREATE_COURSES_TABLE);
 
-        ContentValues values = new ContentValues();
-        values.put(KEY_COURSE_ID, String.format("%s", "CP220"));
-        db.insert(TABLE_DEGREE, null, values);
+//        ContentValues values = new ContentValues();
+//        values.put(KEY_COURSE_ID, String.format("%s", "CP220"));
+//        db.insert(TABLE_DEGREE, null, values);
 
     }
 
