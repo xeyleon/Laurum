@@ -36,7 +36,7 @@
         android:title="App Details">
         <Preference
             android:key="user_manual"
-            android:summary=""
+            android:summary="(Under Construction)"
             android:title="User Manual">
         </Preference>
         <Preference
