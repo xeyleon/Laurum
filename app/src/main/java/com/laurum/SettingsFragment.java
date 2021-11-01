@@ -1,11 +1,19 @@
 package com.laurum;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
@@ -13,7 +21,12 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.tabs.TabLayout;
+import com.laurum.Courses.CoursesFragment;
+import com.laurum.Degree.DegreeFragment;
+import com.laurum.Faculty.FacultyFragment;
 import com.laurum.R;
+import com.laurum.Resources.ResourceFragment;
 
 import java.util.Objects;
 
@@ -61,7 +74,15 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
         Preference developer = findPreference("developer_info");
         Objects.requireNonNull(developer).setOnPreferenceClickListener(v->{
-            Toast.makeText(getContext(), R.string.deverloper_info_msg, Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.developer_info_dialog, null);
+            builder.setView(view);
+            builder.setNegativeButton("Close", (dialog, id) -> {
+
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
             return true;
         });
 
@@ -77,6 +98,51 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                 Toast.makeText(getContext(), R.string.dark_enable_msg, Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(getContext(), R.string.dark_disable_msg, Toast.LENGTH_SHORT).show();
+            return true;
+        });
+
+        Preference user_manual = findPreference("user_manual");
+        Objects.requireNonNull(user_manual).setOnPreferenceClickListener(v->{
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.user_manual_dialog, null);
+
+            TabLayout tabLayout  = view.findViewById(R.id.user_manual_tabs);
+            FrameLayout frameLayout = view.findViewById(R.id.user_manual_frame);
+            View frameView = inflater.inflate(R.layout.fragment_construction,frameLayout,false);
+            frameLayout.addView(frameView);
+
+            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+               public void onTabSelected(TabLayout.Tab tab) {
+                   View frameView;
+                   switch (tab.getPosition()) {
+                       case 0:
+                           frameView = inflater.inflate(R.layout.fragment_construction,frameLayout,false);
+                           break;
+                       case 1:
+                           frameView = inflater.inflate(R.layout.fragment_construction,frameLayout,false);
+                           break;
+                       default:
+                           frameView = inflater.inflate(R.layout.fragment_construction,frameLayout,false);
+                           break;
+                   }
+                   frameLayout.removeAllViews();
+                   frameLayout.addView(frameView);
+               }
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+                }
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+                }
+            });
+
+            builder.setView(view);
+            builder.setNegativeButton("Close", (dialog, id) -> {
+
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
             return true;
         });
     }

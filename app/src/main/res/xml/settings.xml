@@ -5,6 +5,7 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="theme_preference"
+            android:summary="(Under Construction)"
             android:title="Dark Theme" />
     </PreferenceCategory>
 
@@ -34,10 +35,9 @@
     <PreferenceCategory
         android:title="App Details">
         <Preference
-            android:summary="View User Manual"
-            android:title="Tutorial">
-            <intent android:action="android.intent.action.VIEW"
-                android:data="http://github.com/" />
+            android:key="user_manual"
+            android:summary=""
+            android:title="User Manual">
         </Preference>
         <Preference
             android:summary="View Repository"

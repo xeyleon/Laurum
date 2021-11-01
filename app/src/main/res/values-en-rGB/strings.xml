@@ -33,4 +33,15 @@
     <string name="version_info_msg">Version 0.0.1</string>
     <string name="degree_progress_label">Degree Progress</string>
     <string name="course_completed_label">Completed</string>
+
+    <string name="dev_info_dlg_title">Developer Information</string>
+    <string name="dialog_group_label">Group:</string>
+    <string name="group_number">11</string>
+    <string name="dialog_members_label">Members:</string>
+    <string name="dev_member_1">Asad Asif</string>
+    <string name="dev_member_2">Campbell Leckie</string>
+    <string name="dev_member_3">Roy Ceyleon</string>
+    <string name="dev_member_4">Zhenyang Ding</string>
+    <string name="dev_member_5">Zongyang Li</string>
+    <string name="user_manual_dlg_title">User Manual</string>
 </resources>

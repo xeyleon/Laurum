@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.1828125" />
         <entry key="app/src/main/res/drawable/ic_courses_tab.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/drawable/ic_degree_tab.xml" value="0.18072916666666666" />
+        <entry key="app/src/main/res/drawable/ic_developer.xml" value="0.1734375" />
         <entry key="app/src/main/res/drawable/ic_faculty_tab.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/drawable/ic_golden_hawk.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.17864583333333334" />
@@ -21,6 +22,7 @@
         <entry key="app/src/main/res/drawable/ic_schedule.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/drawable/ic_settings_tab.xml" value="0.18072916666666666" />
+        <entry key="app/src/main/res/drawable/ic_user_manual.xml" value="0.1734375" />
         <entry key="app/src/main/res/drawable/search_bar.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/drawable/splash_image.xml" value="0.2416214841716227" />
         <entry key="app/src/main/res/drawable/tab_color_selector.xml" value="0.18072916666666666" />
@@ -35,6 +37,7 @@
         <entry key="app/src/main/res/layout/course_search_results_item.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/custom_dialog.xml" value="0.318974358974359" />
         <entry key="app/src/main/res/layout/degree_course_item.xml" value="0.3870586615208839" />
+        <entry key="app/src/main/res/layout/developer_info_dialog.xml" value="0.15729166666666666" />
         <entry key="app/src/main/res/layout/faculty_dialog.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/layout/fragment_courses.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_courses_list.xml" value="0.1864134682591854" />
@@ -57,6 +60,7 @@
         <entry key="app/src/main/res/layout/search_bar.xml" value="0.15052083333333333" />
         <entry key="app/src/main/res/layout/search_results_dialog.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/layout/user_manual_dialog.xml" value="0.12820660533372194" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.25885416666666666" />

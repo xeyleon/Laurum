@@ -1,0 +1,102 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/devDialog_id"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:scaleType="center"
+        android:text = "@string/dev_info_dlg_title"
+        android:gravity="fill_horizontal|fill|center"
+        android:textColor="@color/wlu_gold"
+        android:textSize="16sp"
+        android:background="@color/wlu_purple"
+        android:drawablePadding="10dp"
+        android:paddingTop="5dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:layout_marginBottom="10dp"
+        app:drawableLeftCompat="@drawable/ic_developer" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/courseTitle_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/wlu_purple"
+        android:layout_margin="4dp"
+        android:text = "@string/dialog_group_label"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"/>
+    <TextView
+        android:id="@+id/courseTitle"
+        android:text = "@string/group_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/devMembers_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/wlu_purple"
+            android:layout_margin="4dp"
+            android:text = "@string/dialog_members_label"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/dev_member_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dev_member_1"
+                android:layout_margin="4dp"/>
+            <TextView
+                android:id="@+id/dev_member_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dev_member_2"
+                android:layout_margin="4dp"/>
+            <TextView
+                android:id="@+id/dev_member_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dev_member_3"
+                android:layout_margin="4dp"/>
+            <TextView
+                android:id="@+id/dev_member_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dev_member_4"
+                android:layout_margin="4dp"/>
+            <TextView
+                android:id="@+id/dev_member_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dev_member_5"
+                android:layout_margin="4dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
