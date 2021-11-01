@@ -1,7 +1,6 @@
 package com.laurum;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,28 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewSwitcher;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.CheckBoxPreference;
-import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.laurum.Courses.CoursesFragment;
-import com.laurum.Degree.DegreeFragment;
-import com.laurum.Faculty.FacultyFragment;
-import com.laurum.R;
-import com.laurum.Resources.ResourceFragment;
 
 import java.util.Objects;
 
@@ -116,7 +105,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             View frameView = inflater.inflate(R.layout.info_dialog,frameLayout,false);
             frameLayout.addView(frameView);
             TextView info_dlg = frameView.findViewById(R.id.info_dlg_msg);
-            TranslateAnimation animObj= new TranslateAnimation(300,info_dlg.getWidth(), 0, 0);
+            TranslateAnimation animObj= new TranslateAnimation(300, info_dlg.getWidth(), 0, 0);
             animObj.setDuration(500);
             info_dlg.startAnimation(animObj);
             info_dlg.setText(R.string.how_to_use_msg);
@@ -125,7 +114,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                    info_dlg.startAnimation(animObj);
                    switch (tab.getPosition()) {
                        case 0:
-
                            info_dlg.setText(R.string.how_to_use_msg);
                            break;
                        case 1:
