@@ -1,9 +1,12 @@
 package com.laurum.Courses;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,12 +18,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.laurum.Database.DatabaseHelper;
 import com.laurum.Database.LaurumDB;
 import com.laurum.R;
+import com.laurum.databinding.FragmentCoursesBinding;
 
 import java.util.List;
 
@@ -92,4 +99,89 @@ public class CoursesFragment extends Fragment {
         return view;
     }
 
+    private static class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecyclerViewAdapter.ViewHolder> {
+
+        private final List<Course> mValues;
+        private int lastPosition = -1;
+
+        public CoursesRecyclerViewAdapter(List<Course> items) {
+            mValues = items;
+        }
+
+        @NonNull
+        @Override
+        public CoursesRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+            return new ViewHolder(FragmentCoursesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        }
+
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onBindViewHolder(final CoursesRecyclerViewAdapter.ViewHolder holder, int position) {
+            holder.mItem = mValues.get(position);
+            holder.course_id.setText(mValues.get(position).getId());
+            holder.course_title.setText(mValues.get(position).getTitle());
+            holder.course_desc = mValues.get(position).getDesc();
+
+            setAnimation(holder.itemView, position);
+
+            holder.itemView.setOnClickListener(v -> {
+                //Toast.makeText(v.getContext(), holder.course_desc, Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = inflater.inflate(R.layout.course_info_dialog, null);
+                TextView textView = view.findViewById(R.id.courseDialog_id);
+                textView.setText(mValues.get(position).getId());
+                textView = view.findViewById(R.id.courseTitle);
+                textView.setText(mValues.get(position).getTitle());
+                textView = view.findViewById(R.id.courseCredits);
+                textView.setText(mValues.get(position).getCredits().toString());
+                textView = view.findViewById(R.id.courseDesc);
+                textView.setText(mValues.get(position).getDesc());
+
+                builder.setView(view);
+                builder.setNegativeButton("Close", (dialog, id) -> {
+
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public static class ViewHolder extends RecyclerView.ViewHolder {
+            public final TextView course_id;
+            public final TextView course_title;
+            public String course_desc = "";
+            public Course mItem;
+
+            public ViewHolder(FragmentCoursesBinding binding) {
+                super(binding.getRoot());
+                course_id = binding.courseId;
+                course_title = binding.courseTitle;
+            }
+
+            @NonNull
+            @Override
+            public String toString() {
+                return super.toString() + " '" + course_title.getText()  + "'";
+            }
+        }
+
+        private void setAnimation(View viewToAnimate, int position)
+        {
+            // If the bound view wasn't previously displayed on screen, it's animated
+            if (position > lastPosition)
+            {
+                Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), android.R.anim.slide_in_left);
+                viewToAnimate.startAnimation(animation);
+                lastPosition = position;
+            }
+        }
+    }
 }

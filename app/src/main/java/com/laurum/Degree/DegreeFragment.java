@@ -16,6 +16,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +28,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.laurum.Courses.Course;
 import com.laurum.Database.LaurumDB;
 import com.laurum.R;
+import com.laurum.databinding.DegreeCourseItemBinding;
+import com.laurum.databinding.FragmentCoursesBinding;
 
 import java.util.List;
 
@@ -167,6 +173,180 @@ public class DegreeFragment extends Fragment {
                 .start();
         degreeProgress.setProgress(total_credits);
         degreeProgressPercent.setText(String.format("%s%%", 100 * (double) degreeProgress.getProgress() / (double) degreeProgress.getMax()));
+    }
+
+    private static class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecyclerViewAdapter.ViewHolder> {
+
+        private final List<Course> mValues;
+        private int lastPosition = -1;
+
+        public DegreeRecyclerViewAdapter(List<Course> items) {
+            mValues = items;
+        }
+
+        @NonNull
+        @Override
+        public DegreeRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ViewHolder(DegreeCourseItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        }
+
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onBindViewHolder(final DegreeRecyclerViewAdapter.ViewHolder holder, int position) {
+            holder.mItem = mValues.get(position);
+            holder.course_id.setText(mValues.get(position).getId());
+            holder.course_title.setText(mValues.get(position).getTitle());
+            holder.course_desc = mValues.get(position).getDesc();
+            holder.course_completed.setChecked(mValues.get(position).getStatus() == 1);
+
+            setAnimation(holder.itemView, position);
+
+            holder.itemView.setOnClickListener(v -> {
+                //Toast.makeText(v.getContext(), holder.course_desc, Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = inflater.inflate(R.layout.course_info_dialog, null);
+                TextView textView = view.findViewById(R.id.courseDialog_id);
+                textView.setText(mValues.get(position).getId());
+                textView = view.findViewById(R.id.courseTitle);
+                textView.setText(mValues.get(position).getTitle());
+                textView = view.findViewById(R.id.courseCredits);
+                textView.setText(mValues.get(position).getCredits().toString());
+                textView = view.findViewById(R.id.courseDesc);
+                textView.setText(mValues.get(position).getDesc());
+
+                builder.setView(view);
+                builder.setNegativeButton("Close", (dialog, id) -> {
+
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            });
+
+            ImageButton remove_button = holder.itemView.findViewById(R.id.course_remove);
+            remove_button.setOnClickListener(view -> {
+                //Toast.makeText(view.getContext(), "Course Remove Requested: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
+                LaurumDB.removeFromDegree(mValues.get(holder.getAdapterPosition()).getId());
+                RecyclerView p_recycler = DegreeFragment.getPrimaryRecyclerView();
+                DegreeFragment.removeCourse(holder.getAdapterPosition());
+            });
+
+            CheckBox completed = holder.itemView.findViewById(R.id.checkbox_complete);
+            completed.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+                if (isChecked)
+                    holder.mItem.setStatus(1);
+                else
+                    holder.mItem.setStatus(0);
+                updateProgress();
+                LaurumDB.degreeCourseStatusUpdate(holder.mItem.getId(), holder.mItem.getStatus());
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public static class ViewHolder extends RecyclerView.ViewHolder {
+            public final TextView course_id;
+            public final TextView course_title;
+            public final CheckBox course_completed;
+            public String course_desc = "";
+            public Course mItem;
+
+            public ViewHolder(DegreeCourseItemBinding binding) {
+                super(binding.getRoot());
+                course_id = binding.degreeCourseId;
+                course_title = binding.degreeCourseTitle;
+                course_completed = binding.checkboxComplete;
+            }
+
+            @NonNull
+            @Override
+            public String toString() {
+                return super.toString() + " '" + course_title.getText()  + "'";
+            }
+        }
+
+        private void setAnimation(View viewToAnimate, int position)
+        {
+            // If the bound view wasn't previously displayed on screen, it's animated
+            if (position > lastPosition)
+            {
+                Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), android.R.anim.slide_in_left);
+                viewToAnimate.startAnimation(animation);
+                lastPosition = position;
+            }
+        }
+    }
+
+    private static class ResultsRecyclerViewAdapter extends RecyclerView.Adapter<ResultsRecyclerViewAdapter.ViewHolder> {
+
+        private final List<Course> mValues;
+        private int lastPosition = -1;
+
+        public ResultsRecyclerViewAdapter(List<Course> items) {
+            mValues = items;
+        }
+
+        @NonNull
+        @Override
+        public ResultsRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ViewHolder(FragmentCoursesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(final ResultsRecyclerViewAdapter.ViewHolder holder, int position) {
+            holder.mItem = mValues.get(position);
+            holder.course_id.setText(mValues.get(position).getId());
+            holder.course_title.setText(mValues.get(position).getTitle());
+            holder.course_desc = mValues.get(position).getDesc();
+
+            setAnimation(holder.itemView, position);
+
+            holder.itemView.setOnClickListener(v -> {
+                //Toast.makeText(v.getContext(), holder.course_desc, Toast.LENGTH_SHORT).show();
+                //LaurumDB.addToDegree(holder.course_id.getText().toString());
+                dismissDialog();
+                addCourse(holder.course_id.getText().toString());
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public static class ViewHolder extends RecyclerView.ViewHolder {
+            public final TextView course_id;
+            public final TextView course_title;
+            public String course_desc = "";
+            public Course mItem;
+
+            public ViewHolder(FragmentCoursesBinding binding) {
+                super(binding.getRoot());
+                course_id = binding.courseId;
+                course_title = binding.courseTitle;
+            }
+
+            @NonNull
+            @Override
+            public String toString() {
+                return super.toString() + " '" + course_title.getText() + "'";
+            }
+        }
+
+        private void setAnimation(View viewToAnimate, int position) {
+            // If the bound view wasn't previously displayed on screen, it's animated
+            if (position > lastPosition) {
+                Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), android.R.anim.slide_in_left);
+                viewToAnimate.startAnimation(animation);
+                lastPosition = position;
+            }
+        }
     }
 
 }
