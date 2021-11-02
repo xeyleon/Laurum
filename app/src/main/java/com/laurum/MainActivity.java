@@ -13,11 +13,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import com.laurum.Courses.CoursesFragment;
-import com.laurum.Database.LaurumDB;
-import com.laurum.Degree.DegreeFragment;
-import com.laurum.Faculty.FacultyFragment;
-import com.laurum.Resources.ResourceFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
@@ -29,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment = null;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    private LaurumDB db;
+    private Database.LaurumDB db;
 
     @SuppressLint("ObsoleteSdkInt")
     @Override
@@ -53,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         //Init Database
-        db = new LaurumDB(this);
+        db = new Database.LaurumDB(this);
 
         tabLayout = findViewById(R.id.MainTabLayout);
         frameLayout = findViewById(R.id.MainFrameLayout);

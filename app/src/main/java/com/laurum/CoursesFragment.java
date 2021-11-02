@@ -1,17 +1,8 @@
-package com.laurum.Courses;
+package com.laurum;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -22,8 +13,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.laurum.Database.LaurumDB;
-import com.laurum.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.laurum.databinding.FragmentCoursesBinding;
 
 import java.util.List;
@@ -33,6 +29,7 @@ public class CoursesFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     RecyclerView recyclerView;
+    List<Course> courses;
 
     public CoursesFragment() {
     }
@@ -67,7 +64,7 @@ public class CoursesFragment extends Fragment {
         else
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 
-        List<Course> courses = LaurumDB.getCourseList();
+        courses = Database.LaurumDB.getCourseList();
         CoursesRecyclerViewAdapter course_adapter = new CoursesRecyclerViewAdapter(courses);
         recyclerView.setAdapter(course_adapter);
 
@@ -81,13 +78,16 @@ public class CoursesFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void afterTextChanged(Editable editable) {
                 //Toast.makeText(getContext(), editable.toString(), Toast.LENGTH_SHORT).show();
-                List<Course> courses = LaurumDB.searchCourseList(editable.toString());
-                CoursesRecyclerViewAdapter course_adapter = new CoursesRecyclerViewAdapter(courses);
-                recyclerView.setAdapter(course_adapter);
-                //course_adapter.notifyDataSetChanged();
+                //courses = LaurumDB.searchCourseList(editable.toString());
+                //CoursesRecyclerViewAdapter course_adapter = new CoursesRecyclerViewAdapter(courses);
+                //recyclerView.setAdapter(course_adapter);
+                courses.clear();
+                courses.addAll(Database.LaurumDB.searchCourseList(editable.toString()));
+                course_adapter.notifyDataSetChanged();
             }
 
         });

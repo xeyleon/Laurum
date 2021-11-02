@@ -1,4 +1,4 @@
-package com.laurum.Resources;
+package com.laurum;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,8 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.laurum.Database.LaurumDB;
-import com.laurum.R;
 import com.laurum.databinding.FragmentResourceBinding;
 
 import java.util.List;
@@ -69,7 +67,7 @@ public class ResourceFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            List<Resource> resources = LaurumDB.getResourceList();
+            List<Resource> resources = Database.LaurumDB.getResourceList();
 
             recyclerView.setAdapter(new ResourceRecyclerViewAdapter(resources));
         }

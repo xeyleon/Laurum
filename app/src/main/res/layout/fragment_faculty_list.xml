@@ -16,7 +16,7 @@
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/faculty_search_input"
-        tools:context=".Faculty.FacultyFragment"
+        tools:context=".FacultyFragment"
         tools:layout_editor_absoluteX="16dp"
         tools:listitem="@layout/fragment_faculty" />
 

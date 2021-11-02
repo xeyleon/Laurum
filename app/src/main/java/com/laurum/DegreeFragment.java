@@ -1,4 +1,4 @@
-package com.laurum.Degree;
+package com.laurum;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -22,12 +21,8 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.laurum.Courses.Course;
-import com.laurum.Database.LaurumDB;
-import com.laurum.R;
 import com.laurum.databinding.DegreeCourseItemBinding;
 import com.laurum.databinding.FragmentCoursesBinding;
 
@@ -81,7 +76,7 @@ public class DegreeFragment extends Fragment {
         else
             primary_RecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 
-        courses = LaurumDB.getDegreeCourses();
+        courses = Database.LaurumDB.getDegreeCourses();
         course_adapter = new DegreeRecyclerViewAdapter(courses);
         primary_RecyclerView.setAdapter(course_adapter);
 
@@ -106,7 +101,7 @@ public class DegreeFragment extends Fragment {
                         LayoutInflater inflater2 = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                         View resultsView = inflater2.inflate(R.layout.search_results_dialog, null);
                         RecyclerView resultsRecycler = resultsView.findViewById(R.id.search_results_list);
-                        List<Course> results = LaurumDB.searchCourseList(search_input.getText().toString());
+                        List<Course> results = Database.LaurumDB.searchCourseList(search_input.getText().toString());
                         ResultsRecyclerViewAdapter adapter = new ResultsRecyclerViewAdapter(results);
                         resultsRecycler.setAdapter(adapter);
 
@@ -147,15 +142,15 @@ public class DegreeFragment extends Fragment {
         if (courseExists(course_id))
             return;
 
-        LaurumDB.addToDegree(course_id);
-        Course course = LaurumDB.getCourse(course_id);
+        Database.LaurumDB.addToDegree(course_id);
+        Course course = Database.LaurumDB.getCourse(course_id);
         courses.add(course);
         course_adapter.notifyItemInserted(course_adapter.getItemCount());
         updateProgress();
     }
 
     public static void removeCourse(int position){
-        LaurumDB.removeFromDegree(courses.get(position).getId());
+        Database.LaurumDB.removeFromDegree(courses.get(position).getId());
         courses.remove(position);
         course_adapter.notifyItemRemoved(position);
         updateProgress();
@@ -227,7 +222,7 @@ public class DegreeFragment extends Fragment {
             ImageButton remove_button = holder.itemView.findViewById(R.id.course_remove);
             remove_button.setOnClickListener(view -> {
                 //Toast.makeText(view.getContext(), "Course Remove Requested: " + mValues.get(holder.getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
-                LaurumDB.removeFromDegree(mValues.get(holder.getAdapterPosition()).getId());
+                Database.LaurumDB.removeFromDegree(mValues.get(holder.getAdapterPosition()).getId());
                 RecyclerView p_recycler = DegreeFragment.getPrimaryRecyclerView();
                 DegreeFragment.removeCourse(holder.getAdapterPosition());
             });
@@ -239,7 +234,7 @@ public class DegreeFragment extends Fragment {
                 else
                     holder.mItem.setStatus(0);
                 updateProgress();
-                LaurumDB.degreeCourseStatusUpdate(holder.mItem.getId(), holder.mItem.getStatus());
+                Database.LaurumDB.degreeCourseStatusUpdate(holder.mItem.getId(), holder.mItem.getStatus());
             });
 
         }

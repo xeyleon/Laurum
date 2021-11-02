@@ -1,4 +1,4 @@
-package com.laurum.Faculty;
+package com.laurum;
 
 public class Faculty {
     private final Integer id;

@@ -1,4 +1,4 @@
-package com.laurum.Courses;
+package com.laurum;
 
 public class Course {
     private final String id;

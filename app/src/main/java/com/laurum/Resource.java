@@ -1,4 +1,4 @@
-package com.laurum.Resources;
+package com.laurum;
 
 
 public class Resource {

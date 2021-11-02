@@ -1,16 +1,9 @@
-package com.laurum.Faculty;
+package com.laurum;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -21,19 +14,22 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.laurum.Courses.Course;
-import com.laurum.Database.LaurumDB;
-import com.laurum.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.laurum.databinding.FragmentFacultyBinding;
 
 import java.util.List;
 
 public class FacultyFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
+    List<Faculty> faculty;
 
     public FacultyFragment() {
     }
@@ -68,7 +64,7 @@ public class FacultyFragment extends Fragment {
         else
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 
-        List<Faculty> faculty = LaurumDB.getFacultyList();
+        faculty = Database.LaurumDB.getFacultyList();
         FacultyRecyclerViewAdapter faculty_adapter = new FacultyRecyclerViewAdapter(faculty);
         recyclerView.setAdapter(faculty_adapter);
 
@@ -82,13 +78,16 @@ public class FacultyFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void afterTextChanged(Editable editable) {
                 //Toast.makeText(getContext(), editable.toString(), Toast.LENGTH_SHORT).show();
-                List<Faculty> faculty = LaurumDB.searchFacultyList(editable.toString());
-                FacultyRecyclerViewAdapter faculty_adapter = new FacultyRecyclerViewAdapter(faculty);
-                recyclerView.setAdapter(faculty_adapter);
-                //course_adapter.notifyDataSetChanged();
+                //List<Faculty> faculty = LaurumDB.searchFacultyList(editable.toString());
+                //FacultyRecyclerViewAdapter faculty_adapter = new FacultyRecyclerViewAdapter(faculty);
+                //recyclerView.setAdapter(faculty_adapter);
+                faculty.clear();
+                faculty.addAll(Database.LaurumDB.searchFacultyList(editable.toString()));
+                faculty_adapter.notifyDataSetChanged();
             }
 
         });
