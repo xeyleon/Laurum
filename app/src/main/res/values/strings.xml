@@ -47,4 +47,5 @@
     <string name="how_to_use_msg">Laurum is a …</string>
     <string name="degree_tracking_msg">Degree Tracking allows you to keep track of your degree progress.</string>
     <string name="degree_total_credits_label">Total Credits:</string>
+    <string name="degree_course_search_hint">Add a Course</string>
 </resources>

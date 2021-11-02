@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:scaleType="center"
-        android:text = "Add a Course"
+        android:text = "@string/degree_course_search_hint"
         android:gravity="fill_horizontal|fill|center"
         android:textColor="@color/wlu_gold"
         android:textSize="16sp"
