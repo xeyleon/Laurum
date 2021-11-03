@@ -15,7 +15,7 @@
         <EditTextPreference
             android:key="@string/starting_credits_key"
             android:title="Starting Credits"
-            android:inputType="numberDecimal"
+            android:inputType="number|numberDecimal"
             android:digits="0123456789"
             android:defaultValue="0"
             android:summary=""
@@ -25,7 +25,7 @@
             android:key="@string/required_credits_key"
             android:title="Total Required Credits"
             android:dialogTitle="Enter Total Required Credits Amount"
-            android:inputType="numberDecimal"
+            android:inputType="number|numberDecimal"
             android:digits="0123456789"
             android:summary=""
             android:defaultValue="20" />

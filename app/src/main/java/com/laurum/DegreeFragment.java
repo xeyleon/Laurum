@@ -41,12 +41,15 @@ public class DegreeFragment extends Fragment {
     private static RecyclerView primary_RecyclerView;
     private static List<Course> courses;
     private static DegreeRecyclerViewAdapter course_adapter;
+    @SuppressLint("StaticFieldLeak")
     private static ProgressBar degreeProgress;
+    @SuppressLint("StaticFieldLeak")
     private static TextView degreeProgressPercent;
+    @SuppressLint("StaticFieldLeak")
     private static TextView degreeCredits;
     private static SharedPreferences sharedPreferences = null;
-    private static Integer starting_credits = 0;
-    private static Integer total_required_credits = 2000;
+    private static float starting_credits = 0;
+    private static float total_required_credits = 2000;
 
     public DegreeFragment() {
     }
@@ -79,8 +82,8 @@ public class DegreeFragment extends Fragment {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        starting_credits = Integer.parseInt(sharedPreferences.getString("starting_credits_key","0"));
-        total_required_credits = Integer.parseInt(sharedPreferences.getString("required_credits_key","20"));
+        starting_credits = Float.parseFloat(sharedPreferences.getString("starting_credits_key","0"));
+        total_required_credits = Float.parseFloat(sharedPreferences.getString("required_credits_key","20"));
 
         primary_RecyclerView = view.findViewById(R.id.degree_course_list);
         if (mColumnCount <= 1)
@@ -93,7 +96,7 @@ public class DegreeFragment extends Fragment {
         primary_RecyclerView.setAdapter(course_adapter);
 
         degreeProgress = view.findViewById(R.id.progressBar);
-        degreeProgress.setMax(total_required_credits * 100);
+        degreeProgress.setMax((int)(total_required_credits * 100));
         degreeProgressPercent = view.findViewById(R.id.degreeProgressPercent);
         degreeCredits = view.findViewById(R.id.degreeCredits);
         //degreeProgress.setScaleY(5f);
@@ -178,12 +181,12 @@ public class DegreeFragment extends Fragment {
                 total_credits += 100 * course.getCredits();
         }
 
-        ObjectAnimator.ofInt(degreeProgress, "progress", total_credits + starting_credits * 100)
+        ObjectAnimator.ofInt(degreeProgress, "progress", total_credits + (int)(starting_credits * 100))
                 .setDuration(300)
                 .start();
 
-        degreeProgress.setProgress(total_credits + starting_credits * 100);
-        degreeProgressPercent.setText(String.format("%s%%", 100 * (double) degreeProgress.getProgress() / (double) degreeProgress.getMax()));
+        degreeProgress.setProgress(total_credits + (int)(starting_credits * 100));
+        degreeProgressPercent.setText(String.format("%.2f%%", 100 * (float) degreeProgress.getProgress() / (float) degreeProgress.getMax()));
         degreeCredits.setText(String.format("%.2f",  ((float)total_credits/(float)100) + starting_credits ));
     }
 

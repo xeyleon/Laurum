@@ -102,7 +102,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         if (starting_credits != null) {
             starting_credits.setSummary(sharedPreferences.getString("starting_credits_key", ""));
             starting_credits.setOnBindEditTextListener(editText ->
-                    editText.setInputType(InputType.TYPE_CLASS_NUMBER)
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL)
             );
         }
 
@@ -110,7 +110,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         if (required_credits != null) {
             required_credits.setSummary(sharedPreferences.getString("required_credits_key", ""));
             required_credits.setOnBindEditTextListener(editText ->
-                    editText.setInputType(InputType.TYPE_CLASS_NUMBER)
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL)
             );
         }
 
@@ -178,6 +178,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                 check.setChecked(sharedPreferences.getBoolean(key, true));
         }
         else if (preference instanceof EditTextPreference) {
+            if (key.compareTo("required_credits_key") == 0)
+                if (Float.parseFloat(String.valueOf(((EditTextPreference) preference).getText())) == 0.0) {
+                    ((EditTextPreference) preference).setText("20");
+                    Toast.makeText(preference.getContext(), "Required credits must be greater than 0.", Toast.LENGTH_SHORT).show();
+                }
             preference.setSummary(((EditTextPreference) preference).getText());
         } else {
             if (preference != null) {
