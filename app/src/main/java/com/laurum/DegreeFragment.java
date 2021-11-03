@@ -45,8 +45,8 @@ public class DegreeFragment extends Fragment {
     private static TextView degreeProgressPercent;
     private static TextView degreeCredits;
     private static SharedPreferences sharedPreferences = null;
-    static Integer starting_credits = 0;
-    static Integer total_required_credits = 2000;
+    private static Integer starting_credits = 0;
+    private static Integer total_required_credits = 2000;
 
     public DegreeFragment() {
     }
@@ -79,7 +79,7 @@ public class DegreeFragment extends Fragment {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        starting_credits = Integer.parseInt(sharedPreferences.getString("starting_credits_key","1"));
+        starting_credits = Integer.parseInt(sharedPreferences.getString("starting_credits_key","0"));
         total_required_credits = Integer.parseInt(sharedPreferences.getString("required_credits_key","20"));
 
         primary_RecyclerView = view.findViewById(R.id.degree_course_list);
