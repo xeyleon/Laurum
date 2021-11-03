@@ -3,11 +3,13 @@ package com.laurum;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,6 +44,9 @@ public class DegreeFragment extends Fragment {
     private static ProgressBar degreeProgress;
     private static TextView degreeProgressPercent;
     private static TextView degreeCredits;
+    private static SharedPreferences sharedPreferences = null;
+    static Integer starting_credits = 0;
+    static Integer total_required_credits = 2000;
 
     public DegreeFragment() {
     }
@@ -71,6 +76,12 @@ public class DegreeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_degree, container, false);
 
         Context context = view.getContext();
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        starting_credits = Integer.parseInt(sharedPreferences.getString("starting_credits_key","1"));
+        total_required_credits = Integer.parseInt(sharedPreferences.getString("required_credits_key","20"));
+
         primary_RecyclerView = view.findViewById(R.id.degree_course_list);
         if (mColumnCount <= 1)
             primary_RecyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -82,6 +93,7 @@ public class DegreeFragment extends Fragment {
         primary_RecyclerView.setAdapter(course_adapter);
 
         degreeProgress = view.findViewById(R.id.progressBar);
+        degreeProgress.setMax(total_required_credits * 100);
         degreeProgressPercent = view.findViewById(R.id.degreeProgressPercent);
         degreeCredits = view.findViewById(R.id.degreeCredits);
         //degreeProgress.setScaleY(5f);
@@ -163,16 +175,16 @@ public class DegreeFragment extends Fragment {
         int total_credits = 0;
         for (Course course : courses){
             if (course.getStatus() == 1)
-                total_credits += 100*course.getCredits();
+                total_credits += 100 * course.getCredits();
         }
 
-        ObjectAnimator.ofInt(degreeProgress, "progress", total_credits)
+        ObjectAnimator.ofInt(degreeProgress, "progress", total_credits + starting_credits * 100)
                 .setDuration(300)
                 .start();
 
-        degreeProgress.setProgress(total_credits);
+        degreeProgress.setProgress(total_credits + starting_credits * 100);
         degreeProgressPercent.setText(String.format("%s%%", 100 * (double) degreeProgress.getProgress() / (double) degreeProgress.getMax()));
-        degreeCredits.setText(String.format("%.2f",  ((float)total_credits/(float)100) ));
+        degreeCredits.setText(String.format("%.2f",  ((float)total_credits/(float)100) + starting_credits ));
     }
 
     private static class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecyclerViewAdapter.ViewHolder> {
