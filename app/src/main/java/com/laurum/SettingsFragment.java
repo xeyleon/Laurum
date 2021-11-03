@@ -3,17 +3,21 @@ package com.laurum;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.CheckBoxPreference;
+import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -94,6 +98,22 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             return true;
         });
 
+        EditTextPreference starting_credits = findPreference("starting_credits_key");
+        if (starting_credits != null) {
+            starting_credits.setSummary(sharedPreferences.getString("starting_credits_key", ""));
+            starting_credits.setOnBindEditTextListener(editText ->
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER)
+            );
+        }
+
+        EditTextPreference required_credits = findPreference("required_credits_key");
+        if (required_credits != null) {
+            required_credits.setSummary(sharedPreferences.getString("required_credits_key", ""));
+            required_credits.setOnBindEditTextListener(editText ->
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER)
+            );
+        }
+
         Preference user_manual = findPreference("user_manual");
         Objects.requireNonNull(user_manual).setOnPreferenceClickListener(v->{
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -156,8 +176,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         else if (preference instanceof CheckBoxPreference) {
                 CheckBoxPreference check = (CheckBoxPreference) preference;
                 check.setChecked(sharedPreferences.getBoolean(key, true));
+        }
+        else if (preference instanceof EditTextPreference) {
+            preference.setSummary(((EditTextPreference) preference).getText());
         } else {
-            preference.setSummary(sharedPreferences.getString(key, ""));
+            if (preference != null) {
+                preference.setSummary(sharedPreferences.getString(key, ""));
+            }
         }
     }
 

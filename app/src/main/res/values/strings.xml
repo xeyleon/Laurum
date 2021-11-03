@@ -48,4 +48,6 @@
     <string name="degree_tracking_msg">Degree Tracking allows you to keep track of your degree progress.</string>
     <string name="degree_total_credits_label">Total Credits:</string>
     <string name="degree_course_search_hint">Add a Course</string>
+    <string name="starting_credits_key">starting_credits_key</string>
+    <string name="required_credits_key">required_credits_key</string>
 </resources>

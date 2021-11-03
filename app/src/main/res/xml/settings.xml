@@ -10,6 +10,29 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="Degree Tracker Settings">
+
+        <EditTextPreference
+            android:key="@string/starting_credits_key"
+            android:title="Starting Credits"
+            android:inputType="numberDecimal"
+            android:digits="0123456789"
+            android:defaultValue="0"
+            android:summary=""
+            android:dialogTitle="Enter Starting Credits Amount" />
+
+        <EditTextPreference
+            android:key="@string/required_credits_key"
+            android:title="Total Required Credits"
+            android:dialogTitle="Enter Total Required Credits Amount"
+            android:inputType="numberDecimal"
+            android:digits="0123456789"
+            android:summary=""
+            android:defaultValue="20" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="Search Settings">
 
         <ListPreference
