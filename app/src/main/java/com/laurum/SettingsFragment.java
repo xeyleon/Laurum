@@ -1,5 +1,7 @@
 package com.laurum;
 
+import static androidx.core.app.ActivityCompat.recreate;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -89,12 +91,17 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             return true;
         });
 
-        CheckBoxPreference checkbox = findPreference("theme_preference");
+        CheckBoxPreference checkbox = findPreference("dark_theme_enabled");
         Objects.requireNonNull(checkbox).setOnPreferenceChangeListener((v, c)->{
-            if (c.toString().compareTo("true") == 0)
+            if (c.toString().compareTo("true") == 0){
                 Toast.makeText(getContext(), R.string.dark_enable_msg, Toast.LENGTH_SHORT).show();
-            else
+                getActivity().setTheme(R.style.Theme_LaurumDark);
+            }
+            else {
                 Toast.makeText(getContext(), R.string.dark_disable_msg, Toast.LENGTH_SHORT).show();
+                getActivity().setTheme(R.style.Theme_Laurum);
+            }
+            recreate(getActivity());
             return true;
         });
 

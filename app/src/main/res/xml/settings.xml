@@ -4,7 +4,7 @@
         android:title="Appearance">
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="theme_preference"
+            android:key="dark_theme_enabled"
             android:summary="(Under Construction)"
             android:title="Dark Theme" />
     </PreferenceCategory>

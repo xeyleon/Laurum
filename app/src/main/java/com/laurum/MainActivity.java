@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceManager;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     private Database.LaurumDB db;
+    private static SharedPreferences sharedPreferences = null;
 
     @SuppressLint("ObsoleteSdkInt")
     @Override
@@ -33,7 +36,12 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_Laurum);
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sharedPreferences.getBoolean("dark_theme_enabled", false))
+            setTheme(R.style.Theme_LaurumDark);
+        else
+            setTheme(R.style.Theme_Laurum);
 
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
@@ -83,27 +91,21 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-                        setTheme(R.style.Theme_Laurum);
                         fragment = new DegreeFragment();
                         break;
                     case 1:
-                        setTheme(R.style.Theme_Laurum);
                         fragment = new CoursesFragment();
                         break;
                     case 2:
-                        setTheme(R.style.Theme_Laurum);
                         fragment = new FacultyFragment();
                         break;
                     case 3:
-                        setTheme(R.style.Theme_Laurum);
                         fragment = new ResourceFragment();
                         break;
                     case 4:
-                        setTheme(R.style.PreferenceTheme);
                         fragment = new SettingsFragment();
                         break;
                     default:
-                        setTheme(R.style.Theme_Laurum);
                         fragment = new DegreeFragment();
                         break;
                 }
