@@ -34,6 +34,41 @@
       "description": "A visual tool to help students with course schedule planning.",
       "url" : "https://scheduleme.wlu.ca",
       "icon" : "ic_schedule"
+    },
+    {
+      "id": "6",
+      "title": "Accesibility",
+      "description": "Accessible Learning is the central support for all academic accommodations.",
+      "url" : "https://students.wlu.ca/student-life/accessibility/index.html",
+      "icon" : "ic_baseline_accessible"
+    },
+    {
+      "id": "7",
+      "title": "Health and Wellness",
+      "description": "Provides physical, emotional and mental health services for students",
+      "url" : "https://students.wlu.ca/wellness-and-recreation/health-and-wellness/index.html",
+      "icon" : "ic_wellness"
+    },
+    {
+      "id": "8",
+      "title": "Co-op",
+      "description": "The Co-op Office approves jobs that will provide students with the opportunity to learn while performing productive work.",
+      "url" : "https://students.wlu.ca/work-leadership-and-volunteering/co-op/index.html",
+      "icon" : "ic_work"
+    },
+    {
+      "id": "9",
+      "title": "Academic Calendars and Governance",
+      "description": "Details programs, courses, and responsibilities.",
+      "url" : "https://students.wlu.ca/academics/calendars-and-policies/index.html",
+      "icon" : "ic_info"
+    },
+    {
+      "id": "10",
+      "title": "Textbooks and Course Materials",
+      "description": "The Laurier Bookstore sells course related materials.",
+      "url" : "https://students.wlu.ca/services-and-spaces/textbooks-and-course-materials/index.html",
+      "icon" : "ic_textbook"
     }
   ]
 }
