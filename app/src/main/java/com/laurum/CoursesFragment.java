@@ -30,6 +30,7 @@ public class CoursesFragment extends Fragment {
     private int mColumnCount = 1;
     RecyclerView recyclerView;
     List<Course> courses;
+    List<String> courseCategory;
 
     public CoursesFragment() {
     }
@@ -67,6 +68,8 @@ public class CoursesFragment extends Fragment {
         courses = Database.LaurumDB.getCourseList();
         CoursesRecyclerViewAdapter course_adapter = new CoursesRecyclerViewAdapter(courses);
         recyclerView.setAdapter(course_adapter);
+
+        courseCategory = Database.LaurumDB.getCourseCategory(courses);
 
         EditText search_input = view.findViewById(R.id.course_search_input);
         search_input.addTextChangedListener(new TextWatcher() {
