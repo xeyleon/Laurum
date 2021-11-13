@@ -305,6 +305,7 @@ public class Database extends SQLiteOpenHelper {
                         Double credits = cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_COURSE_CREDIT));
                         Course course = new Course(id, title, desc, credits);
                         courses.add(course);
+
                     } while (cursor.moveToNext());
                 }
             } catch (Exception e) {
@@ -315,6 +316,20 @@ public class Database extends SQLiteOpenHelper {
                 }
             }
             return courses;
+        }
+
+        
+        public static List<String> getCourseCategory(List<Course> courses){
+            List<String> courseCategory = new ArrayList<>();
+
+            for (int i = 0; i < courses.size(); i++){
+                if (courseCategory.contains(courses.get(i)) == false){
+                    courseCategory.add(courses.get(i).getId());
+                }
+            }
+
+
+            return courseCategory;
         }
 
         public static List<Faculty> getFacultyList() {
