@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/asadl/Desktop/Docs/Uni/Laurum/app/src/main/res/layout/fragment_construction.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/asadl/Desktop/Docs/Uni/Laurum/app/src/main/res/layout/fragment_courses.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/asadl/Desktop/Docs/Uni/Laurum/app/src/main/res/layout/fragment_courses_list.xml" value="0.28306159420289856" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.1828125" />
         <entry key="app/src/main/res/drawable/ic_courses_tab.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/drawable/ic_degree_tab.xml" value="0.18072916666666666" />
