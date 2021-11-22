@@ -524,11 +524,6 @@ public class Database extends SQLiteOpenHelper {
 
         @SuppressLint("DefaultLocale")
         public static void degreeCourseStatusUpdate(String course_id, int status){
-            //ContentValues values = new ContentValues();
-            //values.put(KEY_DEGREE_STATUS, status);
-            //String[] whereArgs = {KEY_COURSE_ID, course_id};
-            //int value = db.update(TABLE_DEGREE, values, "? = ?", whereArgs);
-
             String UPDATE_QUERY = String.format("UPDATE %s SET %s = %d ", TABLE_DEGREE, KEY_DEGREE_STATUS, status);
             UPDATE_QUERY = UPDATE_QUERY.concat(String.format("WHERE %s = '%s'", KEY_COURSE_ID, course_id));
             db.execSQL(UPDATE_QUERY);

@@ -51,4 +51,6 @@
     <string name="degree_course_search_hint">Add a Course</string>
     <string name="starting_credits_key">starting_credits_key</string>
     <string name="required_credits_key">required_credits_key</string>
+
+    <string name="about_laurum_info"><b>Objective:</b>\nLaurum makes the lives of Laurier students easier by offering a centralized source for organization tools and resources relevant to their academic career at Laurier. An easily accessible android application ensures students are equipped to efficiently navigate themselves throughout their academic career at Wilfrid Laurier University.\n\n<b>Version:</b> 0.0.1\n\n<b>Developers:</b> Group 11\n</string>
 </resources>

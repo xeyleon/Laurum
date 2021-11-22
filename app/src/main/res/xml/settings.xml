@@ -58,9 +58,9 @@
     <PreferenceCategory
         android:title="App Details">
         <Preference
-            android:key="user_manual"
-            android:summary="(Under Construction)"
-            android:title="User Manual">
+            android:key="about_laurum"
+            android:summary="Learn About Laurum"
+            android:title="About Laurum">
         </Preference>
         <Preference
             android:summary="View Repository"

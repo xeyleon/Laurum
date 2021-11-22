@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         //Init Database
         db = new Database.LaurumDB(this);
 
+
+        //Restore Tab
         tabLayout = findViewById(R.id.MainTabLayout);
         frameLayout = findViewById(R.id.MainFrameLayout);
         switch(tabLayout.getSelectedTabPosition()){
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.commit();
 
+        //Handle Tab Selection
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

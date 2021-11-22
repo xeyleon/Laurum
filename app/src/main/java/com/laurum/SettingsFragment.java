@@ -3,6 +3,7 @@ package com.laurum;
 import static androidx.core.app.ActivityCompat.recreate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
@@ -61,16 +62,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        ListPreference coursePref = (ListPreference) findPreference("course_search_key");
-//        if(coursePref.getValue() == null){
-//            coursePref.setValueIndex(1);
-//        }
-//
-//        ListPreference facultyPref = (ListPreference) findPreference("faculty_search_key");
-//        if(facultyPref.getValue() == null){
-//            facultyPref.setValueIndex(1);
-//        }
-
         Preference developer = findPreference("developer_info");
         Objects.requireNonNull(developer).setOnPreferenceClickListener(v->{
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -121,50 +112,52 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             );
         }
 
-        Preference user_manual = findPreference("user_manual");
+        Preference user_manual = findPreference("about_laurum");
         Objects.requireNonNull(user_manual).setOnPreferenceClickListener(v->{
-            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-            LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.user_manual_dialog, null);
-
-            TabLayout tabLayout  = view.findViewById(R.id.user_manual_tabs);
-            FrameLayout frameLayout = view.findViewById(R.id.user_manual_frame);
-            View frameView = inflater.inflate(R.layout.info_dialog,frameLayout,false);
-            frameLayout.addView(frameView);
-            TextView info_dlg = frameView.findViewById(R.id.info_dlg_msg);
-            TranslateAnimation animObj= new TranslateAnimation(300, info_dlg.getWidth(), 0, 0);
-            animObj.setDuration(500);
-            info_dlg.startAnimation(animObj);
-            info_dlg.setText(R.string.how_to_use_msg);
-            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-               public void onTabSelected(TabLayout.Tab tab) {
-                   info_dlg.startAnimation(animObj);
-                   switch (tab.getPosition()) {
-                       case 0:
-                           info_dlg.setText(R.string.how_to_use_msg);
-                           break;
-                       case 1:
-                           info_dlg.setText(R.string.degree_tracking_msg);
-                           break;
-                       default:
-                           info_dlg.setText(R.string.how_to_use_msg);
-                           break;
-                   }
-               }
-                @Override
-                public void onTabUnselected(TabLayout.Tab tab) {
-                }
-                @Override
-                public void onTabReselected(TabLayout.Tab tab) {
-                }
-            });
-
-            builder.setView(view);
-            builder.setNegativeButton("Close", (dialog, id) -> {
-
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+//            LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            View view = inflater.inflate(R.layout.user_manual_dialog, null);
+//
+//            TabLayout tabLayout  = view.findViewById(R.id.user_manual_tabs);
+//            FrameLayout frameLayout = view.findViewById(R.id.user_manual_frame);
+//            View frameView = inflater.inflate(R.layout.info_dialog,frameLayout,false);
+//            frameLayout.addView(frameView);
+//            TextView info_dlg = frameView.findViewById(R.id.info_dlg_msg);
+//            TranslateAnimation animObj= new TranslateAnimation(300, info_dlg.getWidth(), 0, 0);
+//            animObj.setDuration(500);
+//            info_dlg.startAnimation(animObj);
+//            info_dlg.setText(R.string.how_to_use_msg);
+//            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//               public void onTabSelected(TabLayout.Tab tab) {
+//                   info_dlg.startAnimation(animObj);
+//                   switch (tab.getPosition()) {
+//                       case 0:
+//                           info_dlg.setText(R.string.how_to_use_msg);
+//                           break;
+//                       case 1:
+//                           info_dlg.setText(R.string.degree_tracking_msg);
+//                           break;
+//                       default:
+//                           info_dlg.setText(R.string.how_to_use_msg);
+//                           break;
+//                   }
+//               }
+//                @Override
+//                public void onTabUnselected(TabLayout.Tab tab) {
+//                }
+//                @Override
+//                public void onTabReselected(TabLayout.Tab tab) {
+//                }
+//            });
+//
+//            builder.setView(view);
+//            builder.setNegativeButton("Close", (dialog, id) -> {
+//
+//            });
+//            AlertDialog dialog = builder.create();
+//            dialog.show();
+            Intent intent = new Intent(this.getContext(), AboutActivity.class);
+            startActivity(intent);
             return true;
         });
     }
