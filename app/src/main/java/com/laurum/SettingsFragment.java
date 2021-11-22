@@ -62,6 +62,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Developer Info
         Preference developer = findPreference("developer_info");
         Objects.requireNonNull(developer).setOnPreferenceClickListener(v->{
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -76,12 +77,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             return true;
         });
 
+        //Version Info
         Preference version = findPreference("version_info");
         Objects.requireNonNull(version).setOnPreferenceClickListener(v->{
             Toast.makeText(getContext(), R.string.version_info_msg, Toast.LENGTH_SHORT).show();
             return true;
         });
 
+        //Dark Theme Toggle
         CheckBoxPreference checkbox = findPreference("dark_theme_enabled");
         Objects.requireNonNull(checkbox).setOnPreferenceChangeListener((v, c)->{
             if (c.toString().compareTo("true") == 0){
@@ -96,6 +99,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             return true;
         });
 
+        //Starting Credits
         EditTextPreference starting_credits = findPreference("starting_credits_key");
         if (starting_credits != null) {
             starting_credits.setSummary(sharedPreferences.getString("starting_credits_key", ""));
@@ -104,6 +108,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             );
         }
 
+        //Required Credits
         EditTextPreference required_credits = findPreference("required_credits_key");
         if (required_credits != null) {
             required_credits.setSummary(sharedPreferences.getString("required_credits_key", ""));
@@ -112,6 +117,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             );
         }
 
+        //About Laurum
         Preference user_manual = findPreference("about_laurum");
         Objects.requireNonNull(user_manual).setOnPreferenceClickListener(v->{
 //            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
