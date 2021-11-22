@@ -62,9 +62,6 @@ public class Database extends SQLiteOpenHelper {
     public static final String KEY_RES_URL = "res_url";
     public static final String KEY_RES_ICON = "res_icon";
 
-    // Settings Table Columns
-
-
     /**
      * Constructor should be private to prevent direct instantiation.
      * Make a call to the static method "getInstance()" instead.
@@ -113,11 +110,8 @@ public class Database extends SQLiteOpenHelper {
             // Simplest implementation is to drop all old tables and recreate them
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_COURSES);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_FACULTY);
-            //db.execSQL("DROP TABLE IF EXISTS " + TABLE_DEGREE);
-            //db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
-            //db.execSQL("DROP TABLE IF EXISTS " + TABLE_REMINDERS);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_DEGREE);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESOURCES);
-            //db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETTINGS);
             onCreate(db);
         }
     }
@@ -131,11 +125,6 @@ public class Database extends SQLiteOpenHelper {
                 "));";
 
         db.execSQL(CREATE_COURSES_TABLE);
-
-//        ContentValues values = new ContentValues();
-//        values.put(KEY_COURSE_ID, String.format("%s", "CP220"));
-//        db.insert(TABLE_DEGREE, null, values);
-
     }
 
     private void initCoursesTable(SQLiteDatabase db) {
@@ -521,12 +510,14 @@ public class Database extends SQLiteOpenHelper {
             return courses;
         }
 
+        // Add a course to degree tracker
         public static void addToDegree(String course_id) {
             ContentValues values = new ContentValues();
             values.put(KEY_COURSE_ID, course_id);
             db.insert(TABLE_DEGREE, null, values);
         }
 
+        // Remove a course from degree tracker
         public static void removeFromDegree(String course_id) {
             db.delete(TABLE_DEGREE, String.format("%s = ?", KEY_COURSE_ID), new String[] {course_id}) ;
         }
