@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY appname "Laurum">
+    <!ENTITY author1 "Asad Asif">
+    <!ENTITY author2 "Campbell Leckie">
+    <!ENTITY author3 "Roy Ceyleon">
+    <!ENTITY author4 "Zhenyang Ding">
+    <!ENTITY author5 "Zongyang Li">
+    ]>
 <resources>
     <string name="app_name">Laurum</string>
     <string name="schedules_tab_label">Schedule</string>
@@ -30,7 +38,7 @@
     <string name="dark_enable_msg">Dark Theme Enabled</string>
     <string name="dark_disable_msg">Dark Theme Disabled</string>
     <string name="deverloper_info_msg">Developed by Group 11</string>
-    <string name="version_info_msg">Version 0.0.1</string>
+    <string name="version_info_msg">Version 1.0.0</string>
     <string name="degree_progress_label">Degree Progress</string>
     <string name="course_completed_label">Completed</string>
 
@@ -52,5 +60,5 @@
     <string name="starting_credits_key">starting_credits_key</string>
     <string name="required_credits_key">required_credits_key</string>
 
-    <string name="about_laurum_info"><b>Objective:</b>\nLaurum makes the lives of Laurier students easier by offering a centralized source for organization tools and resources relevant to their academic career at Laurier. An easily accessible android application ensures students are equipped to efficiently navigate themselves throughout their academic career at Wilfrid Laurier University.\n\n<b>Version:</b> 0.0.1\n\n<b>Developers:</b> Group 11\n</string>
+    <string name="about_laurum_info"><b>Application Objective:</b>\nLaurum is intended to ease the lives of students by offering a centralized source of resources relevant to their academic career at Wilfrid Laurier University.\n\n<b>Version:</b>\n1.0.0\n\n<b>Developers:</b>\nGroup 11\n\n<b>Group Members:</b>\n&author1;\n&author2;\n&author3;\n&author4;\n&author5;</string>
 </resources>
