@@ -1,5 +1,6 @@
 package com.laurum;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
@@ -7,6 +8,8 @@ import androidx.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -38,8 +41,14 @@ public class AboutActivity extends AppCompatActivity {
 
     }
     @Override
-    public void onBackPressed() {
-        finish();
-        super.onBackPressed();
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == android.R.id.home) {
+            super.onBackPressed();
+            KeyEvent kdown = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK);
+            this.dispatchKeyEvent(kdown);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
+
 }
