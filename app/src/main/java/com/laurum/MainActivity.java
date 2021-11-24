@@ -32,18 +32,19 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("ObsoleteSdkInt")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Force Light Mode
+        // Force Light Mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
 
-        //Load Theme
+        // Load Theme
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (sharedPreferences.getBoolean("dark_theme_enabled", false))
             setTheme(R.style.Theme_LaurumDark);
         else
             setTheme(R.style.Theme_Laurum);
 
+        // Change Status Bar Color
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -53,14 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        //Remove Title Bar
+        // Remove Title Bar
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        //Init Database
+        // Init Database
         db = new Database.LaurumDB(this);
 
-
-        //Restore Tab
+        // Restore Fragment
         tabLayout = findViewById(R.id.MainTabLayout);
         frameLayout = findViewById(R.id.MainFrameLayout);
         switch(tabLayout.getSelectedTabPosition()){
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.commit();
 
-        //Handle Tab Selection
+        // Handle Tab Selection and Insertion of Respective Fragment
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
@@ -135,5 +136,4 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         db.close();
     }
-
 }

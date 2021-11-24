@@ -49,7 +49,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -200,7 +199,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onPause() {
         super.onPause();
-        //unregister the preference change listener
+        // Unregister the preference change listener
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
     }

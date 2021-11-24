@@ -66,7 +66,7 @@
             android:summary="View Repository"
             android:title="GitHub">
             <intent android:action="android.intent.action.VIEW"
-                android:data="http://github.com/" />
+                android:data="http://github.com/xeyleon/laurum" />
         </Preference>
         <Preference
             android:key="developer_info"

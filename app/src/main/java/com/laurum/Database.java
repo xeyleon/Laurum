@@ -63,8 +63,7 @@ public class Database extends SQLiteOpenHelper {
     public static final String KEY_RES_ICON = "res_icon";
 
     /**
-     * Constructor should be private to prevent direct instantiation.
-     * Make a call to the static method "getInstance()" instead.
+     * Constructor
      */
     public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -82,7 +81,6 @@ public class Database extends SQLiteOpenHelper {
     }
 
     // Called when the database connection is being configured.
-    // Configure database settings for things like foreign key support, write-ahead logging, etc.
     @Override
     public void onConfigure(SQLiteDatabase db) {
         super.onConfigure(db);
@@ -93,12 +91,10 @@ public class Database extends SQLiteOpenHelper {
     // If a database already exists on disk with the same DATABASE_NAME, this method will NOT be called.
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         initCoursesTable(db);
         initDegreeTable(db);
         initFacultyTable(db);
         initResourcesTable(db);
-
     }
 
     // Called when the database needs to be upgraded.
@@ -116,6 +112,7 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    // Initialize Degree Table
     private void initDegreeTable(SQLiteDatabase db) {
         String CREATE_COURSES_TABLE = "CREATE TABLE " + TABLE_DEGREE +
                 "(" +
@@ -127,6 +124,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(CREATE_COURSES_TABLE);
     }
 
+    // Initialize Courses Table
     private void initCoursesTable(SQLiteDatabase db) {
         String CREATE_COURSES_TABLE = "CREATE TABLE " + TABLE_COURSES +
                 "(" +
@@ -158,6 +156,7 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    // Initialize Faculty Table
     private void initFacultyTable(SQLiteDatabase db) {
         String CREATE_FACULTY_TABLE = "CREATE TABLE " + TABLE_FACULTY +
                 "(" +
@@ -190,6 +189,7 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    // Initialize Resources Table
     private void initResourcesTable(SQLiteDatabase db) {
         String CREATE_RESOURCES_TABLE = "CREATE TABLE " + TABLE_RESOURCES +
                 "(" +
@@ -223,6 +223,7 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
+    // Helper JSON parsing function
     private String loadJSONFromAsset(String jsonFile){
         String json;
         try {
@@ -243,12 +244,14 @@ public class Database extends SQLiteOpenHelper {
         private static SQLiteDatabase db = null;
         private static SharedPreferences sharedPreferences = null;
 
+        // Constructor
         public LaurumDB(Context context) {
             super(context);
             db = new Database(context).getWritableDatabase();
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         }
 
+        // Retrieve All Resources
         public static List<Resource> getResourceList() {
             List<Resource> resources = new ArrayList<>();
 
@@ -278,6 +281,7 @@ public class Database extends SQLiteOpenHelper {
             return resources;
         }
 
+        // Retrieve All Courses
         public static List<Course> getCourseList() {
             List<Course> courses = new ArrayList<>();
 
@@ -307,12 +311,11 @@ public class Database extends SQLiteOpenHelper {
             return courses;
         }
 
-        
         public static List<String> getCourseCategory(List<Course> courses){
             List<String> courseCategory = new ArrayList<>();
 
             for (int i = 0; i < courses.size(); i++){
-                if (courseCategory.contains(courses.get(i)) == false){
+                if (!courseCategory.contains(courses.get(i))){
                     courseCategory.add(courses.get(i).getId());
                 }
             }
@@ -321,6 +324,7 @@ public class Database extends SQLiteOpenHelper {
             return courseCategory;
         }
 
+        // Retrieve All Faculty
         public static List<Faculty> getFacultyList() {
             List<Faculty> faculty = new ArrayList<>();
 
@@ -349,6 +353,7 @@ public class Database extends SQLiteOpenHelper {
             return faculty;
         }
 
+        // Retrieve Filtered Courses
         public static List<Course> searchCourseList(String search) {
             List<Course> courses = new ArrayList<>();
             String search_settings = sharedPreferences.getString("course_search_key","1");
@@ -401,6 +406,7 @@ public class Database extends SQLiteOpenHelper {
             return courses;
         }
 
+        // Retrieve Course by Course ID
         public static Course getCourse(String course_id) {
             Course course = new Course();
             String POSTS_SELECT_QUERY = String.format("SELECT * FROM %s ", TABLE_COURSES);
@@ -425,6 +431,7 @@ public class Database extends SQLiteOpenHelper {
             return course;
         }
 
+        // Retrieve Filtered Faculty
         public static List<Faculty> searchFacultyList(String search) {
             List<Faculty> faculty = new ArrayList<>();
             String search_settings = sharedPreferences.getString("faculty_search_key","1");
@@ -478,6 +485,7 @@ public class Database extends SQLiteOpenHelper {
             return faculty;
         }
 
+        // Retrieve all Degree Tracked courses
         public static List<Course> getDegreeCourses() {
             List<Course> courses = new ArrayList<>();
             String search_settings = sharedPreferences.getString("course_search_key","1");
@@ -522,6 +530,7 @@ public class Database extends SQLiteOpenHelper {
             db.delete(TABLE_DEGREE, String.format("%s = ?", KEY_COURSE_ID), new String[] {course_id}) ;
         }
 
+        // Update Degree Tracked Course Status
         @SuppressLint("DefaultLocale")
         public static void degreeCourseStatusUpdate(String course_id, int status){
             String UPDATE_QUERY = String.format("UPDATE %s SET %s = %d ", TABLE_DEGREE, KEY_DEGREE_STATUS, status);

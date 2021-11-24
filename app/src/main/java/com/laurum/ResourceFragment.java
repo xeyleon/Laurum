@@ -68,7 +68,7 @@ public class ResourceFragment extends Fragment {
             }
 
             List<Resource> resources = Database.LaurumDB.getResourceList();
-
+            recyclerView.setVerticalScrollBarEnabled(false);
             recyclerView.setAdapter(new ResourceRecyclerViewAdapter(resources));
         }
 

@@ -7,6 +7,9 @@ public class Faculty {
     private final String department;
     private final String email;
 
+    /**
+     * Faculty Item Default Constructor
+     */
     public Faculty() {
         this.id = -1;
         this.name = "name";
@@ -14,6 +17,15 @@ public class Faculty {
         this.department = "department";
         this.email = "email";
     }
+
+    /**
+     * Faculty Item Constructor
+     * @param id faculty id
+     * @param name faculty full name
+     * @param title faculty title
+     * @param department faculty department
+     * @param email faculty email
+     */
     public Faculty(Integer id, String name, String title, String department, String email) {
         this.id = id;
         this.name = name;

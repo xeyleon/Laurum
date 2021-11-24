@@ -67,6 +67,7 @@ public class CoursesFragment extends Fragment {
 
         courses = Database.LaurumDB.getCourseList();
         CoursesRecyclerViewAdapter course_adapter = new CoursesRecyclerViewAdapter(courses);
+        recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setAdapter(course_adapter);
 
         courseCategory = Database.LaurumDB.getCourseCategory(courses);

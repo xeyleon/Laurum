@@ -7,6 +7,9 @@ public class Course {
     private final double credits;
     private int status;
 
+    /**
+     * Course Item Default Constructor
+     */
     public Course() {
         this.id = "id";
         this.title = "title";
@@ -15,6 +18,13 @@ public class Course {
         this.status = 0;
     }
 
+    /**
+     * Course Item Constructor
+     * @param id course id
+     * @param title course title
+     * @param desc course description
+     * @param credits course credits
+     */
     public Course(String id, String title, String desc, Double credits) {
         this.id = id;
         this.title = title;

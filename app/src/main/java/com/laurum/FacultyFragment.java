@@ -66,6 +66,7 @@ public class FacultyFragment extends Fragment {
 
         faculty = Database.LaurumDB.getFacultyList();
         FacultyRecyclerViewAdapter faculty_adapter = new FacultyRecyclerViewAdapter(faculty);
+        recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setAdapter(faculty_adapter);
 
         EditText search_input = view.findViewById(R.id.faculty_search_input);
