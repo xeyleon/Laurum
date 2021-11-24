@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
-        android:padding="5dp"
+        android:padding="15dp"
         android:text="@string/about_laurum_info" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
