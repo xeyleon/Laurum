@@ -84,19 +84,19 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         });
 
         //Dark Theme Toggle
-        CheckBoxPreference checkbox = findPreference("dark_theme_enabled");
-        Objects.requireNonNull(checkbox).setOnPreferenceChangeListener((v, c)->{
-            if (c.toString().compareTo("true") == 0){
-                Toast.makeText(getContext(), R.string.dark_enable_msg, Toast.LENGTH_SHORT).show();
-                getActivity().setTheme(R.style.Theme_LaurumDark);
-            }
-            else {
-                Toast.makeText(getContext(), R.string.dark_disable_msg, Toast.LENGTH_SHORT).show();
-                getActivity().setTheme(R.style.Theme_Laurum);
-            }
-            recreate(getActivity());
-            return true;
-        });
+//        CheckBoxPreference checkbox = findPreference("dark_theme_enabled");
+//        Objects.requireNonNull(checkbox).setOnPreferenceChangeListener((v, c)->{
+//            if (c.toString().compareTo("true") == 0){
+//                Toast.makeText(getContext(), R.string.dark_enable_msg, Toast.LENGTH_SHORT).show();
+//                getActivity().setTheme(R.style.Theme_LaurumDark);
+//            }
+//            else {
+//                Toast.makeText(getContext(), R.string.dark_disable_msg, Toast.LENGTH_SHORT).show();
+//                getActivity().setTheme(R.style.Theme_Laurum);
+//            }
+//            recreate(getActivity());
+//            return true;
+//        });
 
         //Starting Credits
         EditTextPreference starting_credits = findPreference("starting_credits_key");

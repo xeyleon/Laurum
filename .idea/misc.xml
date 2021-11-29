@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.1828125" />
+        <entry key="app/src/main/res/drawable/ic_addcourse.xml" value="0.359375" />
         <entry key="app/src/main/res/drawable/ic_courses_tab.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/drawable/ic_degree_tab.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/drawable/ic_developer.xml" value="0.1734375" />

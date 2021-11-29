@@ -1,5 +1,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Under Construction
     <PreferenceCategory
         android:title="Appearance">
         <CheckBoxPreference
@@ -8,6 +9,7 @@
             android:summary="(Under Construction)"
             android:title="Dark Theme" />
     </PreferenceCategory>
+    -->
 
     <PreferenceCategory
         android:title="Degree Tracker Settings">
