@@ -17,14 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.laurum.databinding.DegreeCourseItemBinding;
 import com.laurum.databinding.FragmentCoursesBinding;
 
@@ -50,6 +53,8 @@ public class DegreeFragment extends Fragment {
     private static SharedPreferences sharedPreferences = null;
     private static float starting_credits = 0;
     private static float total_required_credits = 2000;
+    @SuppressLint("StaticFieldLeak")
+    private static TextView degreeCompletionMsg;
 
     public DegreeFragment() {
     }
@@ -99,6 +104,7 @@ public class DegreeFragment extends Fragment {
         degreeProgress.setMax((int)(total_required_credits * 100));
         degreeProgressPercent = view.findViewById(R.id.degreeProgressPercent);
         degreeCredits = view.findViewById(R.id.degreeCredits);
+        degreeCompletionMsg = view.findViewById(R.id.degreeCompletionMsg);
         //degreeProgress.setScaleY(5f);
         updateProgress();
 
@@ -188,6 +194,21 @@ public class DegreeFragment extends Fragment {
         degreeProgress.setProgress(total_credits + (int)(starting_credits * 100));
         degreeProgressPercent.setText(String.format("%.2f%%", 100 * (float) degreeProgress.getProgress() / (float) degreeProgress.getMax()));
         degreeCredits.setText(String.format("%.2f",  ((float)total_credits/(float)100) + starting_credits ));
+
+        if (100 * (float) degreeProgress.getProgress() / (float) degreeProgress.getMax() >= 100) {
+            AlphaAnimation fadeIn = new AlphaAnimation(0.0f, 1.0f) ;
+            fadeIn.setDuration(500);
+            degreeCompletionMsg.startAnimation(fadeIn);
+            degreeCompletionMsg.setTextSize(20);
+            degreeCompletionMsg.setVisibility(View.VISIBLE);
+        }
+        else {
+            AlphaAnimation fadeOut = new AlphaAnimation(1.0f, 0.0f) ;
+            fadeOut.setDuration(500);
+            degreeCompletionMsg.startAnimation(fadeOut);
+            degreeCompletionMsg.setTextSize(1);
+            degreeCompletionMsg.setVisibility(View.INVISIBLE);
+        }
     }
 
     private static class DegreeRecyclerViewAdapter extends RecyclerView.Adapter<DegreeRecyclerViewAdapter.ViewHolder> {

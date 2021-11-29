@@ -76,6 +76,19 @@
             android:layout_margin="2dp" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/degreeCompletionMsg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/total_credits"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/degree_course_list"
+        android:text="@string/degree_complete"
+        android:textStyle="bold"
+        android:textColor="@color/green"
+        android:background="@android:color/transparent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/degree_course_list"
         android:layout_width="match_parent"
@@ -91,7 +104,7 @@
         app:layout_constraintBottom_toTopOf="@id/add_course_fab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/total_credits"
+        app:layout_constraintTop_toBottomOf="@id/degreeCompletionMsg"
         tools:listitem="@layout/degree_course_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
