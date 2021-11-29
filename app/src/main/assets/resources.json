@@ -75,7 +75,7 @@
       "title": "Register for Courses",
       "description": "Steps for registering for courses.",
       "url" : "https://students.wlu.ca/registration-and-finances/registration-guide/step-4-register-for-courses/index.html",
-      "icon" : "ic_add"
+      "icon" : "ic_addcourse"
     }
   ]
 }
