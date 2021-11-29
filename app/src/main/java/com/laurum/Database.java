@@ -311,19 +311,6 @@ public class Database extends SQLiteOpenHelper {
             return courses;
         }
 
-        public static List<String> getCourseCategory(List<Course> courses){
-            List<String> courseCategory = new ArrayList<>();
-
-            for (int i = 0; i < courses.size(); i++){
-                if (!courseCategory.contains(courses.get(i))){
-                    courseCategory.add(courses.get(i).getId());
-                }
-            }
-
-
-            return courseCategory;
-        }
-
         // Retrieve All Faculty
         public static List<Faculty> getFacultyList() {
             List<Faculty> faculty = new ArrayList<>();
