@@ -69,6 +69,13 @@
       "description": "The Laurier Bookstore sells course related materials.",
       "url" : "https://students.wlu.ca/services-and-spaces/textbooks-and-course-materials/index.html",
       "icon" : "ic_textbook"
+    },
+    {
+      "id": "11",
+      "title": "Register for Courses",
+      "description": "Steps for registering for courses.",
+      "url" : "https://students.wlu.ca/registration-and-finances/registration-guide/step-4-register-for-courses/index.html",
+      "icon" : "ic_add"
     }
   ]
 }
