@@ -227,11 +227,11 @@ public class Database extends SQLiteOpenHelper {
     private String loadJSONFromAsset(String jsonFile){
         String json;
         try {
-            InputStream is = context.getAssets().open(jsonFile);
-            int size = is.available();
+            InputStream input = context.getAssets().open(jsonFile);
+            int size = input.available();
             byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
+            input.read(buffer);
+            input.close();
             json = new String(buffer, StandardCharsets.UTF_8);
         } catch (IOException ex) {
             ex.printStackTrace();
