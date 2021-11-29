@@ -7,7 +7,6 @@ Laurum is an android application that eases the lives of students by offering a 
 - Faculty Database
 - Degree Progress Tracking
 - Other Resources and Helpful Organization Tools
-***
 
 ## Authors
 Roy Ceyleon, Zhenyang Ding, Campbell Leckie, Asad Asif, Zongyang Li
