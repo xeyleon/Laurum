@@ -1,32 +1,32 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Under Construction
+    <!--
     <PreferenceCategory
-        android:title="Appearance">
+        android:title="@string/appearance_title">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="dark_theme_enabled"
-            android:summary="(Under Construction)"
-            android:title="Dark Theme" />
+            android:summary="@string/under_construction_text"
+            android:title="@string/dark_theme_text" />
     </PreferenceCategory>
     -->
 
     <PreferenceCategory
-        android:title="Degree Tracker Settings">
+        android:title="@string/degree_track_title">
 
         <EditTextPreference
             android:key="@string/starting_credits_key"
-            android:title="Starting Credits"
+            android:title="@string/starting_credits_text"
             android:inputType="number|numberDecimal"
             android:digits="0123456789"
             android:defaultValue="0"
-            android:summary=""
-            android:dialogTitle="Enter Starting Credits Amount" />
+            android:summary="@string/starting_credits_text"
+            android:dialogTitle="@string/starting_credits_dialog" />
 
         <EditTextPreference
             android:key="@string/required_credits_key"
-            android:title="Total Required Credits"
-            android:dialogTitle="Enter Total Required Credits Amount"
+            android:title="@string/required_credits_text"
+            android:dialogTitle="@string/required_credits_dialog"
             android:inputType="number|numberDecimal"
             android:digits="0123456789"
             android:summary=""
@@ -35,22 +35,22 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Search Settings">
+        android:title="@string/search_settings_title">
 
         <ListPreference
             android:key="@string/course_search_key"
-            android:title="Course Search"
-            android:summary="Course search criteria"
-            android:dialogTitle="Course Search"
+            android:title="@string/course_search_text"
+            android:summary="@string/course_search_criteria"
+            android:dialogTitle="@string/course_search_text"
             android:entries="@array/course_search_entries"
             android:defaultValue="1"
             android:entryValues="@array/course_search_values" />
 
         <ListPreference
             android:key="@string/faculty_search_key"
-            android:title="Faculty Search"
-            android:summary="Faculty search criteria"
-            android:dialogTitle="Faculty Search"
+            android:title="@string/faculty_search_text"
+            android:summary="@string/faculty_search_criteria"
+            android:dialogTitle="@string/faculty_search_text"
             android:entries="@array/faculty_search_entries"
             android:defaultValue="1"
             android:entryValues="@array/faculty_search_values" />
@@ -58,28 +58,28 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="App Details">
+        android:title="@string/app_details">
         <Preference
             android:key="about_laurum"
-            android:summary="Learn About Laurum"
-            android:title="About Laurum">
+            android:summary="@string/about_detail_text"
+            android:title="@string/about_text">
         </Preference>
         <Preference
-            android:summary="View Repository"
-            android:title="GitHub">
+            android:summary="@string/github_viewrepo_text"
+            android:title="@string/github_text">
             <intent android:action="android.intent.action.VIEW"
-                android:data="http://github.com/xeyleon/laurum" />
+                android:data="http://github.com/" />
         </Preference>
         <Preference
             android:key="developer_info"
             android:textAllCaps="true"
-            android:summary="Group 11"
-            android:title="Developer">
+            android:summary="@string/developer_group_text"
+            android:title="@string/developer_text">
         </Preference>
         <Preference
             android:key="version_info"
             android:summary="0.0.1"
-            android:title="Version"/>
+            android:title="@string/version_text"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

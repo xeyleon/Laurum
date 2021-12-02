@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Laurum</string>
+    <string name="schedules_tab_label">日程</string>
+    <string name="reminders_tab_label">提醒</string>
+    <string name="degree_tab_label">学位</string>
+    <string name="courses_tab_label">课程</string>
+    <string name="faculty_tab_label">教师</string>
+    <string name="resources_tab_label">资源</string>
+    <string name="settings_tab_label">设置</string>
+    <string name="coming_soon">功能即将到来</string>
+    <string name="under_construction">功能开发中</string>
+    <string name="todo">TODO</string>
+    <string name="icon">icon</string>
+    <string name="res_description">资源描述</string>
+    <string name="search_course_hint">搜索课程</string>
+    <string name="search_faculty_hint">搜索教授</string>
+
+    <string name="dialog_email_label">E-Mail:</string>
+    <string name="dialog_department_label">部门:</string>
+    <string name="dialog_title_label">名称:</string>
+    <string name="dialog_name_label">名字:</string>
+    <string name="dialog_description_label">描述:</string>
+    <string name="dialog_credits_label">学分:</string>
+
+    <string name="course_search_key">course_search_key</string>
+    <string name="faculty_search_key">faculty_search_key</string>
+    <string name="student_name_key">student_name_key</string>
+
+    <string name="dark_enable_msg">黑天模式启用</string>
+    <string name="dark_disable_msg">黑天模式禁用</string>
+    <string name="deverloper_info_msg">由第11工作组开发</string>
+    <string name="version_info_msg">应用版本：0.0.1</string>
+    <string name="degree_progress_label">学位进度</string>
+    <string name="course_completed_label">完成</string>
+
+    <string name="dev_info_dlg_title">开发者信息</string>
+    <string name="dialog_group_label">工作组:</string>
+    <string name="group_number">11</string>
+    <string name="dialog_members_label">成员:</string>
+    <string name="dev_member_1">Asad Asif</string>
+    <string name="dev_member_2">Campbell Leckie</string>
+    <string name="dev_member_3">Roy Ceyleon</string>
+    <string name="dev_member_4">Zhenyang Ding</string>
+    <string name="dev_member_5">Zongyang Li</string>
+    <string name="user_manual_dlg_title">用户手册</string>
+
+    <string name="how_to_use_msg">Laurum是一个…</string>
+    <string name="degree_tracking_msg">学位追踪提供对学生学术过程的具体信息跟进</string>
+    <string name="degree_total_credits_label">学分总计:</string>
+    <string name="degree_course_search_hint">添加课程</string>
+    <string name="starting_credits_key">starting_credits_key</string>
+    <string name="required_credits_key">required_credits_key</string>
+
+    <string name="use_manual_howtouse">How to Use</string>
+    <string name="use_manual_degreetracking">Degree Tracking</string>
+    <string name="search_result_selecttag">Select a Course</string>
+
+    <string name="appearance_title">外观</string>
+    <string name="under_construction_text">(功能开发中)</string>
+    <string name="dark_theme_text">夜间模式</string>
+
+    <string name="degree_track_title">学位追踪</string>
+    <string name="starting_credits_text">初始学分</string>
+    <string name="starting_credits_dialog">输入初始学分数量</string>
+    <string name="required_credits_text">总计必修学分</string>
+    <string name="required_credits_dialog">输入总计必修学分数量</string>
+
+    <string name="search_settings_title">搜索设置</string>
+    <string name="course_search_text">课程搜索</string>
+    <string name="course_search_criteria">科目搜索</string>
+    <string name="faculty_search_text">教授搜索</string>
+    <string name="faculty_search_criteria">科目教授搜索</string>
+
+    <string name="app_details">应用信息</string>
+    <string name="about_text">关于Laurum</string>
+    <string name="about_detail_text">更多关于Laurum</string>
+    <string name="github_text">GitHub</string>
+    <string name="github_viewrepo_text">查看存储库</string>
+    <string name="developer_text">开发者</string>
+    <string name="developer_group_text">11工作组</string>
+    <string name="version_text">版本</string>
+
+    <string name="about_laurum_info"><b>指标:</b>\nLaurum是一款易用于安卓系统，为Laurier学生量身打造的学术应用程序。通过集中信息资源和课程整理工具，从而给威尔弗里德劳里埃大学(Wilfrid Laurier University)学生们的学术生涯提供及引导出一条更开明便捷的道路。 \n\n<b>版本:</b> 0.0.1\n\n<b>开发者:</b> 第11工作组\n</string>
+    <string name="degree_complete">你完成了</string>
+</resources>
