@@ -78,7 +78,7 @@
         </Preference>
         <Preference
             android:key="version_info"
-            android:summary="0.0.1"
+            android:summary="1.0.0"
             android:title="@string/version_text"/>
     </PreferenceCategory>
 
