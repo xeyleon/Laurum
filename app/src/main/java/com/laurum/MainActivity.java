@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     private Database.LaurumDB db;
-    private static SharedPreferences sharedPreferences = null;
 
     @SuppressLint("ObsoleteSdkInt")
     @Override
@@ -38,11 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Load Theme
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sharedPreferences.getBoolean("dark_theme_enabled", false))
-            setTheme(R.style.Theme_LaurumDark);
-        else
-            setTheme(R.style.Theme_Laurum);
+        setTheme(R.style.Theme_Laurum);
 
         // Change Status Bar Color
         if (Build.VERSION.SDK_INT >= 21) {
