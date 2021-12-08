@@ -31,8 +31,6 @@ public class AboutActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_about);
 
-        Snackbar.make(findViewById(R.id.about_laurum_details),"test",Snackbar.LENGTH_LONG).setAction("Action",null).show();
-
         // Change Status Bar Color
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
