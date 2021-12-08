@@ -26,6 +26,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
@@ -79,7 +80,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         //Version Info
         Preference version = findPreference("version_info");
         Objects.requireNonNull(version).setOnPreferenceClickListener(v->{
-            Toast.makeText(getContext(), R.string.version_info_msg, Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(),R.string.version_info_msg,Snackbar.LENGTH_SHORT).setAction("Action",null).show();
             return true;
         });
 

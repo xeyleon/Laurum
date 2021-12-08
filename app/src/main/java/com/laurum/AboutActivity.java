@@ -14,9 +14,10 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class AboutActivity extends AppCompatActivity {
     static final String ACTIVITY_NAME = "About Laurum";
-    private static SharedPreferences sharedPreferences = null;
     @SuppressLint("ObsoleteSdkInt")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +27,11 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Load Theme
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sharedPreferences.getBoolean("dark_theme_enabled", false))
-            setTheme(R.style.Theme_LaurumDark);
-        else
-            setTheme(R.style.Theme_Laurum);
+        setTheme(R.style.Theme_Laurum);
 
         setContentView(R.layout.activity_about);
+
+        Snackbar.make(findViewById(R.id.about_laurum_details),"test",Snackbar.LENGTH_LONG).setAction("Action",null).show();
 
         // Change Status Bar Color
         if (Build.VERSION.SDK_INT >= 21) {
